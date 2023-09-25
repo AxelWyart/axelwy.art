@@ -84,12 +84,14 @@
     -webkit-text-fill-color: transparent;
     background-image: linear-gradient(to right, #007AFF 0%, #9c6ca6 100%);
  }
-
+ .work {
+    height:584px;
+ }
  .work {
     box-shadow: 0 0.6021873017743928px 0.6021873017743928px -1.25px #0000002e, 0 2.288533303243457px 2.288533303243457px -2.5px #00000029, 0 10px 10px -3.75px #00000010, 0 1px 2px #0000001f, 0 0 2px #00000014;
  }
  @media (max-width: 809px) {
-    .work img {
+    .work {
         height:388px !important;
     }
  }
