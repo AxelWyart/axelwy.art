@@ -8,6 +8,7 @@
 
  body {
     -webkit-font-smoothing: antialiased;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -34,23 +35,23 @@
     left:50%;
     transform: translateX(-50%) scale(.9);
     transform-origin: 50% 50% 0px;
- }
- .tooltip:hover .tooltiptext {
+}
+.tooltip:hover .tooltiptext {
     opacity: 1;
     visibility: visible;
     transform-origin: 50% 50% 0px;
     transform: translateX(-50%) scale(1);
     bottom: 48px;
- }
- #hero h1 {
+}
+#hero h1, #bio h2 {
     font-family: 'Inter Tight', sans-serif;
- }
- .ideas {
+}
+.ideas {
     position: relative;
     display: inline-block;
     margin-right: 12px;
- }
- .ideas::before {
+}
+.ideas::before {
     content:"";
     display: block;
     position: absolute;
@@ -60,8 +61,8 @@
     left:-15.5px;
     background-color: #007AFF;
     border-radius: 8px;
- }
- .ideas::after {
+}
+.ideas::after {
     content:"";
     display: block;
     position: absolute;
@@ -71,8 +72,8 @@
     right:-15.5px;
     background-color: #007AFF;
     border-radius: 8px;
- }
- .execution {
+}
+.execution {
     --angle: 135deg;
     height: -moz-fit-content;
     height: fit-content;
@@ -83,17 +84,30 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-image: linear-gradient(to right, #007AFF 0%, #9c6ca6 100%);
- }
- .work {
+}
+.work {
     height:588px;
     box-shadow: 0 0.6021873017743928px 0.6021873017743928px -1.25px #0000002e, 0 2.288533303243457px 2.288533303243457px -2.5px #00000029, 0 10px 10px -3.75px #00000010, 0 1px 2px #0000001f, 0 0 2px #00000014;
- }
- @media (max-width: 844px) {
+}
+.text-quote {
+    position: relative;
+}
+.text-quote::before {
+    content:"“";
+    position: absolute;
+    left:-12px;
+}
+.text-quote::after {
+    content:"”";
+    position: absolute;
+    right:-12px;
+}
+@media (max-width: 844px) {
     .work {
         height:388px;
     }
  }
- @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
  .ideas {
        background-color:rgb(25, 48, 72) !important; 
        box-shadow: -8px 0px 0px rgb(25, 48, 72), 8px 0px 0px rgb(25, 48, 72), -11px 0px 0px #007AFF, 11px 0px 0px #007AFF !important;
