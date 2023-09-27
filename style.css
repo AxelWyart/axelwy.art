@@ -78,12 +78,26 @@
     height: -moz-fit-content;
     height: fit-content;
     text-align: center;
+    position: relative;
     margin: 0 auto;
     background: #77fafc;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-image: linear-gradient(to right, #007AFF 0%, #9c6ca6 100%);
+}
+.execution::after{
+    content:"";
+    display: inline-block;
+    position: absolute;
+    width:4px;
+    top:4px;
+    right:-8px;
+    height: 1em;
+    opacity: 1;
+    border-radius: 4px;
+    background-color: #9c6ca6;
+    animation: blink 1s ease-out 1s infinite;
 }
 .work {
     height:588px;
@@ -97,11 +111,6 @@
     position: absolute;
     left:-12px;
 }
-.text-quote::after {
-    content:"”";
-    position: absolute;
-    right:-12px;
-}
 @media (max-width: 844px) {
     .work {
         height:388px;
@@ -113,3 +122,8 @@
        box-shadow: -8px 0px 0px rgb(25, 48, 72), 8px 0px 0px rgb(25, 48, 72), -11px 0px 0px #007AFF, 11px 0px 0px #007AFF !important;
     }
  }
+ @keyframes blink {
+    50% {
+        opacity: 0
+    }
+}
