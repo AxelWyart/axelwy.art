@@ -90,12 +90,12 @@
     content:"";
     display: inline-block;
     position: absolute;
-    width:4px;
+    width:.05em;
     top:4px;
     right:-8px;
     height: 1em;
     opacity: 1;
-    border-radius: 4px;
+    border-radius: 0px;
     background-color: #9c6ca6;
     animation: blink 1s ease-out 1s infinite;
 }
