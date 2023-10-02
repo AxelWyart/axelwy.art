@@ -154,6 +154,8 @@ details.description summary::after {
   }
 .text-quote {
     position: relative;
+    font-family: 'Inter Tight';
+    letter-spacing: 0.25px;
 }
 .text-quote::before {
     content:"“";
