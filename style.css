@@ -173,7 +173,21 @@ details.description summary::after {
        background-color:rgb(25, 48, 72) !important; 
        box-shadow: -8px 0px 0px rgb(25, 48, 72), 8px 0px 0px rgb(25, 48, 72), -11px 0px 0px #007AFF, 11px 0px 0px #007AFF !important;
     }
+    .text-link {
+        border-bottom: 2px solid rgba(255,255,255,.25);
+    }
+    .text-link:hover {
+        border-bottom: 2px solid rgba(255,255,255,.8);
+    }
+    details.description summary::after, details.description summary::before {
+        border-bottom: 2px solid rgba(255,255,255,.25);
+    }
+    details.description summary:hover::after, details.description summary:hover::before {
+        border-bottom: 2px solid rgba(255,255,255,.8);
+    }
+    
  }
+
  @keyframes blink {
     50% {
         opacity: 0
