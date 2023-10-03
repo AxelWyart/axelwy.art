@@ -292,9 +292,9 @@ details.description summary::after {
 
 
 @media (max-width: 844px) {
-    .work {
+    /* .work {
         height:388px;
-    }
+    } */
  }
 @media (prefers-color-scheme: dark) {
  .ideas {
