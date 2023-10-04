@@ -78,20 +78,24 @@
     background-color: #007AFF;
     border-radius: 8px;
 }
-.execution {
+.gradient {
     --angle: 135deg;
     height: -moz-fit-content;
     height: fit-content;
     text-align: center;
     position: relative;
-    margin: 0 auto;
     background: #77fafc;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(to right, #007AFF 0%, #9c6ca6 100%);
+    animation: grad 12s linear infinite alternate-reverse;
+    color: transparent;
+    background: linear-gradient(135deg,#9c6ca6,#007AFF 50%,#9c6ca6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 500%;
 }
-.execution::after{
+#hero .gradient::after{
     content:"";
     display: inline-block;
     position: absolute;
@@ -334,5 +338,14 @@ details.description summary::after {
  @keyframes blink {
     50% {
         opacity: 0
+    }
+}
+@keyframes grad {
+    0% {
+        background-position: 100% 0
+    }
+
+    to {
+        background-position: 12% 100%
     }
 }
