@@ -47,7 +47,7 @@ header {
     border-bottom: 2px solid rgba(0,0,0,.25);
 }
 .text-link:hover {
-    border-bottom: 2px solid rgba(0,0,0,.8);
+    border-bottom: 2px solid rgba(0,0,0,.9);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -87,6 +87,7 @@ header {
 }
 .ideas {
     position: relative;
+    z-index:-1;
     display: inline-block;
     margin-right: 12px;
 }
