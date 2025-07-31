@@ -14,31 +14,39 @@
 
 header {
   opacity:0;
-  animation:pageFadeIn .6s ease-in-out .3s;
+  animation:pageFadeIn 1s ease-in-out .2s;
   animation-fill-mode:forwards;
-  animation-duration:.6s;
+  animation-duration:1s;
   animation-delay: .2s
 }
 #title {
   opacity:0;
-  animation:pageFadeIn .6s ease-in-out .3s;
+  animation:pageFadeIn 1s ease-in-out .3s;
   animation-fill-mode:forwards;
-  animation-duration:.6s;
+  animation-duration:1s;
   animation-delay: .3s
 }
-#hero, #button {
+#hero {
   opacity:0;
-  animation:pageFadeIn .6s ease-in-out .4s;
+  animation:pageFadeIn 1s ease-in-out .4s;
   animation-fill-mode:forwards;
-  animation-duration:.6s;
+  animation-duration:1s;
   animation-delay: .6s
+}
+
+#button {
+  opacity:0;
+  animation:pageFadeIn 1s ease-in-out .4s;
+  animation-fill-mode:forwards;
+  animation-duration:1s;
+  animation-delay: .8s
 }
 
 #works, #bio, #companies, #quotes, #reachout, footer {
   opacity:0;
-  animation:pageFadeIn .6s ease-in-out .3s;
+  animation:pageFadeIn 1s ease-in-out .3s;
   animation-fill-mode:forwards;
-  animation-duration:.6s;
+  animation-duration:1s;
   animation-delay: 1s
 }
 
@@ -335,6 +343,9 @@ details.description summary::after {
     .work {
         height:388px;
     }
+    .date-work {
+        display: none;
+    }
  }
 @media (prefers-color-scheme: dark) {
  .ideas {
@@ -388,8 +399,12 @@ details.description summary::after {
 @keyframes pageFadeIn {
   from { 
     opacity:0;
+    transform:translateY(20%);
+    filter: blur(12px);
   }
   to { 
     opacity:1; 
+    transform:translateY(0%);
+    filter: blur(0px);
   }
 }
