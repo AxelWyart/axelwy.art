@@ -42,6 +42,10 @@ header {
   animation-delay: .8s
 }
 
+#works {
+  cursor:grab;
+}
+
 #works, #bio, #companies, #quotes, #reachout, footer {
   opacity:0;
   animation:pageFadeIn 1s ease-in-out .3s;

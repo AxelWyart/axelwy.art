@@ -85,7 +85,7 @@
       </div>
       
       <div id="works" class="mt-16 md:mt-24 mx-auto py-4">
-         <div class="flex overflow-x-scroll overscroll-x-contain no-scrollbar pt-[2px] gap-6 px-6 md:px-8 3xl:px-96">
+         <div class="flex overflow-x-scroll overscroll-x-contain no-scrollbar pt-[2px] gap-6 px-6 md:px-8 3xl:px-96" id="works-scroller">
             <div class="flex flex-col gap-2 shrink-0"> 
                <div class="work rounded-xl md:rounded-3xl" style="aspect-ratio: .4613733905579399 / 1;">
                   <img loading="lazy" src="images/Onboarding.png" alt="Onboarding EverAssist app" style="display:block;width:100%;height:100%;border-radius:inherit;object-position:center;object-fit:cover;image-rendering:auto">                                                               
@@ -408,6 +408,183 @@
       </div>
       </div>
 
+      <script>
+         (function () {
+           const scroller = document.getElementById('works-scroller');
+           if (!scroller) return;
+           const content = scroller; // move whole strip for edge resistance
+
+           let autoScroll = true;
+           let lastUserScrollTime = 0;
+           let intensity = 1; // 0 = no auto, 1 = full auto
+
+           // Drag state
+           let isDragging = false;
+           let startX = 0;
+           let startScrollLeft = 0;
+           let lastDragScrollLeft = 0;
+           let lastDragTime = 0;
+           let inertiaVelocity = 0; // px per frame-ish
+           let edgeOffset = 0; // px of "rubber band" offset at edges
+
+           const USER_CONTROL_TIMEOUT = 6000; // ms user stays in control after interaction
+           const BASE_SPEED = 0.35; // base pixels per frame
+           const INTENSITY_EASING = 0.06; // how quickly we blend between states
+           const INERTIA_FRICTION = 0.92; // 0–1, lower = more friction
+           const EDGE_RESISTANCE = 0.35; // 0–1, higher = stiffer at edges
+           const EDGE_SPRING = 0.12; // how fast content snaps back
+
+           const giveControlToUser = () => {
+             autoScroll = false;
+             lastUserScrollTime = performance.now();
+           };
+
+           ['wheel', 'touchstart', 'mousedown', 'keydown', 'touchmove'].forEach(evt => {
+             scroller.addEventListener(evt, giveControlToUser, { passive: true });
+           });
+
+           // Prevent native image drag in the works scroller
+           scroller.querySelectorAll('img').forEach(img => {
+             img.draggable = false;
+             img.addEventListener('dragstart', e => e.preventDefault());
+           });
+
+           // Mouse drag to scroll
+           scroller.addEventListener('mousedown', (e) => {
+             if (e.button !== 0) return; // only left click
+             isDragging = true;
+             startX = e.clientX;
+             startScrollLeft = scroller.scrollLeft;
+             lastDragScrollLeft = scroller.scrollLeft;
+             lastDragTime = performance.now();
+             inertiaVelocity = 0;
+             e.preventDefault();
+             scroller.classList.add('is-dragging');
+           });
+
+           window.addEventListener('mouseup', () => {
+             isDragging = false;
+             scroller.classList.remove('is-dragging');
+           });
+
+           window.addEventListener('mousemove', (e) => {
+             if (!isDragging) return;
+             const dx = e.clientX - startX;
+             const raw = startScrollLeft - dx;
+             const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+
+             if (raw >= 0 && raw <= maxScroll) {
+               scroller.scrollLeft = raw;
+               edgeOffset = 0;
+             } else {
+               const clamped = Math.max(0, Math.min(maxScroll, raw));
+               scroller.scrollLeft = clamped;
+               const overshoot = raw - clamped;
+               // Overshoot should move with the drag direction, not against it
+               edgeOffset = -overshoot * EDGE_RESISTANCE;
+             }
+
+             const now = performance.now();
+             const dt = now - lastDragTime;
+             if (dt > 0) {
+               const ds = scroller.scrollLeft - lastDragScrollLeft;
+               inertiaVelocity = ds / dt * 16; // approximate per-16ms frame
+               lastDragScrollLeft = scroller.scrollLeft;
+               lastDragTime = now;
+             }
+           });
+
+           // Touch drag to scroll (for completeness; browsers usually do this natively)
+           let touchStartX = 0;
+           let touchStartScrollLeft = 0;
+
+           scroller.addEventListener('touchstart', (e) => {
+             const touch = e.touches[0];
+             touchStartX = touch.clientX;
+             touchStartScrollLeft = scroller.scrollLeft;
+             lastDragScrollLeft = scroller.scrollLeft;
+             lastDragTime = performance.now();
+             inertiaVelocity = 0;
+           }, { passive: true });
+
+           scroller.addEventListener('touchmove', (e) => {
+             const touch = e.touches[0];
+             const dx = touch.clientX - touchStartX;
+             const raw = touchStartScrollLeft - dx;
+             const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+
+             if (raw >= 0 && raw <= maxScroll) {
+               scroller.scrollLeft = raw;
+               edgeOffset = 0;
+             } else {
+               const clamped = Math.max(0, Math.min(maxScroll, raw));
+               scroller.scrollLeft = clamped;
+               const overshoot = raw - clamped;
+               // Same logic for touch: content follows the drag direction
+               edgeOffset = -overshoot * EDGE_RESISTANCE;
+             }
+
+             const now = performance.now();
+             const dt = now - lastDragTime;
+             if (dt > 0) {
+               const ds = scroller.scrollLeft - lastDragScrollLeft;
+               inertiaVelocity = ds / dt * 16;
+               lastDragScrollLeft = scroller.scrollLeft;
+               lastDragTime = now;
+             }
+           }, { passive: true });
+
+           // When touch ends, we keep using the last computed inertiaVelocity
+
+           function step() {
+             const now = performance.now();
+
+             if (!autoScroll && now - lastUserScrollTime > USER_CONTROL_TIMEOUT) {
+               autoScroll = true;
+             }
+
+             const targetIntensity = autoScroll ? 1 : 0;
+             intensity += (targetIntensity - intensity) * INTENSITY_EASING;
+
+             const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+             if (maxScroll > 0) {
+               // Apply drag inertia first (user-driven), with friction
+               if (Math.abs(inertiaVelocity) > 0.01) {
+                 scroller.scrollLeft += inertiaVelocity;
+                 inertiaVelocity *= INERTIA_FRICTION;
+
+                 if (scroller.scrollLeft <= 0 || scroller.scrollLeft >= maxScroll) {
+                   inertiaVelocity = 0;
+                 }
+               }
+
+               // Then apply auto-scroll if active and not essentially zero intensity
+               if (intensity > 0.001) {
+               const wobble = Math.sin(now / 5000) * 0.2; // subtle non-linear variation
+               const delta = (BASE_SPEED + wobble) * intensity;
+
+               if (scroller.scrollLeft >= maxScroll - 1 && delta > 0) {
+                 // Jump back without smooth behavior so user regain is instant
+                 scroller.scrollLeft = 0;
+               } else {
+                 scroller.scrollLeft += delta;
+               }
+               }
+             }
+
+             // Edge spring: gently snap any overshoot back to the boundary
+             if (content) {
+               edgeOffset += (0 - edgeOffset) * EDGE_SPRING;
+               if (Math.abs(edgeOffset) < 0.1) edgeOffset = 0;
+               content.style.transform = edgeOffset ? `translateX(${edgeOffset}px)` : '';
+             }
+
+             requestAnimationFrame(step);
+           }
+
+           requestAnimationFrame(step);
+         })();
+      </script>
       <div id="reachout" class="max-w-3xl 2xl:max-w-4xl flex flex-col gap-y-8 mx-auto py-20 md:py-56 px-6 md:px-8 font-semibold">
          <h1 class="text-[28px] md:text-[56px] leading-[36px] md:leading-[64px]">
             <span class="w-fit rounded-full opacity-40">Need a design partner?</span><br>
