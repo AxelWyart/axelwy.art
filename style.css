@@ -52,6 +52,13 @@ header {
   background-size: 500%;
 }
 
+/* Opportunities text animation */
+.opportunities-animate {
+  opacity: 0;
+  animation: wordFadeIn 0.8s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
 #button {
   opacity:0;
   animation:pageFadeIn 1s ease-in-out .4s;
@@ -120,6 +127,15 @@ header {
     z-index:-1;
     display: inline-block;
     margin-right: 12px;
+    /* Apple-style highlight reveal animation */
+    /* Create a reveal effect using background gradient */
+    background-image: linear-gradient(to right, transparent 0%, transparent 50%, #d5e9ff 50%, #d5e9ff 100%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: highlightReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, wordFadeIn 0.8s ease-out forwards;
+    animation-delay: calc(0.6s + var(--delay, 0s)), calc(0.6s + var(--delay, 0s));
 }
 .ideas::before {
     content:"";
@@ -466,5 +482,15 @@ details.description summary::after {
     opacity: 1; 
     transform: translateY(0);
     filter: blur(0);
+  }
+}
+
+/* Apple-style highlight reveal animation */
+@keyframes highlightReveal {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
   }
 }
