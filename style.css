@@ -37,6 +37,21 @@ header {
   animation-delay: calc(0.6s + var(--delay, 0s));
 }
 
+/* Ensure gradient words still animate properly */
+.word-animate.gradient {
+  opacity: 0;
+  display: inline-block;
+  animation: wordFadeInGradient 0.8s ease-out forwards, grad 12s linear infinite alternate-reverse;
+  animation-delay: calc(0.6s + var(--delay, 0s)), 0s;
+  /* Ensure gradient background is always present */
+  background: linear-gradient(135deg,#9c6ca6,#007AFF 50%,#9c6ca6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-size: 500%;
+}
+
 #button {
   opacity:0;
   animation:pageFadeIn 1s ease-in-out .4s;
@@ -429,6 +444,19 @@ details.description summary::after {
 }
 
 @keyframes wordFadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(8px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes wordFadeInGradient {
   from { 
     opacity: 0;
     transform: translateY(20px);
