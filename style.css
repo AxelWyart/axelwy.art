@@ -124,6 +124,8 @@ header {
     font-family: 'Inter Tight', sans-serif;
 }
 .ideas {
+    position: relative;
+    z-index: -1;
     display: inline-block;
     margin-right: 12px;
     opacity: 0;
@@ -131,10 +133,26 @@ header {
     animation-delay: calc(0.6s + var(--delay, 0s));
 }
 .ideas::before {
-    content: none;
+    content:"";
+    display: block;
+    position: absolute;
+    width:12px;
+    height:12px;
+    top:-11px;
+    left:-15.5px;
+    background-color: #007AFF;
+    border-radius: 8px;
 }
 .ideas::after {
-    content: none;
+    content:"";
+    display: block;
+    position: absolute;
+    width:12px;
+    height:12px;
+    bottom:-11px;
+    right:-15.5px;
+    background-color: #007AFF;
+    border-radius: 8px;
 }
 .gradient {
     --angle: 135deg;
