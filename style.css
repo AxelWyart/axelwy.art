@@ -125,20 +125,12 @@ header {
 }
 .ideas {
     position: relative;
-    z-index:-1;
+    z-index: -1;
     display: inline-block;
     margin-right: 12px;
-    /* Apple-style highlight reveal animation */
-    /* Start with no background, then reveal it */
-    background-color: #d5e9ff;
-    background-image: linear-gradient(to right, #d5e9ff 0%, #d5e9ff 100%);
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    background-position: left center;
     opacity: 0;
-    /* Separate animations: fade in first (matching other words), then reveal highlight */
-    animation: wordFadeIn 0.8s ease-out forwards, highlightReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    animation-delay: calc(0.6s + var(--delay, 0s)), calc(0.6s + var(--delay, 0s) + 0.8s);
+    animation: wordFadeIn 0.8s ease-out forwards;
+    animation-delay: calc(0.6s + var(--delay, 0s));
 }
 .ideas::before {
     content:"";
