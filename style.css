@@ -124,14 +124,14 @@ header {
     font-family: 'Inter Tight', sans-serif;
 }
 .ideas {
-    position: relative;
-    z-index: -1;
-    display: inline-block;
-    margin-right: 12px;
-    opacity: 0;
-    animation: wordFadeIn 0.8s ease-out forwards;
-    animation-delay: calc(0.6s + var(--delay, 0s));
+  position: relative;
+  z-index:-1;
+  display: inline-block;
+  margin-right: 12px;
+  animation: wordFadeIn 0.8s ease-out forwards;
+  animation-delay: calc(0.6s + var(--delay, 0s)), calc(0.6s + var(--delay, 0s) + 0.8s);
 }
+
 .ideas::before {
     content:"";
     display: block;
