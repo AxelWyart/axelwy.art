@@ -58,6 +58,7 @@ header {
   opacity: 0;
   animation: wordFadeIn 0.8s ease-out forwards;
   animation-delay: 1.2s;
+  text-wrap-style: balance;
 }
 
 #button {
