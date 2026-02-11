@@ -66,7 +66,15 @@ header {
   animation:pageFadeIn 1s ease-in-out .4s;
   animation-fill-mode:forwards;
   animation-duration:1s;
-  animation-delay: .8s
+  animation-delay: 1.4s
+}
+
+#button-call {
+  opacity:0;
+  animation:pageFadeIn 1s ease-in-out .4s;
+  animation-fill-mode:forwards;
+  animation-duration:1s;
+  animation-delay: 1.3s
 }
 
 #works {
@@ -78,7 +86,7 @@ header {
   animation:pageFadeIn 1s ease-in-out .3s;
   animation-fill-mode:forwards;
   animation-duration:1s;
-  animation-delay: 1s
+  animation-delay: 1.5s
 }
 
 
@@ -87,6 +95,11 @@ header {
 }
 .text-link:hover {
     border-bottom: 2px solid rgba(0,0,0,.9);
+}
+
+.bouton,
+.bouton * {
+  cursor: pointer;
 }
 
 .no-scrollbar::-webkit-scrollbar {
