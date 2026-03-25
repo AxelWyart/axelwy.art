@@ -26,10 +26,16 @@
   mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  opacity: 1;
+  transition: opacity 220ms ease;
 }
 
 .dark .bottom-progressive-blur {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.bottom-progressive-blur.is-hidden {
+  opacity: 0;
 }
 
 header {
