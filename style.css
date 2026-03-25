@@ -164,11 +164,11 @@ header {
 }
 .ideas {
   position: relative;
-  z-index:-1;
+  z-index: 0;
   display: inline-block;
   margin-right: 12px;
-  animation: wordFadeIn 0.8s ease-out forwards;
-  animation-delay: calc(0.6s + var(--delay, 0s)), calc(0.6s + var(--delay, 0s) + 0.8s);
+  animation: wordFadeInNoBlur 0.8s ease-out forwards;
+  animation-delay: calc(0.6s + var(--delay, 0s));
 }
 
 .ideas::before {
@@ -181,6 +181,7 @@ header {
     left:-15.5px;
     background-color: #007AFF;
     border-radius: 8px;
+    z-index: -1;
 }
 .ideas::after {
     content:"";
@@ -192,6 +193,7 @@ header {
     right:-15.5px;
     background-color: #007AFF;
     border-radius: 8px;
+    z-index: -1;
 }
 .gradient {
     --angle: 135deg;
@@ -503,6 +505,17 @@ details.description summary::after {
     opacity: 1; 
     transform: translateY(0);
     filter: blur(0);
+  }
+}
+
+@keyframes wordFadeInNoBlur {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
