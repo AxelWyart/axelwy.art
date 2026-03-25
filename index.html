@@ -443,7 +443,7 @@
             </div>
          </div>
       </div>
-      <footer class="flex flex-row justify-between mt-8 max-w-3xl 2xl:max-w-4xl mx-auto pt-8 mt-16 px-6 md:px-8">
+      <footer id="footer" class="flex flex-row justify-between mt-8 max-w-3xl 2xl:max-w-4xl mx-auto pt-8 mt-16 px-6 md:px-8">
          <div>
             <p class="text-md opacity-60">© 2026 — Axel Wyart</p>
          </div>
@@ -670,5 +670,24 @@
             });
          }
       </script>
+      <script>
+         (() => {
+            const bottomBlur = document.querySelector('.bottom-progressive-blur');
+            const footer = document.getElementById('footer');
+
+            if (!bottomBlur || !footer || !('IntersectionObserver' in window)) return;
+
+            const toggleBlur = ([entry]) => {
+               bottomBlur.classList.toggle('is-hidden', entry.isIntersecting);
+            };
+
+            const observer = new IntersectionObserver(toggleBlur, {
+               threshold: 0.01
+            });
+
+            observer.observe(footer);
+         })();
+      </script>
+      <div aria-hidden="true" class="bottom-progressive-blur"></div>
    </body>
 </html>
