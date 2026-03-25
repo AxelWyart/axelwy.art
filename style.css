@@ -164,7 +164,7 @@ header {
 }
 .ideas {
   position: relative;
-  z-index:-1;
+  z-index: 0;
   display: inline-block;
   margin-right: 12px;
   animation: wordFadeIn 0.8s ease-out forwards;
@@ -181,6 +181,7 @@ header {
     left:-15.5px;
     background-color: #007AFF;
     border-radius: 8px;
+    z-index: -1;
 }
 .ideas::after {
     content:"";
@@ -192,6 +193,7 @@ header {
     right:-15.5px;
     background-color: #007AFF;
     border-radius: 8px;
+    z-index: -1;
 }
 .gradient {
     --angle: 135deg;
