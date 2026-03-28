@@ -175,6 +175,12 @@ header {
   margin-right: 12px;
   animation: wordFadeIn 0.8s ease-out forwards;
   animation-delay: calc(0.6s + var(--delay, 0s));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .ideas::before {
@@ -425,6 +431,17 @@ details.description summary::after {
     }
     .date-work {
         display: none;
+    }
+    .ideas {
+      position: static;
+      z-index: 4;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .ideas::before,
+    .ideas::after {
+      display: none;
     }
  }
 @media (prefers-color-scheme: dark) {
