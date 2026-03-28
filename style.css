@@ -206,6 +206,7 @@ header {
     background-color: #007AFF;
     border-radius: 8px;
     z-index: -1;
+    filter: none;
 }
 .gradient {
     --angle: 135deg;
@@ -433,15 +434,11 @@ details.description summary::after {
         display: none;
     }
     .ideas {
-      position: static;
+      position: relative;
       z-index: 4;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
-    }
-    .ideas::before,
-    .ideas::after {
-      display: none;
     }
  }
 @media (prefers-color-scheme: dark) {
