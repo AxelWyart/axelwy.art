@@ -174,13 +174,15 @@ header {
   z-index: 0;
   margin-right: 12px;
   animation: wordFadeIn 0.8s ease-out forwards;
+  will-change: transform;
   animation-delay: calc(0.6s + var(--delay, 0s));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
-  backface-visibility: visible;
-  -webkit-backface-visibility: visible;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transform: translateZ(0);
+  transform: perspective(1px);
 }
 
 .ideas::before {
