@@ -173,7 +173,6 @@ header {
 .ideas {
   position: relative;
   z-index: 0;
-  font-weight: normal!important;
   display: inline-block;
   margin-right: 12px;
   animation: wordFadeIn 0.8s ease-out forwards;
@@ -181,8 +180,8 @@ header {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
   transform: translateZ(0);
 }
 
