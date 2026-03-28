@@ -173,8 +173,14 @@ header {
   z-index: 0;
   display: inline-block;
   margin-right: 12px;
-  animation: wordFadeInNoBlur 0.8s ease-out forwards;
+  animation: wordFadeIn 0.8s ease-out forwards;
   animation-delay: calc(0.6s + var(--delay, 0s));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .ideas::before {
@@ -200,6 +206,7 @@ header {
     background-color: #007AFF;
     border-radius: 8px;
     z-index: -1;
+    filter: none;
 }
 .gradient {
     --angle: 135deg;
@@ -426,6 +433,13 @@ details.description summary::after {
     .date-work {
         display: none;
     }
+    .ideas {
+      position: relative;
+      z-index: 4;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
  }
 @media (prefers-color-scheme: dark) {
  .ideas {
@@ -510,7 +524,7 @@ details.description summary::after {
   to { 
     opacity: 1; 
     transform: translateY(0);
-    filter: blur(0);
+    filter: none;
   }
 }
 
@@ -534,7 +548,7 @@ details.description summary::after {
   to { 
     opacity: 1; 
     transform: translateY(0);
-    filter: blur(0);
+    filter: none;
   }
 }
 
