@@ -21,10 +21,11 @@
   height: clamp(56px, 10vh, 128px);
   pointer-events: none;
   z-index: 50;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.65) 45%, rgba(255, 255, 255, 0.28) 75%, rgba(255, 255, 255, 0) 100%);
   will-change: backdrop-filter;
+  isolation: isolate;
   opacity: 1;
   transition: opacity 220ms ease;
 }
@@ -32,9 +33,9 @@
 .dark .bottom-progressive-blur {
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.62) 0%,
-    rgba(0, 0, 0, 0.42) 45%,
-    rgba(0, 0, 0, 0.14) 75%,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.6) 45%,
+    rgba(0, 0, 0, 0.24) 75%,
     rgba(0, 0, 0, 0) 100%
   );
 }
@@ -43,9 +44,9 @@
   .bottom-progressive-blur {
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.62) 0%,
-      rgba(0, 0, 0, 0.42) 45%,
-      rgba(0, 0, 0, 0.14) 75%,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.6) 45%,
+      rgba(0, 0, 0, 0.24) 75%,
       rgba(0, 0, 0, 0) 100%
     );
   }
