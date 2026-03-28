@@ -40,6 +40,18 @@
   );
 }
 
+@media (prefers-color-scheme: dark) {
+  .bottom-progressive-blur {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.62) 45%,
+      rgba(0, 0, 0, 0.2) 75%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+}
+
 .bottom-progressive-blur.is-hidden {
   opacity: 0;
 }
