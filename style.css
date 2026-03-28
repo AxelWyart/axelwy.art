@@ -21,8 +21,8 @@
   height: clamp(56px, 10vh, 128px);
   pointer-events: none;
   z-index: 50;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
@@ -31,7 +31,13 @@
 }
 
 .dark .bottom-progressive-blur {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.62) 45%,
+    rgba(0, 0, 0, 0.2) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .bottom-progressive-blur.is-hidden {
