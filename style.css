@@ -167,7 +167,7 @@ header {
     transform: translateX(-50%) scale(1);
     bottom: 48px;
 }
-#hero h1, #bio h2, #reachout h1 {
+#hero h1, #bio .bio-copy, #reachout h2 {
     font-family: 'Inter Tight', sans-serif;
 }
 .ideas {
