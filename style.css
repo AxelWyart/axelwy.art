@@ -15,6 +15,33 @@
     
  }
 
+.skip-link {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 100;
+    transform: translateY(-160%);
+    border-radius: 10px;
+    background: #007AFF;
+    color: white;
+    padding: 10px 14px;
+    font-weight: 600;
+    transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+    transform: translateY(0);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+#works-scroller:focus-visible {
+    outline: 2px solid #007AFF;
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
 header {
   opacity:0;
   animation:pageFadeIn 1s ease-in-out .2s;
@@ -222,41 +249,24 @@ details.description summary {
     display: inline-block;
 }
 
-details.description summary::after, details.description summary::before {
+.summary-text {
     border-bottom: 2px solid rgba(0,0,0,.25);
+    display: inline-block;
 }
-details.description summary:hover::after, details.description summary:hover::before {
+
+details.description summary:hover .summary-text {
     border-bottom: 2px solid rgba(0,0,0,.8);
 }
 
-details.description summary::after {
-    content: attr(data-open);
-    opacity: 0;
-    position: absolute;
-  }
-  
-  details.description[open] summary::after {
-    content: attr(data-open);
-    opacity: 1;
-    position: relative;
-  }
-  
-  details.description summary::before {
-    content: attr(data-close);
-    opacity: 0;
-    position: absolute;
-  }
-  
-  details.description:not([open]) summary::before {
-    content: attr(data-close);
-    opacity: 1;
-    position: relative;
-  }
-  
-  details.description summary::after,
-  details.description summary::before {
+.summary-text-open,
+details.description[open] .summary-text-closed {
+    display: none;
+}
+
+details.description[open] .summary-text-open {
     display: inline-block;
-  }
+}
+
 .text-quote {
     position: relative;
     font-family: 'Inter Tight';
@@ -423,10 +433,10 @@ details.description summary::after {
     .text-link:hover {
         border-bottom: 2px solid rgba(255,255,255,.8);
     }
-    details.description summary::after, details.description summary::before {
+    .summary-text {
         border-bottom: 2px solid rgba(255,255,255,.25);
     }
-    details.description summary:hover::after, details.description summary:hover::before {
+    details.description summary:hover .summary-text {
         border-bottom: 2px solid rgba(255,255,255,.8);
     }
     .send:after {
@@ -530,5 +540,40 @@ details.description summary::after {
   }
   100% {
     background-size: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  header,
+  #title,
+  .word-animate,
+  .word-animate.gradient,
+  .opportunities-animate,
+  #intro-email-button,
+  #button-call,
+  #works,
+  #bio,
+  #companies,
+  #quotes,
+  #reachout,
+  footer {
+    animation: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #hero .gradient::after {
+    animation: none !important;
+    opacity: 0;
   }
 }
