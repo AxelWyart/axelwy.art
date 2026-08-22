@@ -2,7 +2,7 @@
 
 > AI product design lead partnering with founders and AI teams to turn strategy into shipped outcomes across brand, marketing, product, and design operations.
 
-Canonical website: https://axelwy.art/
+Canonical website: https://www.axelwy.art/
 
 ## Primary Contact
 
@@ -48,6 +48,6 @@ Axel Wyart is a product design leader with 10+ years building and scaling digita
 
 ## Site URLs
 
-- Home: https://axelwy.art/
-- Sitemap: https://axelwy.art/sitemap.xml
-- Open Graph image: https://axelwy.art/images/og.png
+- Home: https://www.axelwy.art/
+- Sitemap: https://www.axelwy.art/sitemap.xml
+- Open Graph image: https://www.axelwy.art/images/og.png

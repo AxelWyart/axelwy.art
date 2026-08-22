@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# LLM-readable site summary: https://axelwy.art/llms.txt
-Sitemap: https://axelwy.art/sitemap.xml
+# LLM-readable site summary: https://www.axelwy.art/llms.txt
+Sitemap: https://www.axelwy.art/sitemap.xml
