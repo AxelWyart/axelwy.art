@@ -15,24 +15,6 @@
     
  }
 
-.skip-link {
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 100;
-    transform: translateY(-160%);
-    border-radius: 10px;
-    background: #007AFF;
-    color: white;
-    padding: 10px 14px;
-    font-weight: 600;
-    transition: transform 160ms ease;
-}
-
-.skip-link:focus-visible {
-    transform: translateY(0);
-}
-
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
@@ -120,9 +102,10 @@ header {
 
 .section-label-animate {
   opacity:0;
-  animation:pageFadeIn 1s ease-in-out .3s;
+  transform: translateY(20px);
+  filter: blur(8px);
+  animation:sectionLabelIn .8s ease-out forwards;
   animation-fill-mode:forwards;
-  animation-duration:1s;
   animation-delay: 1.5s
 }
 
@@ -512,6 +495,19 @@ details.description[open] .summary-text-open {
   }
   to { 
     opacity: 1; 
+    transform: translateY(0);
+    filter: none;
+  }
+}
+
+@keyframes sectionLabelIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
     filter: none;
   }
