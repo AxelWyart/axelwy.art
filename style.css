@@ -118,6 +118,14 @@ header {
   animation-delay: 1.5s
 }
 
+.section-label-animate {
+  opacity:0;
+  animation:pageFadeIn 1s ease-in-out .3s;
+  animation-fill-mode:forwards;
+  animation-duration:1s;
+  animation-delay: 1.5s
+}
+
 
 .text-link {
     border-bottom: 2px solid rgba(0,0,0,.25);
@@ -562,6 +570,7 @@ details.description[open] .summary-text-open {
   #button-call,
   #works,
   #bio,
+  .section-label-animate,
   #companies,
   #quotes,
   #reachout,
