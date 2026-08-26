@@ -100,6 +100,30 @@ header {
   animation-delay: 1.5s
 }
 
+@media (max-width: 767px) {
+  #companies {
+    column-gap: 1.125rem;
+    row-gap: 1.125rem;
+  }
+
+  #companies > a,
+  #companies > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  #companies svg {
+    --tw-scale-x: .64;
+    --tw-scale-y: .64;
+    flex: 0 0 auto;
+    width: clamp(132px, 39vw, 155px);
+    height: auto;
+    transform-origin: left center;
+  }
+}
+
 .section-label-animate {
   opacity:0;
   transform: translateY(20px);
