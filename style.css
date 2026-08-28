@@ -116,17 +116,17 @@ summary:focus-visible,
 
 header {
   opacity:0;
-  animation:pageFadeIn 1s ease-in-out .2s;
+  animation:pageFadeIn .55s cubic-bezier(.23, 1, .32, 1) .05s;
   animation-fill-mode:forwards;
-  animation-duration:1s;
-  animation-delay: .2s
+  animation-duration:.55s;
+  animation-delay: .05s
 }
 #title {
   opacity:0;
-  animation:pageFadeIn 1s ease-in-out .3s;
+  animation:pageFadeIn .55s cubic-bezier(.23, 1, .32, 1) .1s;
   animation-fill-mode:forwards;
-  animation-duration:1s;
-  animation-delay: .3s
+  animation-duration:.55s;
+  animation-delay: .1s
 }
 #hero {
   /* Removed block-level animation - now using word-by-word */
@@ -135,16 +135,16 @@ header {
 .word-animate {
   opacity: 0;
   display: inline-block;
-  animation: wordFadeIn 0.8s ease-out forwards;
-  animation-delay: calc(0.6s + var(--delay, 0s));
+  animation: wordFadeIn .52s cubic-bezier(.23, 1, .32, 1) forwards;
+  animation-delay: calc(.2s + var(--delay, 0s));
 }
 
 /* Ensure gradient words still animate properly */
 .word-animate.gradient {
   opacity: 0;
   display: inline-block;
-  animation: wordFadeInGradient 0.8s ease-out forwards, grad 12s linear infinite alternate-reverse;
-  animation-delay: calc(0.6s + var(--delay, 0s)), 0s;
+  animation: wordFadeInGradient .52s cubic-bezier(.23, 1, .32, 1) forwards, grad 12s linear infinite alternate-reverse;
+  animation-delay: calc(.2s + var(--delay, 0s)), 0s;
   /* Ensure gradient background is always present */
   background: linear-gradient(135deg, var(--color-accent-gradient), var(--color-accent-primary) 50%, var(--color-accent-gradient));
   background-clip: text;
@@ -157,25 +157,25 @@ header {
 /* Opportunities text animation */
 .opportunities-animate {
   opacity: 0;
-  animation: wordFadeIn 0.8s ease-out forwards;
-  animation-delay: 1.2s;
+  animation: wordFadeIn .52s cubic-bezier(.23, 1, .32, 1) forwards;
+  animation-delay: .58s;
   text-wrap-style: balance;
 }
 
 #intro-email-button {
   opacity:0;
-  animation:pageFadeIn 1s ease-in-out .4s;
+  animation:pageFadeIn .55s cubic-bezier(.23, 1, .32, 1) .78s;
   animation-fill-mode:forwards;
-  animation-duration:1s;
-  animation-delay: 1.4s
+  animation-duration:.55s;
+  animation-delay: .78s
 }
 
 #button-call {
   opacity:0;
-  animation:pageFadeIn 1s ease-in-out .4s;
+  animation:pageFadeIn .55s cubic-bezier(.23, 1, .32, 1) .72s;
   animation-fill-mode:forwards;
-  animation-duration:1s;
-  animation-delay: 1.3s
+  animation-duration:.55s;
+  animation-delay: .72s
 }
 
 #works {
@@ -184,10 +184,10 @@ header {
 
 #works, #bio, #companies, #quotes, #reachout, footer {
   opacity:0;
-  animation:pageFadeIn 1s ease-in-out .3s;
+  animation:pageFadeIn .65s cubic-bezier(.23, 1, .32, 1) .9s;
   animation-fill-mode:forwards;
-  animation-duration:1s;
-  animation-delay: 1.5s
+  animation-duration:.65s;
+  animation-delay: .9s
 }
 
 @media (max-width: 767px) {
@@ -216,11 +216,11 @@ header {
 
 .section-label-animate {
   opacity:0;
-  transform: translateY(20px);
-  filter: blur(8px);
-  animation:sectionLabelIn .8s ease-out forwards;
+  transform: translateY(12px);
+  filter: blur(4px);
+  animation:sectionLabelIn .52s cubic-bezier(.23, 1, .32, 1) forwards;
   animation-fill-mode:forwards;
-  animation-delay: 1.5s
+  animation-delay: .9s
 }
 
 
@@ -467,9 +467,9 @@ header {
   margin-right: 12px;
   background-color: var(--color-accent-highlight);
   box-shadow: -8px 0 0 var(--color-accent-highlight), 8px 0 0 var(--color-accent-highlight), -11px 0 0 var(--color-accent-primary), 11px 0 0 var(--color-accent-primary);
-  animation: wordFadeIn 0.8s ease-out forwards;
+  animation: wordFadeIn .52s cubic-bezier(.23, 1, .32, 1) forwards;
   will-change: transform;
-  animation-delay: calc(0.6s + var(--delay, 0s));
+  animation-delay: calc(.2s + var(--delay, 0s));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
@@ -737,8 +737,8 @@ details.description[open] .summary-text-open {
 @keyframes pageFadeIn {
   from { 
     opacity:0;
-    transform:translateY(20%);
-    filter: blur(12px);
+    transform:translateY(12px);
+    filter: blur(4px);
   }
   to { 
     opacity:1; 
@@ -749,8 +749,8 @@ details.description[open] .summary-text-open {
 @keyframes titleFade {
   from { 
     opacity:0;
-    transform:translateY(64px);
-    filter: blur(12px);
+    transform:translateY(20px);
+    filter: blur(4px);
   }
   to { 
     opacity:1; 
@@ -762,8 +762,8 @@ details.description[open] .summary-text-open {
 @keyframes wordFadeIn {
   from { 
     opacity: 0;
-    transform: translateY(20px);
-    filter: blur(8px);
+    transform: translateY(12px);
+    filter: blur(4px);
   }
   to { 
     opacity: 1; 
@@ -775,8 +775,8 @@ details.description[open] .summary-text-open {
 @keyframes sectionLabelIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
-    filter: blur(8px);
+    transform: translateY(12px);
+    filter: blur(4px);
   }
   to {
     opacity: 1;
@@ -788,7 +788,7 @@ details.description[open] .summary-text-open {
 @keyframes wordFadeInNoBlur {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -799,8 +799,8 @@ details.description[open] .summary-text-open {
 @keyframes wordFadeInGradient {
   from { 
     opacity: 0;
-    transform: translateY(20px);
-    filter: blur(8px);
+    transform: translateY(12px);
+    filter: blur(4px);
   }
   to { 
     opacity: 1; 
