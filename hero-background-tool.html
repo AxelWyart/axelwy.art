@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="color-scheme" content="light">
+      <title>Base-Inspired Hero Background Tool</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --panel: #ffffff;
+      --panel-2: #fafafa;
+      --ink: #15151a;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --line-strong: #d1d5db;
+      --accent: #4447ff;
+      --accent-soft: #ececff;
+      --shadow: 0 28px 70px rgb(18 18 26 / 0.10);
+      --radius: 20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    .app {
+      width: min(100%, 1720px);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 4px 4px 20px;
+    }
+
+    .title-block {
+      display: grid;
+      gap: 4px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      padding: 0 16px;
+      color: #fff;
+      background: var(--ink);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgb(0 0 0 / 0.13);
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .button svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2.1;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .preview-shell,
+    .control-panel {
+      border: 1px solid rgb(0 0 0 / 0.06);
+      border-radius: var(--radius);
+      background: rgb(255 255 255 / 0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+    }
+
+    .preview-shell {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgb(255 255 255 / 0.72);
+    }
+
+    .status {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .status strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .segmented {
+      display: flex;
+      padding: 3px;
+      gap: 2px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel-2);
+    }
+
+    .segmented button {
+      min-width: 48px;
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .segmented button[aria-pressed="true"] {
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+    }
+
+    .canvas-wrap {
+      display: grid;
+      min-height: 620px;
+      place-items: center;
+      padding: 0;
+      background: #fff;
+    }
+
+    .artboard {
+      position: relative;
+      width: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .artboard::before {
+      content: "";
+      display: block;
+      padding-top: var(--ratio, 56.25%);
+    }
+
+    .artboard svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .preview-error {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 32px;
+      background: #fff;
+      color: #b91c1c;
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .artboard.has-error .preview-error {
+      display: grid;
+    }
+
+    .control-panel {
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+    }
+
+    .panel-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgb(255 255 255 / 0.92);
+      backdrop-filter: blur(18px);
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .panel-header span {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 68px;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .control:first-of-type {
+      margin-top: 0;
+    }
+
+    label,
+    .label {
+      display: grid;
+      gap: 3px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 450;
+      line-height: 1.35;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .value {
+      display: inline-flex;
+      min-width: 58px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    select,
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0 11px;
+      background: #fff;
+      color: var(--ink);
+      outline: 0;
+    }
+
+    select:focus,
+    input:focus-visible,
+    button:focus-visible {
+      outline: 2px solid rgb(68 71 255 / 0.34);
+      outline-offset: 2px;
+    }
+
+    .color-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .color-field {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .color-field span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    input[type="color"] {
+      width: 100%;
+      min-width: 0;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 3px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .check-row input {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: var(--accent);
+    }
+
+    .mini-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 10;
+      max-width: min(360px, calc(100vw - 48px));
+      border: 1px solid rgb(0 0 0 / 0.08);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: rgb(21 21 26 / 0.92);
+      color: #fff;
+      box-shadow: 0 16px 50px rgb(0 0 0 / 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1120px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .control-panel {
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .app {
+        padding: 14px;
+      }
+
+      .topbar,
+      .preview-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .actions,
+      .segmented {
+        justify-content: stretch;
+      }
+
+      .actions .button,
+      .segmented button {
+        flex: 1;
+      }
+
+      .canvas-wrap {
+        min-height: 380px;
+        padding: 14px;
+      }
+
+      .grid-2,
+      .color-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="title-block">
+        <h1>Base-Inspired Hero Background Tool</h1>
+        <p class="subtitle">Generate quiet global-finance hero backgrounds with sparse market fragments, Base-blue accents, soft candlestick marks, and export-ready SVG or PNG output.</p>
+      </div>
+      <div class="actions">
+        <button class="button secondary" type="button" id="randomize">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+          Randomize
+        </button>
+        <button class="button secondary" type="button" id="copySvg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect width="13" height="13" x="9" y="9" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy SVG
+        </button>
+        <button class="button" type="button" id="exportSvg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Export SVG
+        </button>
+        <button class="button" type="button" id="exportPng">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m10 14-2 2 2 2"/><path d="m14 18 2-2-2-2"/></svg>
+          Export PNG
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="preview-shell" aria-label="Generated hero background preview">
+        <div class="preview-toolbar">
+          <div class="status">
+            <span><strong id="statusSize">1440 x 900</strong></span>
+            <span id="statusBars">112 slots</span>
+            <span id="statusPalette">Base global finance</span>
+          </div>
+          <div class="segmented" aria-label="Canvas size">
+            <button type="button" data-size="hero" aria-pressed="true">Hero</button>
+            <button type="button" data-size="wide" aria-pressed="false">Wide</button>
+            <button type="button" data-size="square" aria-pressed="false">Square</button>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <div class="artboard" id="artboard">
+            <svg id="preview" role="img" aria-label="Abstract finance bar chart hero background"></svg>
+            <div class="preview-error" id="previewError" role="alert"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="control-panel" aria-label="Design controls">
+        <div class="panel-header">
+          <h2>Design Controls</h2>
+          <span id="seedLabel">Seed 4821</span>
+        </div>
+
+        <section class="section">
+          <div class="section-title">Look</div>
+          <div class="grid-2">
+            <label class="field">Preset
+              <select id="preset">
+                <option value="base">Base global finance</option>
+                <option value="opensee">Opensee market</option>
+                <option value="soft">Soft trading desk</option>
+                <option value="terminal">Dark terminal</option>
+                <option value="candy">Colorful risk cloud</option>
+              </select>
+            </label>
+            <label class="field">Silhouette
+              <select id="shape">
+                <option value="basefield">Base hero field</option>
+                <option value="session">Market session</option>
+                <option value="rally">Risk rally</option>
+                <option value="selloff">Drawdown</option>
+                <option value="rotation">Sector rotation</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="check-row">
+            <label class="label" for="transparentBg">Transparent background
+              <span class="hint">Useful when placing the SVG behind a hero block.</span>
+            </label>
+            <input type="checkbox" id="transparentBg">
+          </div>
+
+          <div class="check-row">
+            <label class="label" for="showWicks">Candlestick markers
+              <span class="hint">Adds thin finance-style high/low lines.</span>
+            </label>
+            <input type="checkbox" id="showWicks" checked>
+          </div>
+
+          <div class="check-row">
+            <label class="label" for="showOrb">Base blue anchor
+              <span class="hint">Adds the cropped electric-blue shape used as a hero counterweight.</span>
+            </label>
+            <input type="checkbox" id="showOrb" checked>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Palette</div>
+          <div class="color-row">
+            <label class="color-field"><span>Main</span><input type="color" id="mainColor" value="#0052ff"></label>
+            <label class="color-field"><span>Mint</span><input type="color" id="mintColor" value="#c8f5ad"></label>
+            <label class="color-field"><span>Lilac</span><input type="color" id="lilacColor" value="#d8bdff"></label>
+            <label class="color-field"><span>Gold</span><input type="color" id="goldColor" value="#f2c75b"></label>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Structure</div>
+          <div class="control">
+            <label for="bars">Bar count<span class="hint">More columns create a denser market texture.</span></label>
+            <input type="range" id="bars" min="48" max="160" value="112">
+            <span class="value" data-value-for="bars">112</span>
+          </div>
+          <div class="control">
+            <label for="spread">Chart width<span class="hint">At 100, the market runs from edge to edge.</span></label>
+            <input type="range" id="spread" min="82" max="104" value="100">
+            <span class="value" data-value-for="spread">100</span>
+          </div>
+          <div class="control">
+            <label for="height">Amplitude<span class="hint">Primary bar height and visual confidence.</span></label>
+            <input type="range" id="height" min="16" max="72" value="38">
+            <span class="value" data-value-for="height">38</span>
+          </div>
+          <div class="control">
+            <label for="gap">Column gap<span class="hint">Small values feel like packed market data.</span></label>
+            <input type="range" id="gap" min="4" max="22" value="9">
+            <span class="value" data-value-for="gap">9</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Motion Feel</div>
+          <div class="control">
+            <label for="density">Presence<span class="hint">How many candles survive into the final background.</span></label>
+            <input type="range" id="density" min="4" max="70" value="36">
+            <span class="value" data-value-for="density">36</span>
+          </div>
+          <div class="control">
+            <label for="volatility">Volatility<span class="hint">Randomness in heights and small secondary bars.</span></label>
+            <input type="range" id="volatility" min="0" max="100" value="26">
+            <span class="value" data-value-for="volatility">26</span>
+          </div>
+          <div class="control">
+            <label for="jitter">Jitter<span class="hint">Horizontal and vertical imperfection.</span></label>
+            <input type="range" id="jitter" min="0" max="100" value="10">
+            <span class="value" data-value-for="jitter">10</span>
+          </div>
+          <div class="control">
+            <label for="scatter">Ambient marks<span class="hint">Small detached ticks spread through the whole market field.</span></label>
+            <input type="range" id="scatter" min="0" max="36" value="5">
+            <span class="value" data-value-for="scatter">5</span>
+          </div>
+          <div class="control">
+            <label for="stacking">Pastel stacks<span class="hint">Adds mint and lilac segments around the blue bars.</span></label>
+            <input type="range" id="stacking" min="0" max="100" value="34">
+            <span class="value" data-value-for="stacking">34</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Finish</div>
+          <div class="control">
+            <label for="barRadius">Bar radius<span class="hint">Sharper bars feel analytical; softer bars feel brand-led.</span></label>
+            <input type="range" id="barRadius" min="0" max="18" value="4">
+            <span class="value" data-value-for="barRadius">4</span>
+          </div>
+          <div class="control">
+            <label for="softness">Visibility<span class="hint">Overall opacity. Keep it low for hero backgrounds.</span></label>
+            <input type="range" id="softness" min="8" max="70" value="52">
+            <span class="value" data-value-for="softness">52</span>
+          </div>
+          <div class="control">
+            <label for="glow">Glow<span class="hint">Adds a slight web-hero blur without losing the bars.</span></label>
+            <input type="range" id="glow" min="0" max="40" value="0">
+            <span class="value" data-value-for="glow">0</span>
+          </div>
+          <div class="control">
+            <label for="grain">Fine grain<span class="hint">Subtle noise helps exported backgrounds avoid flatness.</span></label>
+            <input type="range" id="grain" min="0" max="28" value="0">
+            <span class="value" data-value-for="grain">0</span>
+          </div>
+          <div class="mini-actions">
+            <button class="button secondary" type="button" id="calmDown">Calm</button>
+            <button class="button secondary" type="button" id="makeLouder">Louder</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const svg = document.getElementById("preview");
+    const artboard = document.getElementById("artboard");
+    const previewError = document.getElementById("previewError");
+    const toast = document.getElementById("toast");
+
+    const sizePresets = {
+      hero: { width: 1440, height: 900, ratio: "62.5%" },
+      wide: { width: 1920, height: 900, ratio: "46.875%" },
+      square: { width: 1200, height: 1200, ratio: "100%" }
+    };
+
+    const palettePresets = {
+      base: {
+        name: "Base global finance",
+        bg: "#ffffff",
+        main: "#0052ff",
+        mint: "#c8f5ad",
+        lilac: "#d8bdff",
+        gold: "#f2c75b"
+      },
+      opensee: {
+        name: "Opensee market",
+        bg: "#ffffff",
+        main: "#4447ff",
+        mint: "#b9f39e",
+        lilac: "#d8b5ff",
+        gold: "#f7d769"
+      },
+      soft: {
+        name: "Soft trading desk",
+        bg: "#fbfbfd",
+        main: "#5565f8",
+        mint: "#a6ead1",
+        lilac: "#c9b8ff",
+        gold: "#f1c76f"
+      },
+      terminal: {
+        name: "Dark terminal",
+        bg: "#070914",
+        main: "#6570ff",
+        mint: "#69e8be",
+        lilac: "#b58cff",
+        gold: "#ffcb5c"
+      },
+      candy: {
+        name: "Colorful risk cloud",
+        bg: "#fffaff",
+        main: "#4c3dff",
+        mint: "#9af17d",
+        lilac: "#efb7ff",
+        gold: "#ffd15e"
+      }
+    };
+
+    const controls = {
+      preset: document.getElementById("preset"),
+      shape: document.getElementById("shape"),
+      transparentBg: document.getElementById("transparentBg"),
+      showWicks: document.getElementById("showWicks"),
+      showOrb: document.getElementById("showOrb"),
+      mainColor: document.getElementById("mainColor"),
+      mintColor: document.getElementById("mintColor"),
+      lilacColor: document.getElementById("lilacColor"),
+      goldColor: document.getElementById("goldColor"),
+      bars: document.getElementById("bars"),
+      spread: document.getElementById("spread"),
+      height: document.getElementById("height"),
+      gap: document.getElementById("gap"),
+      density: document.getElementById("density"),
+      volatility: document.getElementById("volatility"),
+      jitter: document.getElementById("jitter"),
+      scatter: document.getElementById("scatter"),
+      stacking: document.getElementById("stacking"),
+      barRadius: document.getElementById("barRadius"),
+      softness: document.getElementById("softness"),
+      glow: document.getElementById("glow"),
+      grain: document.getElementById("grain")
+    };
+
+    let activeSize = "hero";
+    let seed = 4821;
+
+    function mulberry32(value) {
+      return function random() {
+        let t = value += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function number(id) {
+      return Number(controls[id].value);
+    }
+
+    function createSvgElement(name, attributes = {}) {
+      const node = document.createElementNS("http://www.w3.org/2000/svg", name);
+      Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
+      return node;
+    }
+
+    function getState() {
+      return {
+        size: sizePresets[activeSize],
+        preset: controls.preset.value,
+        shape: controls.shape.value,
+        transparentBg: controls.transparentBg.checked,
+        showWicks: controls.showWicks.checked,
+        showOrb: controls.showOrb.checked,
+        main: controls.mainColor.value,
+        mint: controls.mintColor.value,
+        lilac: controls.lilacColor.value,
+        gold: controls.goldColor.value,
+        bars: number("bars"),
+        spread: number("spread"),
+        height: number("height"),
+        gap: number("gap"),
+        density: number("density"),
+        volatility: number("volatility"),
+        jitter: number("jitter"),
+        scatter: number("scatter"),
+        stacking: number("stacking"),
+        barRadius: number("barRadius"),
+        softness: number("softness"),
+        glow: number("glow"),
+        grain: number("grain")
+      };
+    }
+
+    function marketProfile(shape, progress) {
+      const waveA = Math.sin(progress * Math.PI * 2.2 + 0.4);
+      const waveB = Math.sin(progress * Math.PI * 7.1 + 1.7);
+      const waveC = Math.cos(progress * Math.PI * 4.6 - 0.8);
+
+      if (shape === "basefield") {
+        return {
+          price: -0.16 + waveA * 0.12 + waveB * 0.045,
+          activity: 0.32 + Math.abs(waveB) * 0.18 + Math.abs(waveC) * 0.18
+        };
+      }
+
+      if (shape === "rally") {
+        return {
+          price: 0.34 - progress * 0.68 + waveA * 0.08 + waveB * 0.04,
+          activity: 0.36 + progress * 0.56 + Math.abs(waveB) * 0.22
+        };
+      }
+
+      if (shape === "selloff") {
+        return {
+          price: -0.28 + progress * 0.64 + waveA * 0.09 - waveB * 0.04,
+          activity: 0.76 - progress * 0.18 + Math.abs(waveC) * 0.28
+        };
+      }
+
+      if (shape === "rotation") {
+        const regime = progress < 0.34 ? -0.18 : progress < 0.68 ? 0.14 : -0.06;
+        return {
+          price: regime + waveA * 0.16 + waveB * 0.055,
+          activity: 0.48 + Math.abs(Math.sin(progress * Math.PI * 5.4)) * 0.46
+        };
+      }
+
+      return {
+        price: -0.04 + (progress - 0.5) * 0.18 + waveA * 0.15 + waveB * 0.06,
+        activity: 0.44 + Math.abs(waveA) * 0.24 + Math.abs(waveC) * 0.26
+      };
+    }
+
+    function buildMarketSeries(state, rng, width, height) {
+      const points = [];
+      const volatility = state.volatility / 100;
+      let walk = (rng() - 0.5) * 0.12;
+
+      for (let i = 0; i < state.bars; i += 1) {
+        const progress = state.bars === 1 ? 0.5 : i / (state.bars - 1);
+        const profile = marketProfile(state.shape, progress);
+        const shock = (rng() - 0.5) * (0.035 + volatility * 0.085);
+        walk = clamp(walk * 0.86 + shock, -0.26, 0.26);
+
+        const microMove = Math.sin((progress * 18 + seed * 0.001) * Math.PI) * 0.025;
+        const price = profile.price + walk + microMove;
+        const y = clamp(height * (0.5 + price * 0.58), height * 0.12, height * 0.88);
+        const activity = clamp(profile.activity + Math.abs(walk) * 1.15 + rng() * volatility * 0.45, 0.18, 1.32);
+        const previousY = points.length ? points[points.length - 1].y : y + (rng() - 0.5) * height * 0.08;
+
+        points.push({
+          progress,
+          y,
+          activity,
+          direction: y < previousY ? "up" : "down"
+        });
+      }
+
+      return points;
+    }
+
+    function clusterEnvelope(progress) {
+      const clusters = [
+        { center: 0.02, width: 0.024, strength: 0.68 },
+        { center: 0.095, width: 0.045, strength: 1 },
+        { center: 0.48, width: 0.028, strength: 0.48 },
+        { center: 0.62, width: 0.052, strength: 1 },
+        { center: 0.82, width: 0.034, strength: 0.38 },
+        { center: 0.94, width: 0.04, strength: 0.52 }
+      ];
+
+      const value = clusters.reduce((total, cluster) => {
+        const distance = progress - cluster.center;
+        return total + cluster.strength * Math.exp(-(distance * distance) / (2 * cluster.width * cluster.width));
+      }, 0);
+
+      return clamp(value, 0, 1);
+    }
+
+    function baseClusterEnvelope(progress) {
+      const clusters = [
+        { center: 0.055, width: 0.035, strength: 0.95 },
+        { center: 0.13, width: 0.026, strength: 0.46 },
+        { center: 0.58, width: 0.032, strength: 0.72 },
+        { center: 0.66, width: 0.052, strength: 1 },
+        { center: 0.78, width: 0.034, strength: 0.5 },
+        { center: 0.92, width: 0.038, strength: 0.5 }
+      ];
+
+      const value = clusters.reduce((total, cluster) => {
+        const distance = progress - cluster.center;
+        return total + cluster.strength * Math.exp(-(distance * distance) / (2 * cluster.width * cluster.width));
+      }, 0);
+
+      return clamp(value, 0, 1);
+    }
+
+    function baseFieldY(progress, rng, width, height) {
+      if (progress < 0.19) {
+        return height * (0.08 + rng() * 0.16);
+      }
+
+      if (progress > 0.49 && progress < 0.74) {
+        const local = (progress - 0.49) / 0.25;
+        return height * (0.27 + local * 0.32 + (rng() - 0.5) * 0.08);
+      }
+
+      if (progress > 0.86) {
+        return height * (0.58 + rng() * 0.26);
+      }
+
+      return height * (0.24 + rng() * 0.56);
+    }
+
+    function drawRoundedRect(group, x, y, width, height, color, radius, opacity, filter = "") {
+      if (height <= 1 || width <= 1) return;
+      group.appendChild(createSvgElement("rect", {
+        x: x.toFixed(2),
+        y: y.toFixed(2),
+        width: width.toFixed(2),
+        height: height.toFixed(2),
+        rx: Math.min(radius, width / 2, height / 2).toFixed(2),
+        fill: color,
+        opacity: opacity.toFixed(3),
+        filter
+      }));
+    }
+
+    function renderDesign() {
+      const state = getState();
+      const rng = mulberry32(seed);
+      const { width, height } = state.size;
+      const palette = palettePresets[state.preset];
+      const bgColor = palette.bg;
+      const isBaseField = state.shape === "basefield" || state.preset === "base";
+      const globalOpacity = state.softness / 100;
+      const chartWidth = width * (state.spread / 100);
+      const leftEdge = (width - chartWidth) / 2;
+      const step = chartWidth / state.bars;
+      const barWidth = clamp(step - state.gap, 3.5, 28);
+      const jitter = state.jitter / 100;
+      const vol = state.volatility / 100;
+      const density = state.density / 100;
+      const stackChance = state.stacking / 100;
+      const radius = state.barRadius;
+      const amplitude = state.height / 100;
+      const defs = createSvgElement("defs");
+      const glowId = "softGlow";
+      const grainId = "grain";
+      const shadowBlur = Math.max(0.1, state.glow / 3);
+      const mainFilter = state.glow > 0 ? `url(#${glowId})` : "";
+      const marketSeries = buildMarketSeries(state, rng, width, height);
+      const candles = marketSeries.map((point, index) => ({
+        ...point,
+        x: leftEdge + step * (index + 0.5) + (rng() - 0.5) * jitter * step * 0.48,
+        y: isBaseField ? baseFieldY(point.progress, rng, width, height) : point.y
+      }));
+
+      svg.replaceChildren();
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      svg.setAttribute("width", width);
+      svg.setAttribute("height", height);
+      svg.style.background = state.transparentBg ? "transparent" : bgColor;
+      artboard.style.setProperty("--ratio", state.size.ratio);
+      artboard.style.background = state.transparentBg ? "transparent" : bgColor;
+      artboard.classList.remove("has-error");
+      previewError.textContent = "";
+
+      const glowFilter = createSvgElement("filter", {
+        id: glowId,
+        x: "-20%",
+        y: "-20%",
+        width: "140%",
+        height: "140%"
+      });
+      glowFilter.appendChild(createSvgElement("feDropShadow", {
+        dx: "0",
+        dy: "0",
+        stdDeviation: shadowBlur.toFixed(2),
+        "flood-color": state.main,
+        "flood-opacity": (state.glow / 140).toFixed(2)
+      }));
+      defs.appendChild(glowFilter);
+
+      if (state.grain > 0 && !state.transparentBg) {
+        const filter = createSvgElement("filter", {
+          id: grainId,
+          x: "0",
+          y: "0",
+          width: "100%",
+          height: "100%"
+        });
+        filter.appendChild(createSvgElement("feTurbulence", {
+          type: "fractalNoise",
+          baseFrequency: "0.82",
+          numOctaves: "2",
+          stitchTiles: "stitch"
+        }));
+        filter.appendChild(createSvgElement("feColorMatrix", {
+          type: "saturate",
+          values: "0"
+        }));
+        const transfer = createSvgElement("feComponentTransfer", {});
+        transfer.appendChild(createSvgElement("feFuncA", {
+          type: "table",
+          tableValues: `0 ${(state.grain / 1200).toFixed(3)}`
+        }));
+        filter.appendChild(transfer);
+        defs.appendChild(filter);
+      }
+
+      svg.appendChild(defs);
+
+      if (!state.transparentBg) {
+        svg.appendChild(createSvgElement("rect", {
+          width,
+          height,
+          fill: bgColor
+        }));
+      }
+
+      if (state.showOrb && isBaseField) {
+        svg.appendChild(createSvgElement("circle", {
+          cx: (width * 1.01).toFixed(2),
+          cy: (height * 0.36).toFixed(2),
+          r: (Math.min(width, height) * 0.115).toFixed(2),
+          fill: state.main,
+          opacity: "0.92"
+        }));
+      }
+
+      const traceGroup = createSvgElement("g", { "data-layer": "market-price-trace" });
+      const wickGroup = createSvgElement("g", { "data-layer": "candlestick-markers" });
+      const backGroup = createSvgElement("g", { "data-layer": "pastel-secondary-bars" });
+      const mainGroup = createSvgElement("g", { "data-layer": "primary-finance-bars" });
+      const trailGroup = createSvgElement("g", { "data-layer": "ambient-market-marks" });
+      const tracePath = candles
+        .map((point, index) => `${index === 0 ? "M" : "L"} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`)
+        .join(" ");
+
+      traceGroup.appendChild(createSvgElement("path", {
+        d: tracePath,
+        fill: "none",
+        stroke: state.main,
+        "stroke-width": isBaseField ? "1.2" : "2",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round",
+        opacity: (isBaseField ? 0.002 : 0.018 * globalOpacity).toFixed(3)
+      }));
+
+      candles.forEach((point, index) => {
+        const activity = point.activity;
+        const envelope = isBaseField ? baseClusterEnvelope(point.progress) : clusterEnvelope(point.progress);
+        const baseSurvival = isBaseField ? 0.012 : 0.008;
+        const guaranteedBaseColumn = isBaseField && envelope > 0.68 && index % 2 === 0;
+        const survivalChance = guaranteedBaseColumn
+          ? 1
+          : clamp(baseSurvival + envelope * density * (0.92 + activity * 0.58), 0.01, isBaseField ? 0.72 : 0.82);
+
+        if (rng() > survivalChance) {
+          return;
+        }
+
+        const x = point.x;
+        const localWidth = clamp(barWidth * (isBaseField ? 0.62 : 0.68 + activity * 0.18 + rng() * 0.16), isBaseField ? 2.4 : 2.5, isBaseField ? 12 : 16);
+        const maxHeight = height * (isBaseField ? 0.12 + amplitude * 0.26 : 0.14 + amplitude * 0.3);
+        const bodyHeight = clamp(
+          height * (isBaseField ? 0.018 + activity * 0.07 + rng() * vol * 0.045 : 0.018 + activity * 0.085 + rng() * vol * 0.055) * (0.58 + amplitude * 0.72),
+          isBaseField ? 6 : 8,
+          maxHeight
+        );
+        const yCenter = clamp(point.y + (rng() - 0.5) * jitter * height * 0.04, height * 0.1, height * 0.9);
+        const top = clamp(yCenter - bodyHeight / 2, 12, height - bodyHeight - 12);
+        const left = x - localWidth / 2;
+        const strongMove = activity > 0.96 && rng() < (isBaseField ? 0.32 : 0.4);
+        const colorRoll = rng();
+        const candleColor = strongMove || colorRoll < (isBaseField ? 0.24 : 0.22)
+          ? state.main
+          : point.direction === "up"
+            ? state.mint
+            : state.lilac;
+        const candleBaseOpacity = candleColor === state.main ? (isBaseField ? 0.9 : 0.78) : (isBaseField ? 0.56 : 0.46);
+        const candleOpacity = clamp(candleBaseOpacity * (0.46 + activity * 0.32 + rng() * 0.14), 0.16, 0.78) * globalOpacity * (isBaseField ? 0.64 + envelope * 0.34 : 0.75 + envelope * 0.35);
+
+        if (state.showWicks && rng() < 0.88) {
+          const wickReach = height * (isBaseField ? 0.03 + rng() * 0.18 + activity * 0.035 : 0.026 + rng() * 0.12 + activity * 0.06 + vol * 0.055);
+          wickGroup.appendChild(createSvgElement("line", {
+            x1: x.toFixed(2),
+            x2: x.toFixed(2),
+            y1: clamp(top - wickReach * (0.45 + rng()), 10, height - 10).toFixed(2),
+            y2: clamp(top + bodyHeight + wickReach * (0.45 + rng()), 10, height - 10).toFixed(2),
+            stroke: state.gold,
+            "stroke-width": clamp(localWidth * 0.1, isBaseField ? 0.7 : 0.9, isBaseField ? 1.2 : 1.8).toFixed(2),
+            "stroke-linecap": "round",
+            opacity: (clamp(0.3 + activity * 0.15, 0.24, 0.5) * globalOpacity * (isBaseField ? 0.76 + envelope * 0.2 : 0.8 + envelope * 0.3)).toFixed(3)
+          }));
+        }
+
+        if (rng() < stackChance * (0.55 + envelope * 0.45)) {
+          const capWidth = localWidth * (0.72 + rng() * 0.2);
+          const capLeft = x - capWidth / 2 + (rng() - 0.5) * localWidth * 0.2;
+          const capHeight = clamp(8 + rng() * height * 0.052 * (0.5 + activity), 7, 54);
+          const footHeight = clamp(8 + rng() * height * 0.048 * (0.48 + activity), 7, 50);
+          const capGap = 5 + rng() * 13;
+          const footGap = 5 + rng() * 14;
+          const topColor = point.direction === "up" ? state.mint : state.lilac;
+          const bottomColor = point.direction === "up" ? state.lilac : state.mint;
+          const accentOpacity = clamp(0.28 + activity * 0.22, 0.2, 0.58) * globalOpacity * (0.72 + envelope * 0.36);
+
+          drawRoundedRect(backGroup, capLeft, top - capHeight - capGap, capWidth, capHeight, topColor, radius, accentOpacity);
+          if (rng() < 0.78) {
+            drawRoundedRect(backGroup, capLeft + (rng() - 0.5) * localWidth * 0.18, top + bodyHeight + footGap, capWidth, footHeight, bottomColor, radius, accentOpacity);
+          }
+        }
+
+        if (index % 17 === 0 || rng() < 0.035) {
+          const volumeHeight = clamp(height * (0.025 + activity * 0.065 + rng() * 0.045), 12, height * 0.16);
+          drawRoundedRect(
+            backGroup,
+            left,
+            height - 22 - volumeHeight,
+            localWidth,
+            volumeHeight,
+            point.direction === "up" ? state.mint : state.lilac,
+            radius,
+            0.08 * globalOpacity
+          );
+        }
+
+        drawRoundedRect(mainGroup, left, top, localWidth, bodyHeight, candleColor, radius, candleOpacity, mainFilter);
+      });
+
+      for (let i = 0; i < state.scatter; i += 1) {
+        const anchor = candles[Math.floor(rng() * candles.length)];
+        const x = anchor.x + (rng() - 0.5) * step * 1.8;
+        const yOffset = (rng() > 0.5 ? 1 : -1) * height * (isBaseField ? 0.08 + rng() * 0.2 : 0.12 + rng() * 0.28);
+        const y = clamp(anchor.y + yOffset, height * 0.08, height * 0.92);
+        const h = (isBaseField ? 10 : 18) + rng() * (isBaseField ? 62 : 80);
+        const w = clamp(barWidth * (0.36 + rng() * 0.36), isBaseField ? 2.5 : 4, isBaseField ? 9 : 16);
+        const colorRoll = rng();
+        const color = colorRoll < 0.3 ? state.mint : colorRoll < 0.66 ? state.lilac : state.gold;
+        const alpha = color === state.gold ? (isBaseField ? 0.28 : 0.44) : (isBaseField ? 0.24 : 0.34);
+
+        if (color === state.gold && state.showWicks) {
+          trailGroup.appendChild(createSvgElement("line", {
+            x1: x.toFixed(2),
+            x2: x.toFixed(2),
+            y1: (y - h / 2).toFixed(2),
+            y2: (y + h / 2).toFixed(2),
+            stroke: state.gold,
+            "stroke-width": "2.4",
+            "stroke-linecap": "round",
+            opacity: (alpha * globalOpacity).toFixed(3)
+          }));
+        } else {
+          drawRoundedRect(trailGroup, x - w / 2, y - h / 2, w, h, color, radius, alpha * globalOpacity);
+        }
+      }
+
+      svg.appendChild(traceGroup);
+      svg.appendChild(wickGroup);
+      svg.appendChild(backGroup);
+      svg.appendChild(mainGroup);
+      svg.appendChild(trailGroup);
+
+      if (state.grain > 0 && !state.transparentBg) {
+        svg.appendChild(createSvgElement("rect", {
+          width,
+          height,
+          fill: "#fff",
+          opacity: "1",
+          filter: `url(#${grainId})`,
+          "pointer-events": "none"
+        }));
+      }
+
+      updateLabels(state);
+    }
+
+    function draw() {
+      try {
+        renderDesign();
+      } catch (error) {
+        console.error(error);
+        artboard.classList.add("has-error");
+        previewError.textContent = `Preview failed: ${error.message}`;
+      }
+    }
+
+    function updateLabels(state) {
+      document.getElementById("statusSize").textContent = `${state.size.width} x ${state.size.height}`;
+      document.getElementById("statusBars").textContent = `${state.bars} slots`;
+      document.getElementById("statusPalette").textContent = palettePresets[state.preset].name;
+      document.getElementById("seedLabel").textContent = `Seed ${seed}`;
+      document.querySelectorAll("[data-value-for]").forEach((node) => {
+        const id = node.getAttribute("data-value-for");
+        node.textContent = controls[id].value;
+      });
+    }
+
+    function setPreset(name) {
+      const palette = palettePresets[name];
+      controls.mainColor.value = palette.main;
+      controls.mintColor.value = palette.mint;
+      controls.lilacColor.value = palette.lilac;
+      controls.goldColor.value = palette.gold;
+      if (name === "base") {
+        controls.shape.value = "basefield";
+        controls.showOrb.checked = true;
+        controls.density.value = 36;
+        controls.softness.value = 52;
+        controls.height.value = 38;
+        controls.scatter.value = 5;
+      }
+      draw();
+    }
+
+    function serializeSvg() {
+      const clone = svg.cloneNode(true);
+      clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      clone.setAttribute("role", "img");
+      clone.setAttribute("aria-label", "Abstract finance bar chart hero background");
+      return new XMLSerializer().serializeToString(clone);
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 300);
+    }
+
+    function exportSvgFile() {
+      const blob = new Blob([serializeSvg()], { type: "image/svg+xml;charset=utf-8" });
+      downloadBlob(blob, `finance-hero-background-${seed}.svg`);
+      showToast("SVG exported.");
+    }
+
+    function exportPngFile() {
+      const state = getState();
+      const source = serializeSvg();
+      const image = new Image();
+      const url = URL.createObjectURL(new Blob([source], { type: "image/svg+xml;charset=utf-8" }));
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = state.size.width;
+        canvas.height = state.size.height;
+        const ctx = canvas.getContext("2d");
+        if (!state.transparentBg) {
+          ctx.fillStyle = palettePresets[state.preset].bg;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        ctx.drawImage(image, 0, 0);
+        canvas.toBlob((blob) => {
+          if (blob) {
+            downloadBlob(blob, `finance-hero-background-${seed}.png`);
+            showToast("PNG exported.");
+          }
+          URL.revokeObjectURL(url);
+        }, "image/png");
+      };
+      image.onerror = () => {
+        URL.revokeObjectURL(url);
+        showToast("PNG export failed. Try SVG export instead.");
+      };
+      image.src = url;
+    }
+
+    async function copySvg() {
+      const source = serializeSvg();
+      try {
+        await navigator.clipboard.writeText(source);
+        showToast("SVG copied to clipboard.");
+      } catch (error) {
+        const textArea = document.createElement("textarea");
+        textArea.value = source;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+        showToast("SVG copied.");
+      }
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("visible");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("visible"), 2200);
+    }
+
+    function randomize() {
+      seed = Math.floor(1000 + Math.random() * 8999);
+      const shapes = controls.preset.value === "base" ? ["basefield"] : ["session", "rally", "selloff", "rotation"];
+      controls.shape.value = shapes[Math.floor(Math.random() * shapes.length)];
+      controls.bars.value = Math.floor(84 + Math.random() * 54);
+      controls.spread.value = Math.floor(96 + Math.random() * 9);
+      controls.height.value = Math.floor(22 + Math.random() * 32);
+      controls.gap.value = Math.floor(7 + Math.random() * 10);
+      controls.density.value = Math.floor((controls.preset.value === "base" ? 24 : 10) + Math.random() * (controls.preset.value === "base" ? 22 : 25));
+      controls.volatility.value = Math.floor(12 + Math.random() * 39);
+      controls.jitter.value = Math.floor(4 + Math.random() * 23);
+      controls.scatter.value = Math.floor(Math.random() * (controls.preset.value === "base" ? 9 : 13));
+      controls.stacking.value = Math.floor(16 + Math.random() * 42);
+      controls.barRadius.value = Math.floor(2 + Math.random() * 7);
+      controls.softness.value = Math.floor((controls.preset.value === "base" ? 42 : 18) + Math.random() * (controls.preset.value === "base" ? 20 : 25));
+      controls.glow.value = controls.preset.value === "base" ? 0 : Math.floor(Math.random() * 5);
+      draw();
+    }
+
+    function adjustMood(direction) {
+      const sign = direction === "louder" ? 1 : -1;
+      controls.density.value = clamp(number("density") + sign * 8, 4, 70);
+      controls.height.value = clamp(number("height") + sign * 7, 16, 72);
+      controls.volatility.value = clamp(number("volatility") + sign * 10, 0, 100);
+      controls.jitter.value = clamp(number("jitter") + sign * 8, 0, 100);
+      controls.scatter.value = clamp(number("scatter") + sign * 5, 0, 36);
+      controls.stacking.value = clamp(number("stacking") + sign * 10, 0, 100);
+      controls.softness.value = clamp(number("softness") + sign * 8, 8, 70);
+      controls.glow.value = clamp(number("glow") + sign * 3, 0, 40);
+      draw();
+    }
+
+    document.querySelectorAll("[data-size]").forEach((button) => {
+      button.addEventListener("click", () => {
+        activeSize = button.dataset.size;
+        document.querySelectorAll("[data-size]").forEach((item) => {
+          item.setAttribute("aria-pressed", String(item === button));
+        });
+        draw();
+      });
+    });
+
+    Object.entries(controls).forEach(([id, control]) => {
+      const eventName = control.matches("input[type='range'], input[type='color']") ? "input" : "change";
+      control.addEventListener(eventName, () => {
+        if (id === "preset") {
+          setPreset(control.value);
+          return;
+        }
+        draw();
+      });
+    });
+
+    document.getElementById("randomize").addEventListener("click", randomize);
+    document.getElementById("exportSvg").addEventListener("click", exportSvgFile);
+    document.getElementById("exportPng").addEventListener("click", exportPngFile);
+    document.getElementById("copySvg").addEventListener("click", copySvg);
+    document.getElementById("calmDown").addEventListener("click", () => adjustMood("calm"));
+    document.getElementById("makeLouder").addEventListener("click", () => adjustMood("louder"));
+
+    draw();
+  </script>
+</body>
+</html>
