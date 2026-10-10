@@ -112,7 +112,13 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&amp;display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-      <link rel="stylesheet" href="style.css?v=20261010-logo-dark-border">
+      <link rel="stylesheet" href="style.css?v=20261010-hero-cursor">
+      <script>
+         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof Element.prototype.animate === 'function') {
+            document.documentElement.classList.add('hero-intro-pending');
+         }
+      </script>
+      <script defer src="hero-intro.js?v=20261010-hero-cursor"></script>
    </head>
    <body class="flex-col bg-canvas text-foreground pt-10 pb-6 md:py-20">
       <header id="header" class="max-w-3xl 2xl:max-w-4xl mx-auto px-6 md:px-8">
@@ -128,7 +134,10 @@
 
       <main id="main">
       <section id="hero" class="max-w-3xl 2xl:max-w-4xl mx-auto py-8 pr-16 md:py-16 px-6 md:px-8 md:pr-16" aria-labelledby="hero-title">
-         <h2 id="hero-title" class="text-[40px] md:text-[64px] leading-[44px] md:leading-[72px] font-semibold 2xl:pr-16"><span class="word-animate ideas" style="--delay: 0s;">Designing</span> <span class="word-animate" style="--delay: 0.06s;">AI</span> <span class="word-animate" style="--delay: 0.12s;">products</span> <span class="word-animate" style="--delay: 0.18s;">that</span> <span class="word-animate" style="--delay: 0.24s;">survive</span> <span class="word-animate gradient" style="--delay: 0.3s;">reality.</span></h2>
+         <h2 id="hero-title" class="text-[40px] md:text-[64px] leading-[44px] md:leading-[72px] font-semibold 2xl:pr-16"><span id="hero-designing" class="word-animate ideas" style="--delay: 0s;"><span class="hero-selection" aria-hidden="true"></span>Designing</span> <span class="word-animate" style="--delay: 0.06s;">AI</span> <span class="word-animate" style="--delay: 0.12s;">products</span> <span class="word-animate" style="--delay: 0.18s;">that</span> <span class="word-animate" style="--delay: 0.24s;">survive</span> <span id="hero-reality" class="word-animate gradient" style="--delay: 0.3s;">reality.</span></h2>
+         <span id="hero-demo-cursor" class="hero-demo-cursor" aria-hidden="true">
+            <svg viewBox="0 0 24 30" width="24" height="30" focusable="false"><path d="M2 2v22l5.5-5.5L12 28l4-2-4.5-9.5H21L2 2Z" fill="currentColor" stroke="var(--color-bg-canvas)" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+         </span>
          <p class="flex items-center text-[20px] md:text-[20px] leading-[32px] md:leading-[32px] mt-4 opportunities-animate">
            I partner with founders and AI teams to turn strategy into shipped outcomes across brand, marketing, product, and design ops.
          </p>

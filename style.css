@@ -132,6 +132,7 @@ header {
   animation-delay: .1s
 }
 #hero {
+    position: relative;
   /* Removed block-level animation - now using word-by-word */
 }
 
@@ -511,6 +512,100 @@ header {
     z-index: 0;
     filter: none;
 }
+.hero-selection,
+.hero-demo-cursor {
+    display: none;
+}
+
+.hero-intro-pending #hero .ideas {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.hero-intro-pending #hero .ideas::before,
+.hero-intro-pending #hero .ideas::after {
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+.hero-intro-pending #hero.is-designing-selected .ideas::before,
+.hero-intro-pending #hero.is-designing-selected .ideas::after {
+    opacity: 1;
+}
+
+.hero-intro-pending .hero-selection {
+    position: absolute;
+    inset: 0 -11px;
+    z-index: -1;
+    display: block;
+    border-inline: 3px solid var(--color-accent-primary);
+    background-color: var(--color-accent-highlight);
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+}
+
+.hero-intro-pending #hero:not(.is-reality-colored) .gradient {
+    background: none;
+    color: var(--color-text-primary);
+    -webkit-text-fill-color: currentColor;
+}
+
+.hero-intro-pending #hero:not(.is-reality-colored) .gradient::after {
+    opacity: 0;
+    animation: none;
+}
+
+.hero-intro-pending .hero-demo-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
+    display: block;
+    width: 24px;
+    height: 30px;
+    color: var(--color-text-primary);
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 3px rgb(0 0 0 / .22));
+    transform-origin: 2px 2px;
+}
+
+.hero-demo-cursor::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--color-accent-primary);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#hero.is-cursor-clicking .hero-demo-cursor::after {
+    animation: heroCursorClick 360ms cubic-bezier(.23, 1, .32, 1) forwards;
+}
+
+@keyframes heroCursorClick {
+    from {
+        opacity: .65;
+        transform: scale(.4);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.65);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-demo-cursor,
+    .hero-selection {
+        display: none !important;
+    }
+}
+
 .gradient {
     --angle: 135deg;
     height: -moz-fit-content;
