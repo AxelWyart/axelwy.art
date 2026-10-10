@@ -255,6 +255,10 @@ header {
     border-bottom: 0;
 }
 
+.company-link-space {
+    word-spacing: .125em;
+}
+
 .company-link {
     display: inline-flex;
     align-items: center;
