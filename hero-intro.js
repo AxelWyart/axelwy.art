@@ -28,7 +28,7 @@
         if (finished) return;
         finished = true;
         root.classList.remove('hero-intro-pending');
-        hero.classList.remove('is-designing-selected', 'is-reality-colored', 'is-cursor-clicking');
+        hero.classList.remove('is-reality-colored', 'is-cursor-clicking');
         hero.dataset.cursorState = 'complete';
         animations.forEach(animation => animation.cancel());
         animations.clear();
@@ -51,7 +51,7 @@
         return animation.finished;
     };
 
-    const transform = (point, scale = 1) => `translate3d(${point.x}px, ${point.y}px, 0) scale(${scale})`;
+    const transform = (point, scale = 1) => `translate3d(${point.x - 4}px, ${point.y - 4}px, 0) scale(${scale})`;
 
     hero.dataset.cursorState = 'waiting';
     safetyTimeout = setTimeout(finish, 6500);
@@ -79,10 +79,10 @@
         const firstWord = designing.getBoundingClientRect();
         const lastWord = reality.getBoundingClientRect();
         const start = {
-            x: firstWord.left - heroBounds.left - 11,
+            x: firstWord.left - heroBounds.left + selection.offsetLeft,
             y: firstWord.top - heroBounds.top + firstWord.height * .58
         };
-        const end = { x: firstWord.right - heroBounds.left + 11, y: start.y };
+        const end = { x: start.x + selection.offsetWidth, y: start.y };
         const target = {
             x: lastWord.left - heroBounds.left + lastWord.width * .56,
             y: lastWord.top - heroBounds.top + lastWord.height * .58
@@ -111,7 +111,6 @@
             animate(cursor, [{ transform: transform(start) }, { transform: transform(end) }], 560, 'cubic-bezier(.45, 0, .55, 1)'),
             animate(selection, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 560, 'cubic-bezier(.45, 0, .55, 1)')
         ]);
-        hero.classList.add('is-designing-selected');
         await animate(cursor, [{ transform: transform(end) }, { transform: transform(end) }], 180);
 
         hero.dataset.cursorState = 'moving';

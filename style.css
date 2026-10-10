@@ -471,10 +471,9 @@ header {
 }
 .ideas {
   position: relative;
+  isolation: isolate;
   z-index: 0;
   margin-right: 12px;
-  background-color: var(--color-accent-highlight);
-  box-shadow: -8px 0 0 var(--color-accent-highlight), 8px 0 0 var(--color-accent-highlight), -11px 0 0 var(--color-accent-primary), 11px 0 0 var(--color-accent-primary);
   animation: wordFadeIn .52s cubic-bezier(.23, 1, .32, 1) forwards;
   will-change: transform;
   animation-delay: calc(.2s + var(--delay, 0s));
@@ -487,62 +486,28 @@ header {
   transform: perspective(1px);
 }
 
-.ideas::before {
-    content:"";
-    display: block;
-    position: absolute;
-    width:12px;
-    height:12px;
-    top:-11px;
-    left:-15.5px;
-    background-color: var(--color-accent-primary);
-    border-radius: 8px;
-    z-index: 0;
-}
-.ideas::after {
-    content:"";
-    display: block;
-    position: absolute;
-    width:12px;
-    height:12px;
-    bottom:-11px;
-    right:-15.5px;
-    background-color: var(--color-accent-primary);
-    border-radius: 8px;
-    z-index: 0;
-    filter: none;
-}
-.hero-selection,
 .hero-demo-cursor {
     display: none;
 }
 
-.hero-intro-pending #hero .ideas {
-    background-color: transparent;
-    box-shadow: none;
+.hero-word-text {
+    position: relative;
+    z-index: 1;
 }
 
-.hero-intro-pending #hero .ideas::before,
-.hero-intro-pending #hero .ideas::after {
-    opacity: 0;
-    transition: opacity 120ms ease;
-}
-
-.hero-intro-pending #hero.is-designing-selected .ideas::before,
-.hero-intro-pending #hero.is-designing-selected .ideas::after {
-    opacity: 1;
+.hero-selection {
+    position: absolute;
+    inset: .05em -.125em;
+    z-index: 0;
+    display: block;
+    border-radius: .14em;
+    background-color: var(--color-accent-highlight);
+    transform-origin: left center;
+    pointer-events: none;
 }
 
 .hero-intro-pending .hero-selection {
-    position: absolute;
-    inset: 0 -11px;
-    z-index: -1;
-    display: block;
-    border-inline: 3px solid var(--color-accent-primary);
-    background-color: var(--color-accent-highlight);
     transform: scaleX(0);
-    transform-origin: left center;
-    pointer-events: none;
 }
 
 .hero-intro-pending #hero:not(.is-reality-colored) .gradient {
@@ -563,19 +528,24 @@ header {
     z-index: 6;
     display: block;
     width: 24px;
-    height: 30px;
-    color: var(--color-text-primary);
+    height: 24px;
     opacity: 0;
     pointer-events: none;
     filter: drop-shadow(0 2px 3px rgb(0 0 0 / .22));
-    transform-origin: 2px 2px;
+    transform-origin: 4px 4px;
+}
+
+.hero-demo-cursor svg {
+    display: block;
+    transform: rotate(51deg);
+    transform-origin: 4px 4px;
 }
 
 .hero-demo-cursor::after {
     content: "";
     position: absolute;
-    top: -10px;
-    left: -10px;
+    top: -8px;
+    left: -8px;
     width: 24px;
     height: 24px;
     border: 2px solid var(--color-accent-primary);
@@ -600,8 +570,7 @@ header {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-demo-cursor,
-    .hero-selection {
+    .hero-demo-cursor {
         display: none !important;
     }
 }
