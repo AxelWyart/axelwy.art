@@ -473,7 +473,6 @@ header {
   position: relative;
   isolation: isolate;
   z-index: 0;
-  margin-right: 12px;
   animation: wordFadeIn .52s cubic-bezier(.23, 1, .32, 1) forwards;
   will-change: transform;
   animation-delay: calc(.2s + var(--delay, 0s));
