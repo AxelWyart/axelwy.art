@@ -51,7 +51,15 @@
         return animation.finished;
     };
 
-    const transform = (point, scale = 1) => `translate3d(${point.x - 4}px, ${point.y - 4}px, 0) scale(${scale})`;
+    const transform = (point, scale = 1, tilt = 0) =>
+        `translate3d(${point.x - 4}px, ${point.y - 4}px, 0) rotate(${tilt}deg) scale(${scale})`;
+
+    // Lean into the direction of travel without spinning the pointer around.
+    const travelTilt = (from, to) => {
+        const dx = to.x - from.x;
+        const distance = Math.hypot(dx, to.y - from.y);
+        return distance ? 24 * dx / distance : 0;
+    };
 
     hero.dataset.cursorState = 'waiting';
     safetyTimeout = setTimeout(finish, 6500);
@@ -89,6 +97,11 @@
         };
         const entry = { x: Math.max(4, start.x - 28), y: start.y + 28 };
         const exit = { x: target.x + 16, y: target.y + 20 };
+        const arc = { x: (end.x + target.x) / 2 + 18, y: (end.y + target.y) / 2 - 20 };
+        const entryTilt = travelTilt(entry, start);
+        const selectionTilt = travelTilt(start, end);
+        const arcStartTilt = travelTilt(end, arc);
+        const arcEndTilt = travelTilt(arc, target);
 
         window.addEventListener('scroll', finish, { passive: true });
         window.addEventListener('resize', finish, { passive: true });
@@ -102,21 +115,27 @@
 
         hero.dataset.cursorState = 'entering';
         await animate(cursor, [
-            { transform: transform(entry), opacity: 0 },
-            { transform: transform(start), opacity: 1 }
+            { transform: transform(entry, 1, entryTilt), opacity: 0 },
+            { transform: transform(start, 1, entryTilt), opacity: 1 }
         ], 280);
 
         hero.dataset.cursorState = 'selecting';
         await Promise.all([
-            animate(cursor, [{ transform: transform(start) }, { transform: transform(end) }], 560, 'cubic-bezier(.45, 0, .55, 1)'),
+            animate(cursor, [
+                { transform: transform(start, 1, entryTilt) },
+                { transform: transform(end, 1, selectionTilt) }
+            ], 560, 'cubic-bezier(.45, 0, .55, 1)'),
             animate(selection, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 560, 'cubic-bezier(.45, 0, .55, 1)')
         ]);
-        await animate(cursor, [{ transform: transform(end) }, { transform: transform(end) }], 180);
+        await animate(cursor, [
+            { transform: transform(end, 1, selectionTilt) },
+            { transform: transform(end, 1, arcStartTilt) }
+        ], 180);
 
         hero.dataset.cursorState = 'moving';
         await animate(cursor, [
-            { transform: transform(end) },
-            { transform: transform({ x: (end.x + target.x) / 2 + 18, y: (end.y + target.y) / 2 - 20 }), offset: .5 },
+            { transform: transform(end, 1, arcStartTilt) },
+            { transform: transform(arc, 1, (arcStartTilt + arcEndTilt) / 2), offset: .5 },
             { transform: transform(target) }
         ], 520, 'cubic-bezier(.45, 0, .2, 1)');
 
@@ -129,7 +148,7 @@
         hero.dataset.cursorState = 'leaving';
         await animate(cursor, [
             { transform: transform(target), opacity: 1 },
-            { transform: transform(exit), opacity: 0 }
+            { transform: transform(exit, 1, travelTilt(target, exit)), opacity: 0 }
         ], 240);
         finish();
     };
