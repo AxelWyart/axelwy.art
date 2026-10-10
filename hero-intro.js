@@ -58,7 +58,7 @@
     const travelTilt = (from, to) => {
         const dx = to.x - from.x;
         const distance = Math.hypot(dx, to.y - from.y);
-        return distance ? 24 * dx / distance : 0;
+        return distance ? 34 * dx / distance : 0;
     };
 
     hero.dataset.cursorState = 'waiting';
@@ -97,11 +97,30 @@
         };
         const entry = { x: Math.max(4, start.x - 28), y: start.y + 28 };
         const exit = { x: target.x + 16, y: target.y + 20 };
-        const arc = { x: (end.x + target.x) / 2 + 18, y: (end.y + target.y) / 2 - 20 };
+        const control = { x: (end.x + target.x) / 2 + 36, y: (end.y + target.y) / 2 - 60 };
         const entryTilt = travelTilt(entry, start);
         const selectionTilt = travelTilt(start, end);
-        const arcStartTilt = travelTilt(end, arc);
-        const arcEndTilt = travelTilt(arc, target);
+        const curveStartTilt = travelTilt(end, control);
+
+        // Sample a smooth curve and lean with its tangent, relaxing on arrival.
+        const curveFrames = Array.from({ length: 9 }, (_, index) => {
+            const t = index / 8;
+            const u = 1 - t;
+            const point = {
+                x: u * u * end.x + 2 * u * t * control.x + t * t * target.x,
+                y: u * u * end.y + 2 * u * t * control.y + t * t * target.y
+            };
+            const direction = {
+                x: point.x + u * (control.x - end.x) + t * (target.x - control.x),
+                y: point.y + u * (control.y - end.y) + t * (target.y - control.y)
+            };
+            const settling = Math.max(0, (t - .75) / .25);
+            return {
+                offset: t,
+                transform: transform(point, 1 + .025 * settling,
+                    travelTilt(point, direction) * (1 - settling) - 6 * settling)
+            };
+        });
 
         window.addEventListener('scroll', finish, { passive: true });
         window.addEventListener('resize', finish, { passive: true });
@@ -115,7 +134,8 @@
 
         hero.dataset.cursorState = 'entering';
         await animate(cursor, [
-            { transform: transform(entry, 1, entryTilt), opacity: 0 },
+            { transform: transform(entry, .96, entryTilt), opacity: 0 },
+            { transform: transform(start, 1.025, entryTilt + 4), opacity: 1, offset: .75 },
             { transform: transform(start, 1, entryTilt), opacity: 1 }
         ], 280);
 
@@ -124,32 +144,39 @@
             animate(cursor, [
                 { transform: transform(start, 1, entryTilt) },
                 { transform: transform(end, 1, selectionTilt) }
-            ], 560, 'cubic-bezier(.45, 0, .55, 1)'),
-            animate(selection, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 560, 'cubic-bezier(.45, 0, .55, 1)')
+            ], 500, 'cubic-bezier(.45, 0, .55, 1)'),
+            animate(selection, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 500, 'cubic-bezier(.45, 0, .55, 1)')
         ]);
         await animate(cursor, [
             { transform: transform(end, 1, selectionTilt) },
-            { transform: transform(end, 1, arcStartTilt) }
-        ], 180);
+            { transform: transform(end, 1, curveStartTilt) }
+        ], 120);
 
         hero.dataset.cursorState = 'moving';
+        await animate(cursor, curveFrames, 460, 'cubic-bezier(.45, 0, .2, 1)');
+
+        hero.dataset.cursorState = 'settling';
         await animate(cursor, [
-            { transform: transform(end, 1, arcStartTilt) },
-            { transform: transform(arc, 1, (arcStartTilt + arcEndTilt) / 2), offset: .5 },
+            { transform: transform(target, 1.025, -6) },
+            { transform: transform(target, .995, 2), offset: .65 },
             { transform: transform(target) }
-        ], 520, 'cubic-bezier(.45, 0, .2, 1)');
+        ], 140);
 
         hero.dataset.cursorState = 'clicking';
         await animate(cursor, [{ transform: transform(target) }, { transform: transform(target, .86) }], 90);
         hero.classList.add('is-cursor-clicking', 'is-reality-colored');
-        await animate(cursor, [{ transform: transform(target, .86) }, { transform: transform(target) }], 160);
-        await animate(cursor, [{ transform: transform(target) }, { transform: transform(target) }], 220);
+        await animate(cursor, [
+            { transform: transform(target, .86) },
+            { transform: transform(target, 1.05), offset: .65 },
+            { transform: transform(target) }
+        ], 180);
+        await animate(cursor, [{ transform: transform(target) }, { transform: transform(target) }], 150);
 
         hero.dataset.cursorState = 'leaving';
         await animate(cursor, [
             { transform: transform(target), opacity: 1 },
             { transform: transform(exit, 1, travelTilt(target, exit)), opacity: 0 }
-        ], 240);
+        ], 220);
         finish();
     };
 
