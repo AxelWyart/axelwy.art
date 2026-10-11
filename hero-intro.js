@@ -20,7 +20,6 @@
     }
 
     const animations = new Set();
-    const cleanups = new Set();
     let finished = false;
     let resizeObserver;
     let safetyTimeout;
@@ -33,8 +32,6 @@
         hero.dataset.cursorState = 'complete';
         animations.forEach(animation => animation.cancel());
         animations.clear();
-        cleanups.forEach(cleanup => cleanup());
-        cleanups.clear();
         resizeObserver?.disconnect();
         clearTimeout(safetyTimeout);
         window.removeEventListener('scroll', finish);
@@ -65,7 +62,7 @@
     };
 
     hero.dataset.cursorState = 'waiting';
-    safetyTimeout = setTimeout(finish, typeof window.runHeroCursorFollowup === 'function' ? 9500 : 6500);
+    safetyTimeout = setTimeout(finish, 6500);
     motionPreference.addEventListener('change', onMotionChange);
 
     const run = async () => {
@@ -175,17 +172,6 @@
             { transform: transform(target) }
         ], 180);
         await animate(cursor, [{ transform: transform(target) }, { transform: transform(target) }], 150);
-
-        // Optional experiment. Without its script, the original outro runs below.
-        if (typeof window.runHeroCursorFollowup === 'function' &&
-            await window.runHeroCursorFollowup({
-                hero, cursor, target, exit, animate, transform, travelTilt, finish,
-                isFinished: () => finished,
-                registerCleanup: cleanup => cleanups.add(cleanup)
-            })) {
-            finish();
-            return;
-        }
 
         hero.dataset.cursorState = 'leaving';
         await animate(cursor, [
