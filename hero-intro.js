@@ -96,7 +96,8 @@
             y: lastWord.top - heroBounds.top + lastWord.height * .58
         };
         const entry = { x: Math.max(4, start.x - 28), y: start.y + 28 };
-        const exit = { x: target.x + 16, y: target.y + 20 };
+        const exit = { x: target.x + 84, y: target.y + 64 };
+        const departure = { x: target.x + 55, y: target.y + 42 };
         const control = { x: (end.x + target.x) / 2 + 36, y: (end.y + target.y) / 2 - 60 };
         const entryTilt = travelTilt(entry, start);
         const selectionTilt = travelTilt(start, end);
@@ -175,8 +176,9 @@
         hero.dataset.cursorState = 'leaving';
         await animate(cursor, [
             { transform: transform(target), opacity: 1 },
+            { transform: transform(departure, 1, travelTilt(target, exit)), opacity: 1, offset: .65 },
             { transform: transform(exit, 1, travelTilt(target, exit)), opacity: 0 }
-        ], 220);
+        ], 480, 'cubic-bezier(.45, 0, .55, 1)');
         finish();
     };
 
