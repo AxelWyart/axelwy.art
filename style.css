@@ -218,6 +218,39 @@ header {
   }
 }
 
+/* Quiet separators with equal breathing room on each side. */
+.section-divider {
+  width: 100%;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.section-divider::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: rgb(var(--rgb-text-primary) / .1);
+}
+
+#bio, #quotes {
+  padding-bottom: 0;
+}
+
+#companies {
+  margin-bottom: 0;
+}
+
+#reachout {
+  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .section-divider {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
 .section-label-animate {
   opacity:0;
   transform: translateY(12px);
