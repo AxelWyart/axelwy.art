@@ -49,5 +49,6 @@ Axel Wyart is a product design leader with 10+ years building and scaling digita
 ## Site URLs
 
 - Home: https://www.axelwy.art/
+- About: https://www.axelwy.art/about/
 - Sitemap: https://www.axelwy.art/sitemap.xml
 - Open Graph image: https://www.axelwy.art/images/og.png
