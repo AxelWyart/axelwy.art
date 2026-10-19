@@ -219,18 +219,11 @@ header {
   }
 }
 
-/* Quiet separators with equal breathing room on each side. */
-.section-divider {
+/* Consistent breathing room between sections. */
+.section-spacer {
   width: 100%;
   padding-top: 4rem;
   padding-bottom: 4rem;
-}
-
-.section-divider::before {
-  content: "";
-  display: block;
-  height: 1px;
-  background: rgb(var(--rgb-text-primary) / .1);
 }
 
 #bio, #quotes {
@@ -246,7 +239,7 @@ header {
 }
 
 @media (min-width: 768px) {
-  .section-divider {
+  .section-spacer {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
@@ -673,18 +666,6 @@ details.description[open] .summary-text-closed {
 details.description[open] .summary-text-open {
     display: inline-block;
 }
-
-.text-quote {
-    position: relative;
-    font-family: 'Inter Tight';
-    letter-spacing: 0.25px;
-}
-.text-quote::before {
-    content:"“";
-    position: absolute;
-    left:-12px;
-}
-
 
 /* TYPING */
 .receive:before, .receive:after {
