@@ -2,8 +2,8 @@ const scroller = document.getElementById('works-scroller');
 
 if (scroller) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const idleDelay = 6000;
-  const speed = 9; // Pixels per second, independent of display refresh rate.
+  const idleDelay = 3000;
+  const speed = 12; // Pixels per second, independent of display refresh rate.
   const activePointers = new Set();
   let resumeAt = 0;
   let frame;
