@@ -1,9 +1,13 @@
 {
   "private": true,
   "scripts": {
+    "vendor:carousel": "node scripts/vendor-carousel.mjs",
     "build:css": "tailwindcss -i ./src/tailwind.css -o ./tailwind.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@blossom-carousel/core": "1.1.9"
   }
 }

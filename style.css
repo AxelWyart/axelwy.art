@@ -265,6 +265,28 @@ header {
 #works-scroller {
     padding-bottom: .75rem;
     margin-bottom: -.75rem;
+    /* Preserve the existing free-scrolling strip; Blossom owns drag physics. */
+    scroll-snap-type: none;
+    scroll-behavior: smooth;
+}
+
+#works-scroller:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -2px;
+}
+
+#works-scroller img {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Let the card receive the gesture rather than the browser's image drag. */
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #works-scroller {
+        scroll-behavior: auto;
+    }
 }
 
 .work-title {
