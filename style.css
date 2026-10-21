@@ -222,8 +222,8 @@ header {
 /* Consistent breathing room between sections. */
 .section-spacer {
   width: 100%;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 #bio, #quotes {
@@ -240,8 +240,8 @@ header {
 
 @media (min-width: 768px) {
   .section-spacer {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 
