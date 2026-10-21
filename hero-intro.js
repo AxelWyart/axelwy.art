@@ -34,9 +34,7 @@
         animations.clear();
         resizeObserver?.disconnect();
         clearTimeout(safetyTimeout);
-        window.removeEventListener('scroll', finish);
-        window.removeEventListener('resize', finish);
-        hero.removeEventListener('pointerdown', finish);
+        hero.removeEventListener('click', finish);
         motionPreference.removeEventListener('change', onMotionChange);
     };
 
@@ -78,11 +76,6 @@
         if (finished) return;
 
         const headingBounds = heading.getBoundingClientRect();
-        if (headingBounds.bottom <= 0 || headingBounds.top >= window.innerHeight) {
-            finish();
-            return;
-        }
-
         const heroBounds = hero.getBoundingClientRect();
         const firstWord = designing.getBoundingClientRect();
         const lastWord = reality.getBoundingClientRect();
@@ -123,9 +116,9 @@
             };
         });
 
-        window.addEventListener('scroll', finish, { passive: true });
-        window.addEventListener('resize', finish, { passive: true });
-        hero.addEventListener('pointerdown', finish);
+        // Scroll and touch gestures leave hero-relative animation coordinates intact.
+        // Only a deliberate click or a real heading layout change should interrupt it.
+        hero.addEventListener('click', finish);
         resizeObserver = new ResizeObserver(() => {
             const bounds = heading.getBoundingClientRect();
             if (Math.abs(bounds.width - headingBounds.width) > 1 ||
