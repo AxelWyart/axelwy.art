@@ -99,7 +99,6 @@
       <link rel="stylesheet" href="fonts/fonts.css">
       <link rel="stylesheet" href="vendor/blossom-carousel/blossom-carousel-core.css">
       <link rel="stylesheet" href="style.css?v=20261021-tighter-sections">
-      <link rel="stylesheet" href="avatar-mask.css?v=20261026-shape-personality">
       <script>
          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof Element.prototype.animate === 'function') {
             document.documentElement.classList.add('hero-intro-pending');
@@ -110,15 +109,7 @@
    <body class="flex-col bg-canvas text-foreground pt-10 pb-6 md:py-20">
       <header id="header" class="max-w-3xl 2xl:max-w-4xl mx-auto px-6 md:px-8">
          <div id="profile-avatar" class="relative w-14 h-14">
-            <svg class="avatar-clip-defs" width="0" height="0" aria-hidden="true" focusable="false">
-               <defs>
-                  <clipPath id="avatar-lobes" clipPathUnits="objectBoundingBox">
-                     <rect class="avatar-lobe avatar-lobe-top" x=".03" y=".03" width=".94" height=".5828" rx=".2914" />
-                     <rect class="avatar-lobe avatar-lobe-bottom" x=".03" y=".3872" width=".94" height=".5828" rx=".2914" />
-                  </clipPath>
-               </defs>
-            </svg>
-            <img src="images/avatar.png" srcset="images/responsive/avatar-56.png 56w, images/responsive/avatar-112.png 112w, images/avatar.png 224w" sizes="56px" width="224" height="224" decoding="async" alt="Axel Wyart">
+            <img src="images/avatar.png" srcset="images/responsive/avatar-56.png 56w, images/responsive/avatar-112.png 112w, images/avatar.png 224w" sizes="56px" width="224" height="224" decoding="async" alt="Axel Wyart" class="rounded-full">
          </div>
       </header>
       
