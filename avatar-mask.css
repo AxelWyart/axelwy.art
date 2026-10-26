@@ -1,6 +1,5 @@
-/* Float independently of the shape changes so the movement stays fluid. */
+/* Each silhouette gets two vertical bobs, then a quiet gap before the next morph. */
 #profile-avatar {
-    transform-origin: 50% 50%;
     animation: avatar-float 5s cubic-bezier(.45, 0, .55, 1) infinite;
 }
 
@@ -11,7 +10,6 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    transform-origin: 50% 65%;
 }
 
 @supports (clip-path: polygon(0 0, 100% 0, 100% 100%)) {
@@ -73,35 +71,23 @@
             27.32% 10.71%, 30.10% 9.64%, 32.66% 8.14%, 35.15% 6.25%, 37.72% 4.18%, 40.50% 2.24%, 43.52% 0.79%, 46.73% 0.11%
         );
         border-radius: 0;
-        clip-path: var(--avatar-circle);
-        animation:
-            avatar-morph 10s cubic-bezier(.34, 1.35, .64, 1) infinite,
-            avatar-bounce 2.5s cubic-bezier(.45, 0, .55, 1) infinite;
+        clip-path: var(--avatar-rounded-square);
+        animation: avatar-morph 20s cubic-bezier(.65, 0, .35, 1) infinite;
     }
 }
 
 @keyframes avatar-morph {
-    0%, 15%, 96%, 100% { clip-path: var(--avatar-circle); }
-    21%, 40% { clip-path: var(--avatar-rounded-square); }
-    46%, 65% { clip-path: var(--avatar-peanut); }
-    71%, 90% { clip-path: var(--avatar-scallop); }
+    0%, 22%, 100% { clip-path: var(--avatar-rounded-square); }
+    25%, 47% { clip-path: var(--avatar-peanut); }
+    50%, 72% { clip-path: var(--avatar-scallop); }
+    75%, 97% { clip-path: var(--avatar-circle); }
 }
 
+/* Translation only: the portrait and mask keep their size and proportions. */
 @keyframes avatar-float {
-    0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.5deg); }
-    25% { transform: translate3d(2px, -5px, 0) rotate(2deg); }
-    50% { transform: translate3d(-1px, -2px, 0) rotate(-1deg); }
-    75% { transform: translate3d(-2px, 2px, 0) rotate(1.5deg); }
-}
-
-/* A little anticipation, lift, and squash as each new shape settles. */
-@keyframes avatar-bounce {
-    0%, 52%, 100% { transform: translate3d(0, 0, 0) scale(1, 1) rotate(0deg); }
-    60% { transform: translate3d(0, 1px, 0) scale(1.04, .94) rotate(-1deg); }
-    72% { transform: translate3d(0, -4px, 0) scale(.97, 1.07) rotate(2deg); }
-    80% { transform: translate3d(0, -6px, 0) scale(1.02, 1.02) rotate(-1deg); }
-    88% { transform: translate3d(0, 1px, 0) scale(1.07, .93) rotate(.5deg); }
-    96% { transform: translate3d(0, -1px, 0) scale(.99, 1.01) rotate(0deg); }
+    0%, 4%, 30%, 58%, 100% { transform: translate3d(0, 0, 0); }
+    14%, 42% { transform: translate3d(0, -4px, 0); }
+    24%, 52% { transform: translate3d(0, .6px, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
