@@ -20,7 +20,8 @@ if (scroller) {
 
   function animateIdle(time) {
     frame = undefined;
-    if (document.hidden || reducedMotion.matches || !visible) return;
+    if (document.hidden || reducedMotion.matches || !visible ||
+        document.documentElement.classList.contains('case-study-open')) return;
 
     const focused = scroller.matches(':focus-visible') ||
       (scroller.contains(document.activeElement) && document.activeElement !== scroller);
@@ -47,7 +48,8 @@ if (scroller) {
     frame = undefined;
     previousTime = undefined;
     position = scroller.scrollLeft;
-    if (!document.hidden && !reducedMotion.matches && visible) {
+    if (!document.hidden && !reducedMotion.matches && visible &&
+        !document.documentElement.classList.contains('case-study-open')) {
       frame = requestAnimationFrame(animateIdle);
     }
   }
@@ -86,6 +88,10 @@ if (scroller) {
     updateAutoScroll();
   });
   reducedMotion.addEventListener('change', updateAutoScroll);
+  document.addEventListener('case-study:toggle', () => {
+    pauseAutoScroll();
+    updateAutoScroll();
+  });
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     updateAutoScroll();

@@ -35,16 +35,17 @@ Axel Wyart is a product design leader with 10+ years building and scaling digita
 
 ## Selected Portfolio Work
 
-- Ellie landing, Elevate (2026): https://elevatehealth.chat
-- EverAssist, Foundever (2025): https://www.foundever.com
-- AI platform, Laiye (2023): https://www.laiye.com/en
-- Rebranding, Sneci (2024): https://www.sneci.com/
-- Widget UI, Laiye (2023): https://www.laiye.com/en
-- Ask AI widget, Nudge (2023): https://www.getnudge.ai/
-- Workflow builder, Mindsay (2018-2023): https://www.mindsay.com
-- Mindsay.com, Mindsay (2018-2023): https://www.mindsay.com
-- Smart mirror, Malakoff Humanis (2017): https://www.malakoffhumanis.com/
-- IoT object, personal project (2017)
+- Ellie landing, Elevate (2026): https://www.axelwy.art/case-studies/ellie-landing.html
+- EverAssist, Foundever (2025): https://www.axelwy.art/case-studies/everassist.html
+- AI platform, Laiye (2023): https://www.axelwy.art/case-studies/laiye-ai-platform.html
+- Rebranding, Sneci (2024): https://www.axelwy.art/case-studies/sneci-rebranding.html
+- Widget UI, Laiye (2023): https://www.axelwy.art/case-studies/laiye-widget.html
+- Ask AI widget, Nudge (2023): https://www.axelwy.art/case-studies/nudge-ask-ai.html
+- Workflow builder, Mindsay (2018–2023): https://www.axelwy.art/case-studies/mindsay-workflow-builder.html
+- Mindsay.com, Mindsay (2018–2023): https://www.axelwy.art/case-studies/mindsay-website.html
+- Smart mirror, Malakoff Humanis (2017): https://www.axelwy.art/case-studies/smart-mirror.html
+- Moving prints, Pops (2017): https://www.axelwy.art/case-studies/pops-moving-prints.html
+- IoT object, Personal project (2017): https://www.axelwy.art/case-studies/iot-object.html
 
 ## Site URLs
 

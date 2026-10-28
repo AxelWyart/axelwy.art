@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "test": "node --test scripts/case-studies.test.mjs",
     "vendor:carousel": "node scripts/vendor-carousel.mjs",
     "build:css": "tailwindcss -i ./src/tailwind.css -o ./tailwind.css --minify"
   },
