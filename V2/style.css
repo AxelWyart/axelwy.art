@@ -189,6 +189,7 @@ html.visual-open { overflow: hidden; }
 .visual-lightbox__viewport { display: grid; place-items: center; width: 100%; height: 100%; }
 .visual-lightbox__image { display: block; width: min(100%, calc((100dvh - 48px) * var(--visual-ratio, 1))); height: auto; aspect-ratio: var(--visual-ratio, 1); object-fit: contain; border-radius: 16px; transform-origin: top left; }
 [aria-labelledby="ellie-heading"].experience-gallery { gap: 16px; }
+.experience-gallery.experience-gallery-compact { gap: 16px; }
 .visual-lightbox[open]::backdrop { animation: visual-backdrop-in 340ms ease-out; }
 .visual-lightbox.is-closing::backdrop { animation: visual-backdrop-out 300ms ease-in forwards; }
 @keyframes visual-backdrop-in { from { opacity: 0; } }
@@ -224,7 +225,7 @@ html.visual-open { overflow: hidden; }
   .experience-preview-pair .visual-trigger { max-width: calc(50% - 8px); }
   .experience-preview-pair img { height: 240px; }
   .experience-gallery { gap: 40px; margin-top: 40px; }
-  .experience-gallery-pair { gap: 12px; }
+  .experience-gallery-pair, .experience-gallery.experience-gallery-compact { gap: 12px; }
   .experience-gallery-portrait .experience-gallery-visual { padding: 24px; }
   .experience-information { margin-top: 36px; }
   .experience-information dl > div { grid-template-columns: 70px minmax(0, 1fr); gap: 16px; }
