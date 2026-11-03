@@ -3,17 +3,25 @@ const emailLink = document.querySelector('.contact-email');
 const copyButton = document.querySelector('.contact-copy');
 const copyStatus = document.querySelector('.contact-status');
 
+let copyFeedbackTimer;
+
 copyButton.addEventListener('click', async () => {
+  let message = 'Email copied';
+  let copied = false;
   try {
     await navigator.clipboard.writeText(emailLink.textContent.trim());
-    copyStatus.textContent = 'Email copied';
+    copied = true;
   } catch {
-    copyStatus.textContent = 'Could not copy email';
+    message = 'Could not copy email';
   }
-});
 
-document.querySelector('.contact').addEventListener('pointerleave', () => {
-  copyStatus.textContent = '';
+  clearTimeout(copyFeedbackTimer);
+  copyButton.toggleAttribute('data-copied', copied);
+  copyStatus.textContent = message;
+  copyFeedbackTimer = setTimeout(() => {
+    copyButton.removeAttribute('data-copied');
+    copyStatus.textContent = '';
+  }, 1800);
 });
 
 const workList = document.querySelector('[aria-labelledby="work-heading"] .entries');
