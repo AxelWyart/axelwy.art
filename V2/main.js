@@ -1,31 +1,4 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const emailLink = document.querySelector('.contact-email');
-const copyButton = document.querySelector('.contact-copy');
-const copyStatus = document.querySelector('.contact-status');
-
-const copyLabel = copyButton.querySelector('.copy-label');
-let copyFeedbackTimer;
-
-copyButton.addEventListener('click', async () => {
-  let message = 'Email copied';
-  let copied = false;
-  try {
-    await navigator.clipboard.writeText(emailLink.textContent.trim());
-    copied = true;
-  } catch {
-    message = 'Could not copy email';
-  }
-
-  clearTimeout(copyFeedbackTimer);
-  copyButton.toggleAttribute('data-copied', copied);
-  copyLabel.textContent = copied ? 'Copied' : 'Retry';
-  copyStatus.textContent = message;
-  copyFeedbackTimer = setTimeout(() => {
-    copyButton.removeAttribute('data-copied');
-    copyLabel.textContent = 'Copy';
-    copyStatus.textContent = '';
-  }, 1800);
-});
 
 const workList = document.querySelector('[aria-labelledby="work-heading"] .entries');
 const hoverPointer = window.matchMedia('(hover: hover) and (pointer: fine)');

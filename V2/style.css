@@ -38,44 +38,6 @@ p { margin: 0; }
 .contact-button::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: var(--control-drop); pointer-events: none; }
 .contact { display: flex; align-items: center; width: fit-content; position: relative; padding-right: 4px; }
 .contact-email { background: #242424; color: #fff; }
-.contact-copy {
-  display: grid;
-  place-items: center;
-  grid-template-columns: 18px 3.5em;
-  gap: 7px;
-  padding: 0 12px;
-  margin-left: 12px;
-  color: var(--text);
-  transition: opacity 140ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
-}
-.contact-copy svg {
-  grid-area: 1 / 1;
-  transition: opacity 120ms ease, transform 180ms cubic-bezier(.2,.8,.2,1);
-}
-.copy-label { text-align: left; justify-self: start; }
-.contact-copy .copy-check { opacity: 0; transform: scale(.75); }
-.contact-copy[data-copied] svg:first-child { opacity: 0; transform: scale(.75); }
-.contact-copy[data-copied] .copy-check { opacity: 1; transform: none; }
-@media (hover: hover) and (pointer: fine) {
-  .contact:not(:hover):not(:has(:focus-visible)) .contact-copy {
-    opacity: 0;
-    transform: translateX(-5px) scale(.93);
-    pointer-events: none;
-  }
-}
-.contact-status {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
-@media (prefers-reduced-motion: reduce) {
-  .contact .contact-copy, .contact-copy svg {
-    transition: none;
-    transform: none !important;
-  }
-}
 .contact-button:active { transform: scale(.95); }
 section { display: flex; flex-direction: column; gap: 20px; }
 .entries { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; }
