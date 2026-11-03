@@ -32,19 +32,18 @@ p { margin: 0; }
 .identity h1, .subtitle { font-size: 17px; line-height: 22px; }
 .subtitle { color: var(--secondary); font-weight: 400; }
 .intro { max-width: 460px; margin-top: 20px; padding-bottom: 16px; color: var(--text); text-wrap: balance; }
-.contact { margin-top: 20px; margin-left: -4px; --button-width: 88px; --menu-width: 190px; --menu-height: 180px; --contact-fs: 15px; --contact-lh: 20px; }
-.contact-button { position: relative; display: block; width: var(--button-width); height: 44px; padding: 12px 16px; border: 0; border-radius: 22px; background: var(--control-bg); backdrop-filter: blur(16px) saturate(200%); box-shadow: var(--control-shadow); cursor: pointer; font-size: var(--contact-fs); line-height: var(--contact-lh); font-weight: 500; transition: transform 300ms var(--ease), color 100ms ease; }
+.contact { margin-top: 20px; margin-left: -4px; --contact-fs: 15px; --contact-lh: 20px; }
+.contact-button { position: relative; display: block; height: 44px; padding: 12px 16px; border: 0; border-radius: 22px; background: var(--control-bg); backdrop-filter: blur(16px) saturate(200%); box-shadow: var(--control-shadow); cursor: pointer; font-size: var(--contact-fs); line-height: var(--contact-lh); font-weight: 500; transition: transform 300ms var(--ease), color 100ms ease; }
+.contact-button::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
 .contact-button::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: var(--control-drop); pointer-events: none; }
-.contact-button::before, .contact-panel::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
+.contact { display: flex; align-items: center; width: fit-content; position: relative; padding-right: 4px; }
+.contact-email { background: #242424; color: #fff; }
+.contact-copy { display: grid; place-items: center; width: 44px; padding: 0; margin-left: 4px; color: var(--text); }
+@media (hover: hover) and (pointer: fine) {
+  .contact:not(:hover):not(:focus-within) .contact-copy { opacity: 0; pointer-events: none; }
+}
+.contact-status { position: absolute; top: calc(100% + 4px); left: 0; color: var(--secondary); font-size: 13px; }
 .contact-button:active { transform: scale(.95); }
-.contact:has(:popover-open) .contact-button { color: transparent; background: transparent; box-shadow: none; backdrop-filter: none; outline: none; }
-.contact:has(:popover-open) .contact-button::before, .contact:has(:popover-open) .contact-button::after { opacity: 0; }
-.contact-panel { position: fixed; inset: auto; margin: 0; width: 190px; height: 180px; max-width: calc(100vw - 16px); padding: 10px; border: 0; border-radius: 30px; background: var(--control-bg); color: var(--text); backdrop-filter: blur(16px) saturate(200%); box-shadow: var(--control-shadow), var(--menu-drop); overflow: hidden; transform-origin: 44px 22px; font-size: 15px; line-height: 20px; opacity: 0; transform: scale(.65); transition: opacity 160ms var(--ease), transform 250ms var(--ease), display 250ms allow-discrete, overlay 250ms allow-discrete; }
-.contact-panel:popover-open { opacity: 1; transform: none; }
-.contact-panel a { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 16px 8px 8px; border-radius: 20px; white-space: nowrap; transition: background-color 200ms var(--ease); }
-.contact-panel img { display: block; width: 24px; height: 24px; flex: 0 0 auto; filter: drop-shadow(0 2px 6px #00000014); }
-.contact-panel a:focus-visible { outline-offset: -2px; background: var(--fill-hover); }
-.contact-panel[data-keyboard] { transition: none; }
 section { display: flex; flex-direction: column; gap: 20px; }
 .entries { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; }
 .entry { display: flex; align-items: center; gap: 16px; min-height: 44px; }
@@ -77,10 +76,9 @@ section { display: flex; flex-direction: column; gap: 20px; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--secondary); font-size: 13px; line-height: 18px; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--secondary); font-size: 20px; line-height: 28px; }
 @media (hover: hover) and (pointer: fine) {
   .contact-button:hover { transform: scale(1.04); }
-  .contact-panel a:hover { background: var(--fill-hover); }
   .entry:hover .entry-name, footer a:hover { color: var(--hover-text); }
   .entry:hover .entry-note { opacity: 1; }
   .quiet-link:hover { text-decoration-color: currentColor; }
@@ -91,11 +89,8 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
 }
 @media (max-width: 767px) {
   .page { max-width: 596px; padding: 44px 28px 68px; gap: 44px; }
-  .contact { margin-top: 16px; --button-width: 94px; --contact-fs: 17px; --contact-lh: 22px; }
+  .contact { margin-top: 16px; --contact-fs: 17px; --contact-lh: 22px; }
   .contact-button { padding-block: 11px; }
-  .contact-panel { width: 209px; height: 196px; font-size: 17px; line-height: 22px; border-radius: 32px; transform-origin: 47px 22px; }
-  .contact-panel a { gap: 12px; min-height: 44px; border-radius: 22px; }
-  .contact-panel img { width: 28px; height: 28px; }
   .company-icon { width: 48px; height: 48px; }
   .entry { min-height: 48px; }
 
@@ -175,7 +170,7 @@ html.experience-open { overflow: hidden; }
 .experience-article h2 { margin: 0; font-size: 15px; line-height: 22px; font-weight: 500; }
 .experience-gallery { gap: 56px; margin-top: 56px; }
 .experience-gallery-item { margin: 0; }
-.experience-visual-caption { display: flex; flex-direction: column; align-items: flex-start; gap: 0; margin: 0 0 8px; }
+.experience-visual-caption { display: flex; flex-direction: column; align-items: flex-start; gap: 0; margin: 0 0 16px; }
 .experience-visual-caption h2 { font-size: 15px; line-height: 22px; font-weight: 500; }
 .experience-visual-caption p { color: var(--secondary); font-size: 15px; line-height: 22px; font-weight: 400; text-wrap: balance; }
 .experience-gallery-visual { display: flex; justify-content: center; overflow: hidden; border-radius: 16px; background: var(--detail-surface); }

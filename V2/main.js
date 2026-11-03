@@ -1,50 +1,20 @@
-const contactButton = document.querySelector('.contact-button');
-const contactPanel = document.querySelector('#contact-links');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const emailLink = document.querySelector('.contact-email');
+const copyButton = document.querySelector('.contact-copy');
+const copyStatus = document.querySelector('.contact-status');
 
-function positionContact() {
-  const rect = contactButton.getBoundingClientRect();
-  const mobile = window.innerWidth < 768;
-  const width = mobile ? 209 : 190;
-  const height = mobile ? 196 : 180;
-  contactPanel.style.left = `${Math.max(8, Math.min(rect.left, window.innerWidth - width - 8))}px`;
-  contactPanel.style.top = `${Math.max(8, Math.min(rect.top, window.innerHeight - height - 8))}px`;
-}
+copyButton.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(emailLink.textContent.trim());
+    copyStatus.textContent = 'Email copied';
+  } catch {
+    copyStatus.textContent = 'Could not copy email';
+  }
+});
 
-contactButton.addEventListener('click', event => {
-  contactPanel.toggleAttribute('data-keyboard', event.detail === 0);
+document.querySelector('.contact').addEventListener('pointerleave', () => {
+  copyStatus.textContent = '';
 });
-contactPanel.addEventListener('beforetoggle', event => {
-  contactPanel.getAnimations({ subtree: true }).forEach(animation => animation.cancel());
-  if (event.newState !== 'open') return;
-  positionContact();
-  if (reducedMotion.matches || contactPanel.hasAttribute('data-keyboard')) return;
-  const mobile = window.innerWidth < 768;
-  const width = mobile ? 209 : 190;
-  const height = mobile ? 196 : 180;
-  const buttonWidth = mobile ? 94 : 88;
-  contactPanel.animate([
-    { width: `${buttonWidth}px`, height: '44px', borderRadius: '22px', transform: 'scale(1)', opacity: 1 },
-    { offset: .24, width: `${buttonWidth + (width - buttonWidth) * .2}px`, height: `${44 + (height - 44) * .2}px`, transform: 'scale(.65)' },
-    { width: `${width}px`, height: `${height}px`, borderRadius: mobile ? '32px' : '30px', transform: 'scale(1)', opacity: 1 }
-  ], { duration: 450, easing: 'cubic-bezier(.2, 0, 0, 1)' });
-  contactPanel.querySelectorAll('a').forEach((link, index) => {
-    link.animate([{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'translateY(0)' }], {
-      duration: 300, delay: 120 + index * 30, fill: 'backwards', easing: 'cubic-bezier(.2, 0, 0, 1)'
-    });
-  });
-});
-contactPanel.addEventListener('toggle', event => {
-  contactButton.setAttribute('aria-expanded', String(event.newState === 'open'));
-});
-contactPanel.addEventListener('click', event => {
-  if (event.target.closest('a')) contactPanel.hidePopover();
-});
-window.addEventListener('resize', positionContact);
-window.addEventListener('scroll', () => {
-  if (contactPanel.matches(':popover-open')) contactPanel.hidePopover();
-}, { passive: true });
-
 
 const workList = document.querySelector('[aria-labelledby="work-heading"] .entries');
 const hoverPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
