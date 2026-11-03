@@ -41,9 +41,10 @@ p { margin: 0; }
 .contact-copy {
   display: grid;
   place-items: center;
-  width: 44px;
-  padding: 0;
-  margin-left: 4px;
+  grid-template-columns: 18px 3.5em;
+  gap: 7px;
+  padding: 0 12px;
+  margin-left: 12px;
   color: var(--text);
   transition: opacity 140ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
 }
@@ -51,6 +52,7 @@ p { margin: 0; }
   grid-area: 1 / 1;
   transition: opacity 120ms ease, transform 180ms cubic-bezier(.2,.8,.2,1);
 }
+.copy-label { text-align: left; justify-self: start; }
 .contact-copy .copy-check { opacity: 0; transform: scale(.75); }
 .contact-copy[data-copied] svg:first-child { opacity: 0; transform: scale(.75); }
 .contact-copy[data-copied] .copy-check { opacity: 1; transform: none; }
@@ -63,18 +65,13 @@ p { margin: 0; }
 }
 .contact-status {
   position: absolute;
-  top: calc(100% + 6px);
-  right: 4px;
-  color: var(--secondary);
-  font-size: 13px;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: none;
-  transition: opacity 140ms ease, transform 180ms cubic-bezier(.2,.8,.2,1);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
-.contact-status:empty { opacity: 0; transform: translateY(-3px); }
 @media (prefers-reduced-motion: reduce) {
-  .contact .contact-copy, .contact-copy svg, .contact-status {
+  .contact .contact-copy, .contact-copy svg {
     transition: none;
     transform: none !important;
   }

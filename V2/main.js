@@ -3,6 +3,7 @@ const emailLink = document.querySelector('.contact-email');
 const copyButton = document.querySelector('.contact-copy');
 const copyStatus = document.querySelector('.contact-status');
 
+const copyLabel = copyButton.querySelector('.copy-label');
 let copyFeedbackTimer;
 
 copyButton.addEventListener('click', async () => {
@@ -17,9 +18,11 @@ copyButton.addEventListener('click', async () => {
 
   clearTimeout(copyFeedbackTimer);
   copyButton.toggleAttribute('data-copied', copied);
+  copyLabel.textContent = copied ? 'Copied' : 'Retry';
   copyStatus.textContent = message;
   copyFeedbackTimer = setTimeout(() => {
     copyButton.removeAttribute('data-copied');
+    copyLabel.textContent = 'Copy';
     copyStatus.textContent = '';
   }, 1800);
 });
