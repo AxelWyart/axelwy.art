@@ -1,0 +1,213 @@
+{
+  "people": [
+    {
+      "slug": "guanchun-wang",
+      "name": "Guanchun (Arvid) Wang",
+      "profile": "https://www.linkedin.com/in/guanchun-arvid-wang-9bbb0136/",
+      "file": "guanchun-wang.jpg"
+    },
+    {
+      "slug": "crystal-wu",
+      "name": "Crystal Wu",
+      "profile": "https://www.linkedin.com/in/crystal-wu-11a10419b/",
+      "file": "crystal-wu.jpg"
+    },
+    {
+      "slug": "amelia-lee",
+      "name": "Amelia Lee",
+      "profile": "https://www.linkedin.com/in/lee-amelia/",
+      "file": "amelia-lee.jpg"
+    },
+    {
+      "slug": "yichuan-hu",
+      "name": "Yichuan Hu",
+      "profile": "https://www.linkedin.com/in/yichuanhu/",
+      "file": "yichuan-hu.jpg"
+    },
+    {
+      "slug": "nadia-ali",
+      "name": "Nadia Ali",
+      "profile": "https://www.linkedin.com/in/nadiaalidesign/",
+      "file": "nadia-ali.jpg"
+    },
+    {
+      "slug": "francesc-mora",
+      "name": "Francesc Mora",
+      "profile": "https://www.linkedin.com/in/francescmoramarchal/",
+      "file": "francesc-mora.jpg"
+    },
+    {
+      "slug": "quentin-luong-van",
+      "name": "Quentin Luong Van",
+      "profile": "https://www.linkedin.com/in/quentin-luong-van-286352176/",
+      "file": "quentin-luong-van.jpg"
+    },
+    {
+      "slug": "aurelien-delaban",
+      "name": "Aurélien Delaban",
+      "profile": "https://www.linkedin.com/in/aureliendelaban/?locale=en",
+      "file": "aurelien-delaban.jpg"
+    },
+    {
+      "slug": "sophie-moyse",
+      "name": "Sophie Moyse",
+      "profile": "https://www.linkedin.com/in/sophiemoyse/",
+      "file": "sophie-moyse.jpg"
+    },
+    {
+      "slug": "illa-branco",
+      "name": "Illa Branco",
+      "profile": "https://www.linkedin.com/in/illabranco/?locale=pt",
+      "file": "illa-branco.jpg"
+    },
+    {
+      "slug": "karen-gouveia",
+      "name": "Karen Gouveia",
+      "profile": "https://www.linkedin.com/in/karen-gouveia/",
+      "file": "karen-gouveia.jpg"
+    },
+    {
+      "slug": "rebecca-jonsson",
+      "name": "Rebecca Jonsson",
+      "profile": "https://www.linkedin.com/in/rebecca-jonson-phd-nlp/",
+      "file": "rebecca-jonsson.jpg"
+    },
+    {
+      "slug": "osvaldo-zamora",
+      "name": "Osvaldo Zamora",
+      "profile": "https://www.linkedin.com/in/ozdesign/",
+      "file": "osvaldo-zamora.jpg"
+    },
+    {
+      "slug": "olimpia-hogea",
+      "name": "Olimpia Denisa Hogea",
+      "profile": "https://www.linkedin.com/in/olimpia-hogea-8b9939173/",
+      "file": "olimpia-hogea.jpg"
+    },
+    {
+      "slug": "alienor-dartiguenave",
+      "name": "Aliénor Dartiguenave",
+      "profile": "https://www.linkedin.com/in/ali%C3%A9nor-dartiguenave-4969a98b/",
+      "file": "alienor-dartiguenave.jpg"
+    },
+    {
+      "slug": "victor-ferrand",
+      "name": "Victor Ferrand",
+      "profile": "https://www.linkedin.com/in/victorferrand/",
+      "file": "victor-ferrand.jpg"
+    },
+    {
+      "slug": "francois-jutier",
+      "name": "François Jutier",
+      "profile": "https://www.linkedin.com/in/fran%C3%A7ois-jutier-54b377208/",
+      "file": "francois-jutier.jpg"
+    },
+    {
+      "slug": "kenrig-dalle",
+      "name": "Kenrig Dalle",
+      "profile": "https://www.linkedin.com/in/kenrig-dalle/",
+      "file": "kenrig-dalle.jpg"
+    },
+    {
+      "slug": "margaux-reinaudo",
+      "name": "Margaux Reinaudo",
+      "profile": "https://www.linkedin.com/in/margaux-reinaudo-a6a90820/",
+      "file": "margaux-reinaudo.jpg"
+    },
+    {
+      "slug": "ilias-hicham",
+      "name": "Ilias Hicham",
+      "profile": "https://www.linkedin.com/in/iliashicham/",
+      "file": "ilias-hicham.jpg"
+    },
+    {
+      "slug": "chloe-levavasseur",
+      "name": "Chloé Levavasseur",
+      "profile": "https://www.linkedin.com/in/chloelevavasseur/",
+      "file": "chloe-levavasseur.jpg"
+    },
+    {
+      "slug": "bonnie-bailly",
+      "name": "Bonnie Bailly",
+      "profile": "https://www.linkedin.com/in/bonnie-scott-bailly/",
+      "file": "bonnie-bailly.jpg"
+    },
+    {
+      "slug": "guillaume-laporte",
+      "name": "Guillaume Laporte",
+      "profile": "https://www.linkedin.com/in/guillaume-laporte-ai/",
+      "image": "../../images/guillaume.jpeg"
+    },
+    {
+      "slug": "lewis-aupy",
+      "name": "Lewis Aupy",
+      "profile": "https://www.linkedin.com/in/lewisaupy/",
+      "image": "../../images/lewis.jpeg"
+    },
+    {
+      "slug": "cecile-vuillermoz",
+      "name": "Cécile Vuillermoz",
+      "profile": "https://www.linkedin.com/in/cecilevuillermoz/",
+      "image": "../../images/cecile.jpeg"
+    },
+    {
+      "slug": "dawid-rurkowski",
+      "name": "Dawid Rurkowski",
+      "file": "dawid-rurkowski.png",
+      "source": "Portrait supplied by Axel, 1 November 2026"
+    },
+    {
+      "slug": "santi-barbat",
+      "name": "Santi Barbat",
+      "profile": "https://www.linkedin.com/in/sbarbat/",
+      "file": "santi-barbat.jpg"
+    },
+    {
+      "slug": "yoann-artus",
+      "name": "Yoann Artus",
+      "profile": "https://www.linkedin.com/in/yoann-artus-b579621/",
+      "file": "yoann-artus.jpg"
+    }
+  ],
+  "groups": {
+    "foundever": [
+      "dawid-rurkowski",
+      "nadia-ali",
+      "francesc-mora",
+      "quentin-luong-van",
+      "aurelien-delaban",
+      "sophie-moyse",
+      "illa-branco",
+      "karen-gouveia",
+      "osvaldo-zamora",
+      "olimpia-hogea",
+      "guillaume-laporte",
+      "rebecca-jonsson",
+      "alienor-dartiguenave",
+      "victor-ferrand"
+    ],
+    "mindsay": [
+      "lewis-aupy",
+      "francois-jutier",
+      "margaux-reinaudo",
+      "cecile-vuillermoz",
+      "kenrig-dalle",
+      "ilias-hicham",
+      "chloe-levavasseur",
+      "bonnie-bailly"
+    ],
+    "laiye": [
+      "lewis-aupy",
+      "cecile-vuillermoz",
+      "guanchun-wang",
+      "crystal-wu",
+      "amelia-lee",
+      "yichuan-hu"
+    ],
+    "nudge": [
+      "guillaume-laporte",
+      "yoann-artus",
+      "santi-barbat"
+    ]
+  }
+}
