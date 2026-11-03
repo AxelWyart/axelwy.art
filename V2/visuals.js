@@ -49,9 +49,10 @@
     const end = image.getBoundingClientRect();
     if (end.width && end.height && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       motion = image.animate([
-        { transform: transformTo(end, start) },
-        { transform: 'none' },
-      ], { duration: 340, easing: 'cubic-bezier(.22,1,.36,1)' });
+        { transform: transformTo(end, start), easing: 'cubic-bezier(.22,1,.36,1)' },
+        { transform: `translate(${-end.width * .006}px, ${-end.height * .006}px) scale(1.012)`, offset: .75, easing: 'ease-in-out' },
+        { transform: 'translate(0, 0) scale(1)' },
+      ], { duration: 360 });
     }
 
     if (thumbnail.dataset.fullSrc) {

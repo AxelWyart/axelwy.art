@@ -185,7 +185,7 @@ html.experience-open { overflow: hidden; }
 .visual-trigger { width: 100%; padding: 0; border: 0; color: inherit; cursor: zoom-in; }
 html.visual-open { overflow: hidden; }
 .visual-lightbox { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 24px; border: 0; background: transparent; overflow: visible; }
-.visual-lightbox::backdrop { background: color-mix(in srgb, var(--background) 88%, transparent); backdrop-filter: blur(3px); }
+.visual-lightbox::backdrop { background: rgb(0 0 0 / 76%); backdrop-filter: blur(3px); }
 .visual-lightbox__viewport { display: grid; place-items: center; width: 100%; height: 100%; }
 .visual-lightbox__image { display: block; max-width: 100%; max-height: calc(100dvh - 48px); width: auto; height: auto; border-radius: 16px; transform-origin: top left; }
 [aria-labelledby="ellie-heading"].experience-gallery { gap: 16px; }
