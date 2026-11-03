@@ -41,6 +41,8 @@
 
     origin = thumbnail.closest('button');
     const start = thumbnail.getBoundingClientRect();
+    const ratio = thumbnail.naturalWidth / thumbnail.naturalHeight || start.width / start.height;
+    image.style.setProperty('--visual-ratio', ratio);
     image.alt = thumbnail.alt;
     image.src = thumbnail.currentSrc || thumbnail.src;
     dialog.showModal();
