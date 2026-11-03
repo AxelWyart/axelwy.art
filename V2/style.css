@@ -109,10 +109,10 @@ section { display: flex; flex-direction: column; gap: 20px; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--secondary); font-size: 20px; line-height: 28px; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--secondary); font-size: 15px; line-height: 20px; }
 @media (hover: hover) and (pointer: fine) {
   .contact-button:hover { transform: scale(1.04); }
-  .entry:hover .entry-name, footer a:hover { color: var(--hover-text); }
+  .entry:hover .entry-name { color: var(--hover-text); }
   .entry:hover .entry-note { opacity: 1; }
   .quiet-link:hover { text-decoration-color: currentColor; }
   .client-logo:hover { color: var(--text); }
@@ -131,7 +131,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
 @media (max-width: 360px) {
   .page { padding-inline: 12px; }
   .entry { gap: 12px; }
-  .entry > .entry-copy { font-size: 13px; }
+  .entry > .entry-copy, footer { font-size: 13px; }
   .about { font-size: 13px; }
   .entry-description { gap: 8px; }
 }
