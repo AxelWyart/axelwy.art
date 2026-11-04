@@ -403,8 +403,7 @@ html.visual-open { overflow: hidden; }
   inset: 0;
   z-index: 101;
   pointer-events: none;
-  backdrop-filter: blur(4px);
-  background: linear-gradient(90deg, #477dff18, transparent 14% 86%, #ed638518);
+  backdrop-filter: blur(10px);
   mask-image: linear-gradient(90deg, #000, transparent 13% 87%, #000),
     linear-gradient(180deg, #0008, transparent 18%, transparent 92%, #0005);
 }
@@ -445,3 +444,8 @@ html.visual-open { overflow: hidden; }
 .about-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0; padding-block: 16px; border-block: 1px solid var(--detail-line); }
 .about-metrics dt { font-size: 20px; line-height: 26px; font-weight: 500; }
 .about-metrics dd { margin: 4px 0 0; color: var(--secondary); font-size: 13px; line-height: 18px; }
+
+.experience-project-cta { max-width: 608px; margin: 0 auto 32px; }
+.experience-project-cta .contact-button { --contact-fs: 15px; --contact-lh: 20px; }
+.experience-lede:has(+ .experience-project-cta), .experience-summary:has(+ .experience-project-cta) { margin-bottom: 16px; }
+.experience-gallery > .experience-project-cta { width: 100%; margin-bottom: 12px; }
