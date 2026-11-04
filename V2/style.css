@@ -72,6 +72,13 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
+.services-list { margin: 0; }
+.services-list > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--detail-line); }
+.services-list dt { font-weight: 500; }
+.services-list dd { margin: 0; color: var(--secondary); }
+@media (max-width: 480px) {
+  .services-list > div { grid-template-columns: 1fr; gap: 4px; }
+}
 footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
 .footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: color-mix(in srgb, var(--secondary) 75%, transparent); font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
 #footer-wave-forecast {
