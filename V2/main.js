@@ -62,37 +62,44 @@ async function showFooterWave() {
   const period = current?.wave_period;
   if (!Number.isFinite(height) || height < 0 || !Number.isFinite(period) || period <= 0) return;
 
-  const art = footerWave.querySelector('pre');
-  footerWave.querySelector('figcaption span').textContent = `Forecast ${height.toFixed(1)} m · ${period.toFixed(0)} s`;
-  footerWave.hidden = false;
-  const amplitude = Math.min(3, height);
-  let start;
-  let lastFrame = -1;
+  const art = footerWave.querySelector('span');
+  const crest = height >= 1.5 ? ' _)\'-. ' : '  ,(  ';
+  const trough = height >= 1.5 ? '   \'.,_' : "`-'   ";
+  const width = crest.length;
+  const count = height >= 1.5 ? 3 : 2;
+  const delay = Math.max(90, Math.min(300, period * 1000 / (width * 6)));
+  let offset = 0;
+  let timer;
+  let visible = false;
+  let paused = false;
 
-  function draw(now) {
-    start ??= now;
-    const elapsed = now - start;
-    const frame = Math.floor(elapsed / 80);
-    if (frame !== lastFrame) {
-      const rows = Array.from({ length: 7 }, () => Array(32).fill(' '));
-      for (let x = 0; x < 32; x++) {
-        const phase = x * .34 - elapsed / 1000 * Math.PI * 2 / period;
-        const row = Math.round(3 - Math.sin(phase) * amplitude);
-        const slope = Math.cos(phase);
-        rows[row][x] = amplitude < .5 || Math.abs(slope) < .4 ? '_' : slope > 0 ? '/' : '\\';
-      }
-      art.textContent = rows.map(row => row.join('')).join('\n');
-      lastFrame = frame;
-    }
-    if (!reducedMotion.matches && elapsed < 4500) requestAnimationFrame(draw);
+  function draw() {
+    const shift = line => {
+      const repeated = line.repeat(count + 1);
+      return repeated.slice(offset, offset + width * count);
+    };
+    art.textContent = shift(crest) + '\n' + shift(trough);
+    offset = (offset + 1) % width;
   }
 
-  const observer = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    observer.disconnect();
-    requestAnimationFrame(draw);
+  function updateAnimation() {
+    clearInterval(timer);
+    footerWave.disabled = reducedMotion.matches;
+    if (visible && !paused && !reducedMotion.matches) timer = setInterval(draw, delay);
+  }
+
+  draw();
+  footerWave.hidden = false;
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    updateAnimation();
+  }).observe(footerWave);
+  footerWave.addEventListener('click', () => {
+    paused = !paused;
+    footerWave.setAttribute('aria-label', paused ? 'Play wave animation' : 'Pause wave animation');
+    updateAnimation();
   });
-  observer.observe(footerWave);
+  reducedMotion.addEventListener('change', updateAnimation);
 }
 
 showFooterWave().catch(() => {});
