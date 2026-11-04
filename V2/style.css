@@ -184,6 +184,8 @@ html.experience-open { overflow: hidden; }
 .experience-summary { display: flex; flex-direction: column; gap: 20px; max-width: 608px; margin: 0 auto 40px; font-size: 20px; line-height: 28px; }
 .experience-summary p { text-wrap: balance; }
 .experience-preview { display: flex; flex-direction: column; margin: 0; }
+.experience-preview + :is(.experience-summary, .experience-lede) { margin-top: 32px; }
+.experience-gallery > .experience-lede { margin-block: 12px; }
 .experience-preview > .visual-trigger { display: block; overflow: hidden; border-radius: 16px; background: var(--detail-surface); }
 .experience-preview img { display: block; width: 100%; height: auto; object-fit: contain; }
 .experience-demo { container: experience-demo / inline-size; overflow: hidden; border-radius: 16px; background: #f1f2f5; }
