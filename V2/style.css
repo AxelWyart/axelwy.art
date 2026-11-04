@@ -189,7 +189,8 @@ html.experience-open { overflow: hidden; }
 .experience-article h2 { margin: 0; font-size: 15px; line-height: 22px; font-weight: 500; }
 .experience-gallery { gap: 56px; margin-top: 56px; }
 .experience-gallery-item { margin: 0; }
-.experience-visual-caption { display: flex; flex-direction: column; align-items: flex-start; gap: 0; margin: 0 0 16px; }
+.experience-visual-caption, .experience-gallery > h2 { width: 100%; max-width: 608px; margin-inline: auto; }
+.experience-visual-caption { display: flex; flex-direction: column; align-items: flex-start; gap: 0; margin-block: 0 16px; }
 .experience-visual-caption h2 { font-size: 15px; line-height: 22px; font-weight: 500; }
 .experience-visual-caption p { color: var(--secondary); font-size: 15px; line-height: 22px; font-weight: 400; text-wrap: balance; }
 .experience-gallery-visual { display: flex; justify-content: center; overflow: hidden; border-radius: 16px; background: var(--detail-surface); }
