@@ -234,14 +234,12 @@ html.visual-open { overflow: hidden; }
 .experience-information dt { color: var(--secondary); }
 .experience-information dd { margin: 0; text-align: end; }
 .experience-information a { text-decoration: none; }
-.experience-pagination { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; margin-top: 32px; font-size: 15px; line-height: 22px; }
+.experience-pagination { margin-top: 32px; font-size: 15px; line-height: 22px; }
 .experience-pagination a { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 10px; border-radius: 10px; transition: background-color 160ms ease; }
 .experience-pagination a:focus-visible { background: var(--work-hover-bg); }
 .case-nav-copy { display: grid; line-height: 20px; }
 .case-nav-direction { color: var(--secondary); font-size: 13px; }
-.experience-pagination a:last-child .case-nav-copy { text-align: end; }
 .case-nav-logo { flex: none; border-radius: 6px; box-shadow: var(--company-icon-shadow); }
-.experience-pagination a:last-child .case-nav-logo { order: 1; }
 .experience-navigation-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .experience-close:active, .experience-back:active { transform: scale(.97); }
 @media (hover: hover) and (pointer: fine) {
