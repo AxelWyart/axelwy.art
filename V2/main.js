@@ -64,11 +64,19 @@ async function showFooterWave() {
 
   const art = footerWave.querySelector('[aria-hidden]');
   footerWave.querySelector('#footer-wave-forecast').textContent = `Waves around ${height.toFixed(1)} m every ${period.toFixed(1)} s`;
-  const crest = height >= 1.5 ? ' _)\'-. ' : '  ,(  ';
-  const trough = height >= 1.5 ? '   \'.,_' : "`-'   ";
-  const width = crest.length;
-  const count = height >= 1.5 ? 3 : 2;
-  const delay = Math.max(90, Math.min(300, period * 1000 / (width * 6)));
+  // Use vertical rows for height and horizontal spacing for the forecast period.
+  // Sub-metre conditions read as surface ripples instead of breaking crests.
+  const profile = [
+    { below: 0.5, rows: ['..'] },
+    { below: 1, rows: ['_.._'] },
+    { below: 2, rows: ['  ,(', "`-'"] },
+    { below: 3, rows: ['  _', " / `-.", "'     '"] },
+    { below: Infinity, rows: ['   _,', '  /  `.', ' /     `', "'"] },
+  ].find(band => height < band.below);
+  const profileWidth = Math.max(...profile.rows.map(row => row.length));
+  const width = Math.max(profileWidth + 1, Math.min(12, Math.round(period)));
+  const count = width <= 7 ? 3 : 2;
+  const delay = period * 1000 / width;
   let offset = 0;
   let timer;
   let visible = false;
@@ -76,10 +84,10 @@ async function showFooterWave() {
 
   function draw() {
     const shift = line => {
-      const repeated = line.repeat(count + 1);
+      const repeated = line.padEnd(width).repeat(count + 1);
       return repeated.slice(offset, offset + width * count);
     };
-    art.textContent = shift(crest) + '\n' + shift(trough);
+    art.textContent = profile.rows.map(shift).join('\n');
     offset = (offset + 1) % width;
   }
 
