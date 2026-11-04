@@ -70,6 +70,8 @@ section { display: flex; flex-direction: column; gap: 20px; }
 .clients-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 24px; list-style: none; margin: 0; padding: 0; }
 .client-logo { display: grid; place-items: center; min-height: 56px; padding: 8px; border-radius: 8px; color: var(--secondary); transition: color 160ms ease; }
 a.client-logo { color: var(--text); }
+.client-contact { font-size: 24px; font-weight: 400; transition: background-color 160ms ease; }
+.client-contact:is(:hover, :focus-visible) { background: var(--work-hover-bg); }
 span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
