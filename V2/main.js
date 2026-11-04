@@ -128,3 +128,34 @@ avatarLink.addEventListener('pointerleave', () => {
   avatarLink.style.removeProperty('--avatar-x');
   avatarLink.style.removeProperty('--avatar-y');
 });
+
+document.querySelectorAll('.client-funding').forEach(item => {
+  const count = item.querySelector('.funding-count');
+  const amount = Number(count.dataset.amount);
+  const currency = count.dataset.currency;
+  let frame;
+  let active = false;
+
+  function updateFunding() {
+    const visible = item.matches(':hover, :focus-within');
+    if (visible === active) return;
+    active = visible;
+    cancelAnimationFrame(frame);
+    if (!visible || reducedMotion.matches) {
+      count.textContent = `${currency}${amount}M`;
+      return;
+    }
+    const start = performance.now();
+    function draw(now) {
+      const progress = Math.max(0, Math.min(1, (now - start) / 450));
+      const value = Math.round(amount * (1 - (1 - progress) ** 3));
+      count.textContent = `${currency}${value}M`;
+      if (progress < 1) frame = requestAnimationFrame(draw);
+    }
+    frame = requestAnimationFrame(draw);
+  }
+
+  for (const event of ['pointerenter', 'pointerleave', 'focusin', 'focusout']) {
+    item.addEventListener(event, () => queueMicrotask(updateFunding));
+  }
+});

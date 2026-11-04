@@ -449,3 +449,13 @@ html.visual-open { overflow: hidden; }
 .experience-project-cta .contact-button { --contact-fs: 15px; --contact-lh: 20px; }
 .experience-lede:has(+ .experience-project-cta), .experience-summary:has(+ .experience-project-cta) { margin-bottom: 16px; }
 .experience-gallery > .experience-project-cta { width: 100%; margin-bottom: 12px; }
+
+.client-funding { position: relative; }
+.client-funding-tooltip { position: absolute; z-index: 1; inset-block-end: calc(100% + 3px); inset-inline-start: 50%; transform: translateX(-50%); padding: 5px 8px; border-radius: 7px; background: var(--detail-surface); color: var(--text); font-size: 12px; line-height: 16px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 140ms ease; }
+.client-funding:is(:hover, :focus-within) .client-funding-tooltip { opacity: 1; }
+.funding-count { display: inline-block; min-width: 4.5ch; text-align: end; font-variant-numeric: tabular-nums; }
+.funding-label { color: var(--secondary); }
+.funding-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (prefers-reduced-motion: reduce) {
+  .client-funding-tooltip { transition: none; }
+}
