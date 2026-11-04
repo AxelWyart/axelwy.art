@@ -417,7 +417,7 @@ html.visual-open { overflow: hidden; }
   width: clamp(var(--orbit-min, 78px), var(--orbit-width, 17%), var(--orbit-max, 228px));
   aspect-ratio: var(--orbit-ratio, 4 / 3);
   opacity: var(--orbit-opacity, 1);
-  filter: blur(var(--orbit-blur, 0px));
+  filter: var(--orbit-filter, none);
   pointer-events: none;
   user-select: none;
   transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(var(--orbit-scale));
@@ -459,3 +459,8 @@ html.visual-open { overflow: hidden; }
 .funding-count { display: inline-block; min-width: 4.5ch; text-align: end; font-variant-numeric: tabular-nums; }
 .funding-label { color: var(--secondary); }
 .funding-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+@media (max-width: 640px) {
+  .about-orbit.is-orbiting { height: clamp(238px, 46vw, 300px); }
+  .about-orbit.is-orbiting::after { display: none; }
+}
