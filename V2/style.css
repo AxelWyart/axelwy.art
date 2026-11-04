@@ -421,3 +421,16 @@ html.visual-open { overflow: hidden; }
 .about-orbit-controls:not([hidden]) { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; color: var(--secondary); font-size: 13px; }
 .about-orbit-controls label { display: flex; align-items: center; gap: 5px; }
 .about-orbit-controls input { width: 68px; accent-color: var(--secondary); }
+
+.about-page { position: relative; padding-top: 0; }
+.about-page > .experience-back { position: absolute; top: 24px; left: 24px; z-index: 101; }
+.about-orbit.is-orbiting img { inset-block-start: 34%; }
+.about-orbit:not(.is-orbiting) { margin-top: 76px; }
+.orbit-accessible:not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
