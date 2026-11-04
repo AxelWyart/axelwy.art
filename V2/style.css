@@ -78,22 +78,20 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .services-toggle::before, .services-toggle::after { content: ""; grid-area: 1 / 1; width: 10px; height: 1px; background: currentColor; }
 .services-toggle::after { transform: rotate(90deg); transition: transform 180ms var(--ease); }
 .services-disclosure[open] .services-toggle::after { transform: rotate(0); }
-.services-list { margin: 16px 0 0; }
+.services-list { margin: 0; }
+.services-disclosure { border-top: 1px solid var(--detail-line); }
+.services-disclosure summary { min-height: 44px; font-weight: 500; }
+.services-disclosure p { padding: 0 24px 12px 0; color: var(--secondary); }
 @media (prefers-reduced-motion: no-preference) {
-  .services-disclosure[open] .services-list { animation: services-reveal 220ms var(--ease) both; }
-  @keyframes services-reveal {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+  .service-name { transition: transform 200ms var(--ease); }
+  .services-disclosure[open] .service-name,
+  .services-disclosure summary:focus-visible .service-name { transform: translateX(4px); }
+  @media (hover: hover) {
+    .services-disclosure summary:hover .service-name { transform: translateX(4px); }
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .services-toggle::after { transition: none; }
-}
-.services-list > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--detail-line); }
-.services-list dt { font-weight: 500; }
-.services-list dd { margin: 0; color: var(--secondary); }
-@media (max-width: 480px) {
-  .services-list > div { grid-template-columns: 1fr; gap: 4px; }
 }
 footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
 .footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: color-mix(in srgb, var(--secondary) 75%, transparent); font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
