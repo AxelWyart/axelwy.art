@@ -37,7 +37,7 @@ function drawOrbit(time) {
     photo.style.setProperty('--orbit-scale', .88 + depth * .12);
     const distance = (1 - depth) / 2;
     photo.style.setProperty('--orbit-opacity', 1 - distance * .58);
-    const blur = compact ? Math.max(0, (distance - .35) / .65) ** 2 * 2 : distance * distance * 6;
+    const blur = compact ? Math.max(0, (distance - .35) / .65) ** 2 * 6 : distance * distance * 6;
     photo.style.setProperty('--orbit-filter', blur ? `blur(${blur}px)` : 'none');
     photo.style.zIndex = Math.round(depth * 50 + 50);
   });

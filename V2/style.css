@@ -418,6 +418,7 @@ html.visual-open { overflow: hidden; }
   aspect-ratio: var(--orbit-ratio, 4 / 3);
   opacity: var(--orbit-opacity, 1);
   filter: var(--orbit-filter, none);
+  clip-path: inset(1px round 11px);
   pointer-events: none;
   user-select: none;
   transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(var(--orbit-scale));
