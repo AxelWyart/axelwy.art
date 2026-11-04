@@ -14,7 +14,7 @@ let drag;
 let tilt = 0;
 
 function drawOrbit(time) {
-  if (lastTime !== undefined) phase += (time - lastTime) * Number(speed.value) * Math.PI * 2 / 20000;
+  if (lastTime !== undefined) phase += (time - lastTime) * Number(speed.value) * Math.PI * 2 / 60000;
   lastTime = time;
   const radiusX = orbit.clientWidth * .56;
   const radiusY = Math.min(110, orbit.clientHeight * .30);
@@ -28,7 +28,7 @@ function drawOrbit(time) {
     photo.style.setProperty('--orbit-scale', .88 + depth * .12);
     const distance = (1 - depth) / 2;
     photo.style.setProperty('--orbit-opacity', 1 - distance * .58);
-    photo.style.setProperty('--orbit-blur', `${distance * distance * 3}px`);
+    photo.style.setProperty('--orbit-blur', `${distance * distance * 6}px`);
     photo.style.zIndex = Math.round(depth * 50 + 50);
   });
   if (visible && !paused && !drag && !reduceMotion.matches) frame = requestAnimationFrame(drawOrbit);
@@ -63,8 +63,8 @@ orbit.addEventListener('pointerdown', event => {
 });
 orbit.addEventListener('pointermove', event => {
   if (drag?.id !== event.pointerId) return;
-  phase = drag.phase + (event.clientX - drag.x) / orbit.clientWidth * Math.PI * 2;
-  tilt = Math.max(-90, Math.min(90, drag.tilt + (event.clientY - drag.y) * .7));
+  phase = drag.phase - (event.clientX - drag.x) / orbit.clientWidth * Math.PI * 2;
+  tilt = Math.max(-90, Math.min(90, drag.tilt - (event.clientY - drag.y) * .7));
   updateOrbit();
 });
 orbit.addEventListener('lostpointercapture', event => {
