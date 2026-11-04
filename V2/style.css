@@ -85,8 +85,8 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 @media (prefers-reduced-motion: no-preference) {
   .services-disclosure[open] > p { animation: service-description-in 220ms var(--ease) both; }
   @keyframes service-description-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; filter: blur(2px); }
+    to { opacity: 1; filter: blur(0); }
   }
 }
 @media (prefers-reduced-motion: reduce) {
