@@ -1,5 +1,5 @@
 const orbit = document.querySelector('.about-orbit');
-const photos = [...orbit.querySelectorAll('img')];
+const photos = [...orbit.querySelectorAll('.orbit-card')];
 const toggle = document.querySelector('.about-orbit-toggle');
 const controls = document.querySelector('.about-orbit-controls');
 const speed = document.querySelector('#orbit-speed');
