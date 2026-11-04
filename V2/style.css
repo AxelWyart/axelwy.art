@@ -390,11 +390,18 @@ html.visual-open { overflow: hidden; }
 .about-orbit-section { gap: 8px; }
 .about-orbit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .about-orbit img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
-.about-orbit.is-orbiting { position: relative; display: block; height: clamp(160px, 43vw, 224px); }
+.about-orbit.is-orbiting {
+  position: relative;
+  display: block;
+  align-self: center;
+  width: min(100vw, 1440px);
+  height: clamp(180px, 32vw, 380px);
+  overflow: clip;
+}
 .about-orbit.is-orbiting img {
   position: absolute;
   inset: 50% auto auto 50%;
-  width: 36%;
+  width: clamp(78px, 17%, 228px);
   transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(var(--orbit-scale));
   box-shadow: 0 8px 20px #0002;
 }

@@ -11,8 +11,8 @@ let frame;
 function drawOrbit(time) {
   if (lastTime !== undefined) phase += (time - lastTime) * Math.PI * 2 / 20000;
   lastTime = time;
-  const radiusX = orbit.clientWidth * .31;
-  const radiusY = Math.min(28, radiusX * .18);
+  const radiusX = orbit.clientWidth * .48;
+  const radiusY = Math.min(92, orbit.clientHeight * .25);
   photos.forEach((photo, index) => {
     const angle = phase + index * Math.PI * 2 / photos.length;
     const depth = Math.sin(angle);
