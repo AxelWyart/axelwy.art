@@ -63,7 +63,7 @@ async function showFooterWave() {
   if (!Number.isFinite(height) || height < 0 || !Number.isFinite(period) || period <= 0) return;
 
   const art = footerWave.querySelector('[aria-hidden]');
-  footerWave.querySelector('[role=tooltip]').textContent = `Wave forecast · ${height.toFixed(1)} m · ${period.toFixed(1)} s`;
+  footerWave.querySelector('#footer-wave-forecast').textContent = `Waves around ${height.toFixed(1)} m every ${period.toFixed(1)} s`;
   const crest = height >= 1.5 ? ' _)\'-. ' : '  ,(  ';
   const trough = height >= 1.5 ? '   \'.,_' : "`-'   ";
   const width = crest.length;
