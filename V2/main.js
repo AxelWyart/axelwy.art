@@ -141,7 +141,7 @@ document.querySelectorAll('.client-funding').forEach(item => {
     if (visible === active) return;
     active = visible;
     cancelAnimationFrame(frame);
-    if (!visible || reducedMotion.matches) {
+    if (!visible) {
       count.textContent = `${currency}${amount}M`;
       return;
     }
