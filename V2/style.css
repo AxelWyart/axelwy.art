@@ -359,7 +359,16 @@ html.visual-open { overflow: hidden; }
     transition: transform 420ms cubic-bezier(.24, 1.08, .42, 1);
   }
   .avatar-link:hover .avatar { transition: transform 160ms ease-out; }
-  .avatar-tooltip { transition: opacity 150ms ease; }
+  .avatar-tooltip {
+    transform-origin: left center;
+    transform: scaleX(.88);
+    filter: blur(3px);
+    transition: opacity 180ms var(--ease), transform 180ms var(--ease), filter 180ms var(--ease);
+  }
+  .avatar-link:focus-visible .avatar-tooltip { transform: scaleX(1); filter: blur(0); }
+  @media (hover: hover) and (pointer: fine) {
+    .avatar-link:hover .avatar-tooltip { transform: scaleX(1); filter: blur(0); }
+  }
 }
 
 .about-page { gap: 32px; }
