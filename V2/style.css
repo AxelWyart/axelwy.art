@@ -366,7 +366,7 @@ html.visual-open { overflow: hidden; }
 .about-identity span { color: var(--secondary); }
 .about-orbit-section { gap: 8px; }
 .about-orbit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.about-orbit :is(img, video) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.about-orbit :is(img, video) { display: block; width: 100%; height: auto; border-radius: 12px; }
 .about-orbit.is-orbiting {
   position: relative;
   display: block;
@@ -398,12 +398,12 @@ html.visual-open { overflow: hidden; }
   user-select: none;
   transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(var(--orbit-scale));
 }
-.about-orbit.is-orbiting .orbit-card :is(img, video) { aspect-ratio: var(--orbit-ratio, 4 / 3); clip-path: inset(1px round 11px); }
+.about-orbit.is-orbiting .orbit-card :is(img, video) { width: auto; max-width: 100%; max-height: clamp(120px, 22vw, 245px); margin-inline: auto; clip-path: inset(1px round 11px); }
 .about-orbit-toggle { align-self: center; border: 0; background: transparent; color: var(--secondary); font-size: 13px; cursor: pointer; }
 
-.about-orbit .orbit-card:nth-child(3n + 1) { --orbit-min: 96px; --orbit-width: 20%; --orbit-max: 272px; --orbit-ratio: 16 / 10; }
-.about-orbit .orbit-card:nth-child(3n + 2) { --orbit-min: 72px; --orbit-width: 13%; --orbit-max: 180px; --orbit-ratio: 4 / 5; }
-.about-orbit .orbit-card:nth-child(3n) { --orbit-min: 81px; --orbit-width: 16.5%; --orbit-max: 220px; --orbit-ratio: 1; }
+.about-orbit .orbit-card:nth-child(3n + 1) { --orbit-min: 96px; --orbit-width: 20%; --orbit-max: 272px; }
+.about-orbit .orbit-card:nth-child(3n + 2) { --orbit-min: 72px; --orbit-width: 13%; --orbit-max: 180px; }
+.about-orbit .orbit-card:nth-child(3n) { --orbit-min: 81px; --orbit-width: 16.5%; --orbit-max: 220px; }
 .about-orbit-controls:not([hidden]) { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; color: var(--secondary); font-size: 13px; }
 .about-orbit-controls label { display: flex; align-items: center; gap: 5px; }
 .about-orbit-controls input { width: 68px; accent-color: var(--secondary); }
