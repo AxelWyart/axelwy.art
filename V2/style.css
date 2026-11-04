@@ -72,7 +72,23 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
-.services-list { margin: 0; }
+.services-disclosure summary { display: flex; align-items: center; justify-content: space-between; list-style: none; cursor: pointer; }
+.services-disclosure summary::-webkit-details-marker { display: none; }
+.services-toggle { display: grid; place-items: center; width: 24px; height: 24px; color: var(--secondary); }
+.services-toggle::before, .services-toggle::after { content: ""; grid-area: 1 / 1; width: 10px; height: 1px; background: currentColor; }
+.services-toggle::after { transform: rotate(90deg); transition: transform 180ms var(--ease); }
+.services-disclosure[open] .services-toggle::after { transform: rotate(0); }
+.services-list { margin: 16px 0 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .services-disclosure[open] .services-list { animation: services-reveal 220ms var(--ease) both; }
+  @keyframes services-reveal {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .services-toggle::after { transition: none; }
+}
 .services-list > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--detail-line); }
 .services-list dt { font-weight: 500; }
 .services-list dd { margin: 0; color: var(--secondary); }
