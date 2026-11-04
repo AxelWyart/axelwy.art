@@ -245,7 +245,6 @@
       ++presentationID;
       cancelAnimationFrame(openingFrame);
       closingRequested = false;
-      if (contactPanel.matches(':popover-open')) contactPanel.hidePopover();
       hideWorkHighlight();
       if (!dialog.open) {
         originTrigger = trigger || links.find((link) => link.href === history.state?.__experienceSheet?.triggerURL);
