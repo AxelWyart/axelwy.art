@@ -192,7 +192,7 @@ html.visual-open { overflow: hidden; }
 .experience-information dl { margin: 0; border-top: 1px solid var(--detail-line); }
 .experience-information dl > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--detail-line); font-size: 15px; line-height: 22px; }
 .experience-information dt { color: var(--secondary); }
-.experience-information dd { margin: 0; }
+.experience-information dd { margin: 0; text-align: end; }
 .experience-information a { text-decoration: underline; text-decoration-color: var(--detail-line); text-underline-offset: 4px; }
 .experience-pagination { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; margin-top: 32px; font-size: 15px; line-height: 22px; }
 .experience-pagination a { display: flex; align-items: center; min-height: 44px; }
