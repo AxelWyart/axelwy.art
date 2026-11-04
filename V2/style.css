@@ -72,8 +72,25 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
-footer { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; color: var(--secondary); font-size: 15px; line-height: 20px; }
-.footer-wave { padding: 0; border: 0; background: transparent; color: inherit; font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
+footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
+.footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: inherit; font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
+#footer-wave-forecast {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: var(--detail-surface);
+  color: var(--text);
+  font: 11px/16px system-ui, sans-serif;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+.footer-wave:is(:hover, :focus-visible) #footer-wave-forecast { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .footer-wave { cursor: default; }
 }
