@@ -83,11 +83,10 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .services-disclosure summary { min-height: 44px; font-weight: 500; }
 .services-disclosure p { padding: 0 24px 12px 0; color: var(--secondary); }
 @media (prefers-reduced-motion: no-preference) {
-  .service-name { transition: transform 200ms var(--ease); }
-  .services-disclosure[open] .service-name,
-  .services-disclosure summary:focus-visible .service-name { transform: translateX(4px); }
-  @media (hover: hover) {
-    .services-disclosure summary:hover .service-name { transform: translateX(4px); }
+  .services-disclosure[open] > p { animation: service-description-in 220ms var(--ease) both; }
+  @keyframes service-description-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
