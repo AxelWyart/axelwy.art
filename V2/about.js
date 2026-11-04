@@ -12,9 +12,15 @@ let lastTime;
 let frame;
 let drag;
 let tilt = 0;
+let momentum = 0;
 
 function drawOrbit(time) {
-  if (lastTime !== undefined) phase += (time - lastTime) * Number(speed.value) * Math.PI * 2 / 60000;
+  if (lastTime !== undefined) {
+    const elapsed = Math.min(50, Math.max(0, time - lastTime));
+    const decay = Math.exp(-elapsed / 520);
+    phase += elapsed * Number(speed.value) * Math.PI * 2 / 60000 + momentum * 520 * (1 - decay);
+    momentum *= decay;
+  }
   lastTime = time;
   const radiusX = orbit.clientWidth * .56;
   const radiusY = Math.min(110, orbit.clientHeight * .30);
@@ -57,7 +63,8 @@ toggle.addEventListener('click', () => {
 angleOffset.addEventListener('input', updateOrbit);
 orbit.addEventListener('pointerdown', event => {
   if (reduceMotion.matches || !event.isPrimary || event.button !== 0) return;
-  drag = { id: event.pointerId, x: event.clientX, y: event.clientY, phase, tilt };
+  momentum = 0;
+  drag = { id: event.pointerId, x: event.clientX, y: event.clientY, phase, tilt, samples: [{ phase, time: event.timeStamp }] };
   orbit.setPointerCapture(event.pointerId);
   updateOrbit();
 });
@@ -65,7 +72,17 @@ orbit.addEventListener('pointermove', event => {
   if (drag?.id !== event.pointerId) return;
   phase = drag.phase - (event.clientX - drag.x) / orbit.clientWidth * Math.PI * 2;
   tilt = Math.max(-90, Math.min(90, drag.tilt - (event.clientY - drag.y) * .7));
+  drag.samples.push({ phase, time: event.timeStamp });
+  drag.samples = drag.samples.filter(sample => event.timeStamp - sample.time <= 100);
   updateOrbit();
+});
+orbit.addEventListener('pointerup', event => {
+  if (drag?.id !== event.pointerId || paused) return;
+  const first = drag.samples[0];
+  const last = drag.samples.at(-1);
+  if (event.timeStamp - last.time > 90 || last.time === first.time) return;
+  const velocity = (last.phase - first.phase) / (last.time - first.time);
+  momentum = Math.max(-.018, Math.min(.018, velocity * 1.4));
 });
 orbit.addEventListener('lostpointercapture', event => {
   if (drag?.id !== event.pointerId) return;
