@@ -73,7 +73,9 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
 footer { display: flex; flex-wrap: wrap; gap: 12px; color: var(--secondary); font-size: 15px; line-height: 20px; }
-.footer-updated { margin-inline-start: auto; text-align: end; }
+.footer-wave { margin: 0 0 0 auto; text-align: end; }
+.footer-wave pre { margin: 0 0 4px; font: 11px/9px ui-monospace, monospace; }
+.footer-wave figcaption { font-size: 12px; }
 @media (hover: hover) and (pointer: fine) {
   .contact-button:hover { transform: scale(1.04); }
   .entry:hover .entry-name { color: var(--hover-text); }

@@ -50,3 +50,49 @@ hoverPointer.addEventListener('change', hideWorkHighlight);
 new ResizeObserver(() => {
   if (highlightedWork) positionWorkHighlight(highlightedWork);
 }).observe(workList);
+
+const footerWave = document.querySelector('.footer-wave');
+const marineURL = 'https://marine-api.open-meteo.com/v1/marine?latitude=43.49&longitude=-1.64&current=wave_height,wave_period';
+
+async function showFooterWave() {
+  const response = await fetch(marineURL);
+  if (!response.ok) return;
+  const { current } = await response.json();
+  const height = current?.wave_height;
+  const period = current?.wave_period;
+  if (!Number.isFinite(height) || height < 0 || !Number.isFinite(period) || period <= 0) return;
+
+  const art = footerWave.querySelector('pre');
+  footerWave.querySelector('figcaption span').textContent = `Forecast ${height.toFixed(1)} m · ${period.toFixed(0)} s`;
+  footerWave.hidden = false;
+  const amplitude = Math.min(3, height);
+  let start;
+  let lastFrame = -1;
+
+  function draw(now) {
+    start ??= now;
+    const elapsed = now - start;
+    const frame = Math.floor(elapsed / 80);
+    if (frame !== lastFrame) {
+      const rows = Array.from({ length: 7 }, () => Array(32).fill(' '));
+      for (let x = 0; x < 32; x++) {
+        const phase = x * .34 - elapsed / 1000 * Math.PI * 2 / period;
+        const row = Math.round(3 - Math.sin(phase) * amplitude);
+        const slope = Math.cos(phase);
+        rows[row][x] = amplitude < .5 || Math.abs(slope) < .4 ? '_' : slope > 0 ? '/' : '\\';
+      }
+      art.textContent = rows.map(row => row.join('')).join('\n');
+      lastFrame = frame;
+    }
+    if (!reducedMotion.matches && elapsed < 4500) requestAnimationFrame(draw);
+  }
+
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    observer.disconnect();
+    requestAnimationFrame(draw);
+  });
+  observer.observe(footerWave);
+}
+
+showFooterWave().catch(() => {});
