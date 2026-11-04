@@ -441,3 +441,5 @@ html.visual-open { overflow: hidden; }
   .about-orbit.is-orbiting { height: clamp(238px, 46vw, 300px); }
   .about-orbit.is-orbiting::after { display: none; }
 }
+
+.about-orbit.is-orbiting .orbit-landscape { width: clamp(125px, 24%, 330px); }
