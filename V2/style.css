@@ -72,15 +72,15 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
-footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
-.footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: inherit; font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
+footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
+.footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: color-mix(in srgb, var(--secondary) 75%, transparent); font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
 #footer-wave-forecast {
   position: absolute;
   inset-inline-start: calc(100% + 8px);
   top: 50%;
   transform: translateY(-50%);
-  color: var(--secondary);
-  font: 11px/16px system-ui, sans-serif;
+  color: inherit;
+  font: var(--footer-type);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -112,6 +112,7 @@ footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9p
   .page { padding-inline: 12px; }
   .entry { gap: 12px; }
   .entry > .entry-copy, footer { font-size: 13px; }
+  footer { --footer-type: 13px/20px system-ui, sans-serif; }
   .about { font-size: 13px; }
   .entry-description { gap: 8px; }
 }
