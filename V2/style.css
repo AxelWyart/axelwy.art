@@ -351,27 +351,34 @@ html.visual-open { overflow: hidden; }
 .avatar-tooltip {
   position: absolute;
   z-index: 1;
-  top: var(--avatar-tip-y, 50%);
-  left: var(--avatar-tip-x, calc(100% + 10px));
-  padding: 3px 7px;
-  border-radius: 5px;
-  background: #242424;
-  color: #fff;
-  font-size: 12px;
-  line-height: 18px;
+  top: var(--avatar-tip-y, calc(50% - 13.5px));
+  left: var(--avatar-tip-x, calc(100% + 12px));
+  display: flex;
+  align-items: center;
+  height: 27px;
+  padding: 0 12px;
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--detail-surface) 30%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 .7px color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: .28px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
 }
 .avatar-link:focus-visible .avatar-tooltip { opacity: 1; }
 @media (hover: hover) and (pointer: fine) {
+  .avatar-link::before { content: ""; position: absolute; inset: -12px; border-radius: 50%; }
   .avatar-link:hover .avatar-tooltip { opacity: 1; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .avatar-link .avatar {
     transform: translate(var(--avatar-x, 0px), var(--avatar-y, 0px));
-    transition: transform 320ms cubic-bezier(.22, 1.35, .4, 1);
+    transition: transform 420ms cubic-bezier(.24, 1.08, .42, 1);
   }
-  .avatar-link:hover .avatar { transition: transform 110ms ease-out; }
-  .avatar-tooltip { transition: opacity 120ms ease; }
+  .avatar-link:hover .avatar { transition: transform 160ms ease-out; }
+  .avatar-tooltip { transition: opacity 150ms ease; }
 }
