@@ -216,17 +216,16 @@ html.visual-open { overflow: hidden; }
 .experience-information dt { color: var(--secondary); }
 .experience-information dd { margin: 0; text-align: end; }
 .experience-information a { text-decoration: none; }
-.experience-pagination { margin-top: 32px; font-size: 15px; line-height: 22px; }
-.experience-pagination a { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 10px; border-radius: 10px; transition: background-color 160ms ease; }
-.experience-pagination a:focus-visible { background: var(--work-hover-bg); }
-.case-nav-copy { display: grid; line-height: 20px; }
-.case-nav-direction { color: var(--secondary); font-size: 13px; }
+.experience-pagination { margin-top: 24px; }
+.experience-pagination .entry { position: relative; isolation: isolate; }
+.experience-pagination .entry::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -10px -12px; border-radius: 14px; background: var(--work-hover-bg); opacity: 0; transition: opacity 120ms ease; }
+.experience-pagination .entry:focus-visible::before { opacity: 1; }
 .experience-navigation-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .experience-close:active, .experience-back:active { transform: scale(.97); }
 @media (hover: hover) and (pointer: fine) {
   .experience-close:hover { background: color-mix(in srgb, var(--detail-surface) 90%, transparent); }
   .experience-back:hover { background: var(--fill-hover); }
-  .experience-pagination a:hover { background: var(--work-hover-bg); }
+  .experience-pagination .entry:hover::before { opacity: 1; }
 }
 @media (max-width: 640px) {
   .experience-dialog { width: 100%; height: calc(100dvh - 16px); border-radius: 24px 24px 0 0; }
