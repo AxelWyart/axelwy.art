@@ -1,6 +1,6 @@
 const orbit = document.querySelector('.about-orbit');
 const photos = [...orbit.querySelectorAll('.orbit-card')];
-const clip = orbit.querySelector('video');
+const clips = orbit.querySelectorAll('video');
 const toggle = document.querySelector('.about-orbit-toggle');
 const controls = document.querySelector('.about-orbit-controls');
 const speed = document.querySelector('#orbit-speed');
@@ -50,8 +50,10 @@ function updateOrbit() {
   lastTime = undefined;
   orbit.classList.toggle('is-orbiting', !reduceMotion.matches);
   controls.hidden = reduceMotion.matches;
-  if (visible && !paused && !reduceMotion.matches) clip.play().catch(() => {});
-  else clip.pause();
+  clips.forEach(clip => {
+    if (visible && !paused && !reduceMotion.matches) clip.play().catch(() => {});
+    else clip.pause();
+  });
   if (!reduceMotion.matches) drawOrbit(performance.now());
 }
 
