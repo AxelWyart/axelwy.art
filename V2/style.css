@@ -382,3 +382,20 @@ html.visual-open { overflow: hidden; }
   .avatar-link:hover .avatar { transition: transform 160ms ease-out; }
   .avatar-tooltip { transition: opacity 150ms ease; }
 }
+
+.about-page { gap: 32px; }
+.about-identity { display: flex; align-items: center; gap: 14px; }
+.about-identity img { border-radius: 50%; object-fit: cover; }
+.about-identity span { color: var(--secondary); }
+.about-orbit-section { gap: 8px; }
+.about-orbit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.about-orbit img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.about-orbit.is-orbiting { position: relative; display: block; height: clamp(160px, 43vw, 224px); }
+.about-orbit.is-orbiting img {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 36%;
+  transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(var(--orbit-scale));
+  box-shadow: 0 8px 20px #0002;
+}
+.about-orbit-toggle { align-self: center; border: 0; background: transparent; color: var(--secondary); font-size: 13px; cursor: pointer; }

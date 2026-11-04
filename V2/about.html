@@ -5,17 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>About — Axel Wyart</title>
-  <link rel="stylesheet" href="/V2/style.css?v=20261104-avatar">
+  <link rel="stylesheet" href="/V2/style.css?v=20261104-about-orbit">
+  <script src="/V2/about.js" defer></script>
 </head>
 <body>
-  <main class="page">
+  <main class="page about-page">
+    <a class="experience-back" href="/V2/" aria-label="Back to homepage">←</a>
     <section class="about" aria-labelledby="about-title">
-      <a class="experience-back" href="/V2/" aria-label="Back to homepage">←</a>
-      <div class="avatar-frame"><img class="avatar" src="/images/avatar.png" width="64" height="64" alt="Axel Wyart"></div>
-      <h1 id="about-title">About me</h1>
-      <p>I’m a product design leader with 10+ years building and scaling digital products, most recently in AI-driven platforms.</p>
-      <p>Today, I lead Design at <a class="about-link" href="https://www.foundever.com/" target="_blank" rel="noopener noreferrer">Foundever</a>, where we ship AI solutions used by thousands of agents worldwide on a daily basis. My job sits at the uncomfortable intersection of strategy, delivery, and reality: aligning executives, product, and engineering while making sure what we build actually works for users.</p>
+      <header class="about-identity">
+        <img src="/images/avatar.png" width="64" height="64" alt="">
+        <div>
+          <h1 id="about-title">Axel Wyart</h1>
+          <span>Design Director · Biarritz, France</span>
+        </div>
+      </header>
+      <p>I lead design at <a class="about-link" href="https://www.foundever.com/">Foundever</a>, where we build AI tools used by thousands of customer-service agents.</p>
+      <p>Over the past decade, I’ve designed everything from visual identities to conversational software. I like getting close to the work, whether that means prototyping an interface or helping a team decide what to build next.</p>
+      <p>I work from Biarritz with teams around the world.</p>
       <a class="quiet-link" href="mailto:hey@axelwy.art">hey@axelwy.art</a>
+    </section>
+    <section class="about-orbit-section" aria-labelledby="orbit-title">
+      <h2 id="orbit-title">A few things I’ve made</h2>
+      <div class="about-orbit">
+        <img src="/V2/assets/ellie/ellie-app-832.webp" alt="Ellie health app" width="832" height="554">
+        <img src="/V2/assets/visuals/sneci-signage-832.webp" alt="SNECI signage" width="832" height="510">
+        <img src="/V2/assets/visuals/nudge-landing-1664.png" alt="Nudge landing page" width="1664" height="1186">
+        <img src="/images/pops-moving-prints-still.webp" alt="Pops lenticular photo print" width="832" height="554">
+      </div>
+      <button class="about-orbit-toggle" type="button" hidden>Pause rotation</button>
     </section>
   </main>
 </body>
