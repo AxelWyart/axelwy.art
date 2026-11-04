@@ -345,3 +345,33 @@ html.visual-open { overflow: hidden; }
     .collaborator-item:has(.collaborator-link:hover) .collaborator-tooltip { opacity: 0; transform: translateX(var(--tooltip-offset)) scale(.98); }
   }
 }
+
+.avatar-link { display: block; border-radius: 50%; }
+.avatar-link .avatar { pointer-events: none; }
+.avatar-tooltip {
+  position: absolute;
+  z-index: 1;
+  top: var(--avatar-tip-y, 50%);
+  left: var(--avatar-tip-x, calc(100% + 10px));
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #242424;
+  color: #fff;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+}
+.avatar-link:focus-visible .avatar-tooltip { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .avatar-link:hover .avatar-tooltip { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .avatar-link .avatar {
+    transform: translate(var(--avatar-x, 0px), var(--avatar-y, 0px));
+    transition: transform 320ms cubic-bezier(.22, 1.35, .4, 1);
+  }
+  .avatar-link:hover .avatar { transition: transform 110ms ease-out; }
+  .avatar-tooltip { transition: opacity 120ms ease; }
+}

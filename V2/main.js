@@ -112,3 +112,21 @@ async function showFooterWave() {
 }
 
 showFooterWave().catch(() => {});
+
+const avatarLink = document.querySelector('.avatar-link');
+avatarLink.addEventListener('pointermove', event => {
+  if (!hoverPointer.matches || event.pointerType === 'touch') return;
+  const bounds = avatarLink.getBoundingClientRect();
+  const x = event.clientX - bounds.left;
+  const y = event.clientY - bounds.top;
+  avatarLink.style.setProperty('--avatar-x', `${(x - bounds.width / 2) * .15}px`);
+  avatarLink.style.setProperty('--avatar-y', `${(y - bounds.height / 2) * .15}px`);
+  avatarLink.style.setProperty('--avatar-tip-x', `${x + 12}px`);
+  avatarLink.style.setProperty('--avatar-tip-y', `${y + 12}px`);
+});
+avatarLink.addEventListener('pointerleave', () => {
+  avatarLink.style.removeProperty('--avatar-x');
+  avatarLink.style.removeProperty('--avatar-y');
+  avatarLink.style.removeProperty('--avatar-tip-x');
+  avatarLink.style.removeProperty('--avatar-tip-y');
+});
