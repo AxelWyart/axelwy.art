@@ -130,6 +130,7 @@ avatarLink.addEventListener('pointerleave', () => {
 });
 
 document.querySelectorAll('.client-funding').forEach(item => {
+  const tooltip = item.querySelector('.client-funding-tooltip');
   const count = item.querySelector('.funding-count');
   const amount = Number(count.dataset.amount);
   const currency = count.dataset.currency;
@@ -154,6 +155,18 @@ document.querySelectorAll('.client-funding').forEach(item => {
     }
     frame = requestAnimationFrame(draw);
   }
+
+  item.addEventListener('pointermove', event => {
+    if (!hoverPointer.matches || event.pointerType === 'touch') return;
+    const bounds = item.getBoundingClientRect();
+    const x = Math.max(8, Math.min(event.clientX + 14, document.documentElement.clientWidth - tooltip.offsetWidth - 8));
+    item.style.setProperty('--funding-x', `${x - bounds.left}px`);
+    item.style.setProperty('--funding-y', `${event.clientY - bounds.top - 8}px`);
+    item.setAttribute('data-pointer', '');
+  });
+  item.addEventListener('focusin', event => {
+    if (event.target.matches(':focus-visible')) item.removeAttribute('data-pointer');
+  });
 
   for (const event of ['pointerenter', 'pointerleave', 'focusin', 'focusout']) {
     item.addEventListener(event, () => queueMicrotask(updateFunding));

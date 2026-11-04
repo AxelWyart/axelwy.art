@@ -343,7 +343,7 @@ html.visual-open { overflow: hidden; }
   color: var(--text);
   font-size: 11px;
   line-height: 14px;
-  letter-spacing: .28px;
+  letter-spacing: 0;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
@@ -361,8 +361,8 @@ html.visual-open { overflow: hidden; }
   .avatar-link:hover .avatar { transition: transform 160ms ease-out; }
   .avatar-tooltip {
     clip-path: inset(0 82% 0 0 round 17px);
-    filter: blur(3px);
-    transition: opacity 180ms var(--ease), clip-path 200ms var(--ease), filter 180ms var(--ease);
+    filter: blur(7px);
+    transition: opacity 210ms var(--ease), clip-path 230ms var(--ease), filter 230ms ease-in-out;
   }
   .avatar-link:focus-visible .avatar-tooltip { clip-path: inset(0 round 17px); filter: none; }
   @media (hover: hover) and (pointer: fine) {
@@ -440,7 +440,13 @@ html.visual-open { overflow: hidden; }
 .experience-gallery > .experience-project-cta { width: 100%; margin-bottom: 12px; }
 
 .client-funding { position: relative; }
-.client-funding-tooltip { position: absolute; z-index: 1; inset-block-end: calc(100% + 3px); inset-inline-start: 50%; transform: translateX(-50%); padding: 5px 8px; border-radius: 7px; background: var(--detail-surface); color: var(--text); font-size: 11px; line-height: 15px; white-space: nowrap; opacity: 0; pointer-events: none; clip-path: inset(0 82% 0 0 round 7px); filter: blur(3px); transition: opacity 180ms var(--ease), clip-path 200ms var(--ease), filter 180ms var(--ease); }
+.client-funding-tooltip { position: absolute; z-index: 1; inset-block-end: calc(100% + 3px); inset-inline-start: 50%; transform: translateX(-50%); padding: 5px 8px; border-radius: 7px; background: var(--detail-surface); color: var(--text); font-size: 11px; line-height: 15px; white-space: nowrap; opacity: 0; pointer-events: none; clip-path: inset(0 82% 0 0 round 7px); letter-spacing: 0; filter: blur(7px); transition: opacity 210ms var(--ease), clip-path 230ms var(--ease), filter 230ms ease-in-out; }
+.client-funding[data-pointer] .client-funding-tooltip {
+  inset-block-end: auto;
+  top: var(--funding-y);
+  left: var(--funding-x);
+  transform: translateY(-100%);
+}
 .client-funding:is(:hover, :focus-within) .client-funding-tooltip { opacity: 1; clip-path: inset(0 round 7px); filter: none; }
 .funding-count { display: inline-block; min-width: 4.5ch; text-align: end; font-variant-numeric: tabular-nums; }
 .funding-label { color: var(--secondary); }
