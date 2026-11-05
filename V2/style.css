@@ -70,8 +70,8 @@ section { display: flex; flex-direction: column; gap: 20px; }
 .quiet-link { align-self: flex-start; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #0000004d; }
 .clients-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 24px; list-style: none; margin: 0; padding: 0; }
 .client-logo { display: grid; place-items: center; min-height: 56px; padding: 8px; border-radius: 8px; color: var(--secondary); transition: color 160ms ease; }
-a.client-logo { color: var(--text); }
-span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
+a.client-logo, span.client-logo { color: var(--text); }
+span.client-logo { filter: grayscale(1); cursor: not-allowed; transition: opacity 160ms ease; }
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
@@ -100,6 +100,7 @@ footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-dir
   .entry:hover .entry-note { opacity: 1; }
   .quiet-link:hover { text-decoration-color: currentColor; }
   .client-logo:hover { color: var(--text); }
+  span.client-logo:hover { opacity: .45; }
 }
 @media (max-width: 480px) {
   .clients-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 20px; }
