@@ -511,10 +511,6 @@ html.visual-open { overflow: hidden; }
 }
 
 
-.experience-project-cta { max-width: 608px; margin: 0 auto 32px; }
-.experience-project-cta .contact-button { --contact-fs: 15px; --contact-lh: 20px; }
-.experience-lede:has(+ .experience-project-cta), .experience-summary:has(+ .experience-project-cta) { margin-bottom: 16px; }
-.experience-gallery > .experience-project-cta { width: 100%; margin-bottom: 12px; }
 
 .client-funding { position: relative; }
 .client-funding-tooltip { bottom: calc(100% + 3px); left: 50%; transform: translateX(-50%); }
