@@ -384,6 +384,8 @@ html.visual-open { overflow: hidden; }
 }
 .about-outcomes h2 {
   padding-bottom: 8px;
+  font: inherit;
+  color: var(--secondary);
 }
 .about-outcomes ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--outcome-rule); }
 .about-outcomes li {
@@ -393,6 +395,7 @@ html.visual-open { overflow: hidden; }
   align-items: start;
   gap: var(--outcome-gap);
   padding-block: .735rem;
+  font-weight: 500;
 }
 .about-outcomes li + li::before {
   content: "";
