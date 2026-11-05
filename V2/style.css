@@ -413,7 +413,9 @@ html.visual-open { overflow: hidden; }
   box-shadow: inset 0 0 0 1px var(--fill-hover);
   color: var(--text);
 }
-.about-outcome-check::after {
+.about-outcome-done { text-decoration-color: var(--secondary); }
+.about-outcome-check.is-pending { background: transparent; box-shadow: inset 0 0 0 1px var(--secondary); }
+.about-outcome-check:not(.is-pending)::after {
   content: "";
   width: 8px;
   height: 4px;
