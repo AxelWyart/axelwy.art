@@ -371,12 +371,12 @@ html.visual-open { overflow: hidden; }
 }
 
 .about-page { gap: 32px; }
-.about-page :is(.about h1, .contact-button) { font-weight: 400; }
+.about-page .contact-button { font-weight: 400; }
 .about-page .about p { color: var(--text); }
-.about-outcomes { padding: 14px 16px 6px; border-radius: 12px; background: var(--work-hover-bg); }
-.about-outcomes h2 { margin-bottom: 4px; font-size: 15px; line-height: 22px; font-weight: 400; }
+.about-outcomes { padding: 12px 14px 8px; border-radius: 12px; background: var(--work-hover-bg); }
+.about-outcomes h2 { margin-bottom: 3px; font-size: 15px; line-height: 22px; font-weight: 400; }
 .about-outcomes ul { margin: 0; padding: 0; list-style: none; }
-.about-outcomes li { display: grid; grid-template-columns: 16px 1fr; align-items: start; gap: 10px; padding: 8px 0; line-height: 22px; }
+.about-outcomes li { display: grid; grid-template-columns: 16px 1fr; align-items: start; gap: 8px; padding: 5px 0; line-height: 22px; }
 .about-outcomes li + li { border-top: 1px solid var(--fill-hover); }
 .about-outcome-check { display: grid; place-items: center; width: 16px; height: 16px; margin-top: 3px; border-radius: 4px; background: var(--text); color: var(--background); font-size: 11px; line-height: 1; }
 .about-company { display: inline-flex; align-items: center; gap: .28em; margin-inline-start: .14em; vertical-align: baseline; white-space: nowrap; }
