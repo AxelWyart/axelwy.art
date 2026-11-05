@@ -75,7 +75,8 @@ async function showFooterWave() {
   ].find(band => height < band.below);
   const profileWidth = Math.max(...profile.rows.map(row => row.length));
   const width = Math.max(profileWidth + 1, Math.min(12, Math.round(period)));
-  const count = width <= 7 ? 3 : 2;
+  const displayWidth = 14;
+  const repeats = Math.ceil(displayWidth / width) + 1;
   const delay = period * 1000 / width;
   let offset = 0;
   let timer;
@@ -84,8 +85,8 @@ async function showFooterWave() {
 
   function draw() {
     const shift = line => {
-      const repeated = line.padEnd(width).repeat(count + 1);
-      return repeated.slice(offset, offset + width * count);
+      const repeated = line.padEnd(width).repeat(repeats);
+      return repeated.slice(offset, offset + displayWidth);
     };
     art.textContent = profile.rows.map(shift).join('\n');
     offset = (offset + 1) % width;
