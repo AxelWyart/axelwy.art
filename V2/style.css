@@ -381,7 +381,9 @@ html.visual-open { overflow: hidden; }
   display: block;
   align-self: center;
   width: min(100vw, 1720px);
-  height: clamp(180px, 32vw, 380px);
+  --orbit-height: clamp(180px, 32vw, 380px);
+  --orbit-bottom-room: 72px;
+  height: calc(var(--orbit-height) + var(--orbit-bottom-room));
   overflow: clip;
   touch-action: pan-y;
   cursor: grab;
@@ -419,7 +421,7 @@ html.visual-open { overflow: hidden; }
 
 .about-page { position: relative; padding-top: 0; }
 .about-page > .experience-back { position: absolute; top: 24px; left: 24px; z-index: 101; background: color-mix(in srgb, var(--background) 60%, transparent); backdrop-filter: blur(10px); }
-.about-orbit.is-orbiting .orbit-card { inset-block-start: 34%; }
+.about-orbit.is-orbiting .orbit-card { inset-block-start: calc(var(--orbit-height) * .34); }
 .about-orbit:not(.is-orbiting) { margin-top: 76px; }
 .orbit-accessible:not(:focus-within) {
   position: absolute;
@@ -453,7 +455,7 @@ html.visual-open { overflow: hidden; }
 .funding-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 @media (max-width: 640px) {
-  .about-orbit.is-orbiting { height: clamp(238px, 46vw, 300px); }
+  .about-orbit.is-orbiting { --orbit-height: clamp(238px, 46vw, 300px); --orbit-bottom-room: 36px; }
   .about-orbit.is-orbiting::after { display: none; }
 }
 
