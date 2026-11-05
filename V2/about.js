@@ -111,3 +111,15 @@ orbit.addEventListener('keydown', event => {
   event.preventDefault();
   updateOrbit();
 });
+
+const outcomes = document.querySelector('.about-outcomes ul');
+const outcomesSection = outcomes.closest('.about-outcomes');
+if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+  outcomesSection.dataset.ink = 'waiting';
+  const inkObserver = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    outcomesSection.dataset.ink = 'drawn';
+    inkObserver.disconnect();
+  }, { threshold: 0.5 });
+  inkObserver.observe(outcomes);
+}
