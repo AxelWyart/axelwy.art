@@ -374,36 +374,51 @@ html.visual-open { overflow: hidden; }
 .about-page .contact-button { font-weight: 400; }
 .about-page .about p { color: var(--text); }
 .about-outcomes {
-  --outcome-gutter: 19.6%;
-  --outcome-rule: color-mix(in srgb, var(--text) 7%, transparent);
-  margin-block: 24px;
+  --outcome-rule: color-mix(in srgb, var(--text) 5%, transparent);
+  --outcome-icon-size: 14px;
+  --outcome-gap: 10px;
+  gap: 0;
+  margin-block: 28px;
+  font-size: 14px;
+  line-height: 18px;
 }
-.about-outcomes h2 { padding-bottom: 8px; font-size: 15px; line-height: 22px; font-weight: 400; color: var(--secondary); }
+.about-outcomes h2 {
+  padding-bottom: 8px;
+  font: inherit;
+  color: color-mix(in srgb, var(--text) 45%, transparent);
+}
 .about-outcomes ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--outcome-rule); }
 .about-outcomes li {
   position: relative;
   display: grid;
-  grid-template-columns: var(--outcome-gutter) minmax(0, 1fr);
-  align-items: baseline;
-  padding-block: 10px;
-  line-height: 20px;
+  grid-template-columns: var(--outcome-icon-size) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--outcome-gap);
+  padding-block: .735rem;
 }
 .about-outcomes li + li::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto var(--outcome-gutter);
+  inset: 0 0 auto calc(var(--outcome-icon-size) + var(--outcome-gap));
   border-top: 1px solid var(--outcome-rule);
 }
 .about-outcome-check {
   display: grid;
   place-items: center;
-  width: 14px;
-  height: 14px;
-  border: 1px solid var(--fill-hover);
-  border-radius: 3px;
-  color: var(--secondary);
-  font-size: 10px;
-  line-height: 1;
+  width: var(--outcome-icon-size);
+  height: var(--outcome-icon-size);
+  margin-top: 2px;
+  border-radius: 4px;
+  background: var(--fill-hover);
+  color: var(--hover-text);
+}
+.about-outcome-check::after {
+  content: "";
+  width: 6px;
+  height: 3px;
+  border: solid currentColor;
+  border-width: 0 0 1.5px 1.5px;
+  transform: translateY(-.5px) rotate(-45deg);
 }
 .about-company { display: inline-flex; align-items: center; gap: .28em; margin-inline-start: .14em; vertical-align: baseline; white-space: nowrap; }
 .about-company-name { text-decoration: underline; text-decoration-color: currentColor; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: .16em; }
