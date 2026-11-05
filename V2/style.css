@@ -378,9 +378,6 @@ html.visual-open { overflow: hidden; }
   --outcome-gap: 10px;
   gap: 0;
   margin-block: 28px;
-  padding: 16px;
-  border-radius: 12px;
-  background: var(--work-hover-bg);
   font-size: 15px;
   line-height: 20px;
 }
@@ -389,13 +386,15 @@ html.visual-open { overflow: hidden; }
   font: inherit;
   font-weight: 600;
 }
-.about-outcomes ul { margin: 0; padding: 0; list-style: none; }
+.about-outcomes ul { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .about-outcomes li {
   display: grid;
   grid-template-columns: var(--outcome-icon-size) minmax(0, 1fr);
   align-items: start;
   gap: var(--outcome-gap);
-  padding-block: .735rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--work-hover-bg);
 }
 .about-outcome-check {
   display: grid;
