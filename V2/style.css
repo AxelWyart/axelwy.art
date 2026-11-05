@@ -75,6 +75,7 @@ span.client-logo { opacity: .45; filter: grayscale(1); cursor: not-allowed; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
 footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
+.page > footer::after { content: ""; width: 96px; height: 1px; margin-top: 24px; background: var(--fill-hover); }
 .footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: color-mix(in srgb, var(--secondary) 75%, transparent); font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
 #footer-wave-forecast {
   position: absolute;
@@ -327,11 +328,9 @@ html.visual-open { overflow: hidden; }
 
 .avatar-link { display: block; border-radius: 50%; }
 .avatar-link .avatar { pointer-events: none; }
-.avatar-tooltip {
+:is(.avatar-tooltip, .client-funding-tooltip) {
   position: absolute;
   z-index: 1;
-  top: var(--avatar-tip-y, calc(50% - 11.5px));
-  left: var(--avatar-tip-x, calc(100% + 12px));
   display: flex;
   align-items: center;
   height: 23px;
@@ -348,10 +347,11 @@ html.visual-open { overflow: hidden; }
   pointer-events: none;
   opacity: 0;
 }
-.avatar-link:focus-visible .avatar-tooltip { opacity: 1; }
+.avatar-tooltip { top: var(--avatar-tip-y, calc(50% - 11.5px)); left: var(--avatar-tip-x, calc(100% + 12px)); }
+:is(.avatar-link:focus-visible, .client-funding:focus-within) > :is(.avatar-tooltip, .client-funding-tooltip) { opacity: 1; }
 @media (hover: hover) and (pointer: fine) {
   .avatar-link::before { content: ""; position: absolute; inset: -12px; border-radius: 50%; }
-  .avatar-link:hover .avatar-tooltip { opacity: 1; }
+  :is(.avatar-link, .client-funding):hover > :is(.avatar-tooltip, .client-funding-tooltip) { opacity: 1; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .avatar-link .avatar {
@@ -359,14 +359,14 @@ html.visual-open { overflow: hidden; }
     transition: transform 420ms cubic-bezier(.24, 1.08, .42, 1);
   }
   .avatar-link:hover .avatar { transition: transform 160ms ease-out; }
-  .avatar-tooltip {
+  :is(.avatar-tooltip, .client-funding-tooltip) {
     clip-path: inset(0 82% 0 0 round 17px);
     filter: blur(7px);
     transition: opacity 210ms var(--ease), clip-path 230ms var(--ease), filter 230ms ease-in-out;
   }
-  .avatar-link:focus-visible .avatar-tooltip { clip-path: inset(0 round 17px); filter: none; }
+  :is(.avatar-link:focus-visible, .client-funding:focus-within) > :is(.avatar-tooltip, .client-funding-tooltip) { clip-path: inset(0 round 17px); filter: none; }
   @media (hover: hover) and (pointer: fine) {
-    .avatar-link:hover .avatar-tooltip { clip-path: inset(0 round 17px); filter: none; }
+    :is(.avatar-link, .client-funding):hover > :is(.avatar-tooltip, .client-funding-tooltip) { clip-path: inset(0 round 17px); filter: none; }
   }
 }
 
@@ -502,16 +502,15 @@ html.visual-open { overflow: hidden; }
 .experience-gallery > .experience-project-cta { width: 100%; margin-bottom: 12px; }
 
 .client-funding { position: relative; }
-.client-funding-tooltip { position: absolute; z-index: 1; inset-block-end: calc(100% + 3px); inset-inline-start: 50%; transform: translateX(-50%); padding: 5px 8px; border-radius: 7px; background: var(--detail-surface); color: var(--text); font-size: 11px; line-height: 15px; white-space: nowrap; opacity: 0; pointer-events: none; clip-path: inset(0 82% 0 0 round 7px); letter-spacing: 0; filter: blur(7px); transition: opacity 210ms var(--ease), clip-path 230ms var(--ease), filter 230ms ease-in-out; }
+.client-funding-tooltip { bottom: calc(100% + 3px); left: 50%; transform: translateX(-50%); }
 .client-funding[data-pointer] .client-funding-tooltip {
-  inset-block-end: auto;
+  bottom: auto;
   top: var(--funding-y);
   left: var(--funding-x);
-  transform: translateY(-100%);
+  transform: none;
 }
-.client-funding:is(:hover, :focus-within) .client-funding-tooltip { opacity: 1; clip-path: inset(0 round 7px); filter: none; }
 .funding-count { display: inline-block; min-width: 4.5ch; text-align: end; font-variant-numeric: tabular-nums; }
-.funding-label { color: var(--secondary); }
+.funding-label { margin-inline-start: .25em; }
 .funding-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 @media (max-width: 640px) {

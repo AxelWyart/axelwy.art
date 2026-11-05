@@ -159,9 +159,9 @@ document.querySelectorAll('.client-funding').forEach(item => {
   item.addEventListener('pointermove', event => {
     if (!hoverPointer.matches || event.pointerType === 'touch') return;
     const bounds = item.getBoundingClientRect();
-    const x = Math.max(8, Math.min(event.clientX + 14, document.documentElement.clientWidth - tooltip.offsetWidth - 8));
+    const x = Math.max(8, Math.min(event.clientX + 18, document.documentElement.clientWidth - tooltip.offsetWidth - 8));
     item.style.setProperty('--funding-x', `${x - bounds.left}px`);
-    item.style.setProperty('--funding-y', `${event.clientY - bounds.top - 8}px`);
+    item.style.setProperty('--funding-y', `${event.clientY - bounds.top - 5}px`);
     item.setAttribute('data-pointer', '');
   });
   item.addEventListener('focusin', event => {
