@@ -374,6 +374,7 @@ html.visual-open { overflow: hidden; }
 .about-page .contact-button { font-weight: 400; }
 .about-page .about p { color: var(--text); }
 .about-outcomes {
+  --outcome-rule: color-mix(in srgb, var(--text) 5%, transparent);
   --outcome-icon-size: 20px;
   --outcome-gap: 10px;
   gap: 0;
@@ -386,15 +387,20 @@ html.visual-open { overflow: hidden; }
   font: inherit;
   font-weight: 600;
 }
-.about-outcomes ul { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.about-outcomes ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--outcome-rule); }
 .about-outcomes li {
+  position: relative;
   display: grid;
   grid-template-columns: var(--outcome-icon-size) minmax(0, 1fr);
   align-items: start;
   gap: var(--outcome-gap);
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: var(--work-hover-bg);
+  padding-block: .735rem;
+}
+.about-outcomes li + li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto calc(var(--outcome-icon-size) + var(--outcome-gap));
+  border-top: 1px solid var(--outcome-rule);
 }
 .about-outcome-check {
   display: grid;
