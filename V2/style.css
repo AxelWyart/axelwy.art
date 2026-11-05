@@ -432,9 +432,6 @@ html.visual-open { overflow: hidden; }
   white-space: nowrap;
 }
 
-.about-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0; padding-block: 16px; border-block: 1px solid var(--detail-line); }
-.about-metrics dt { font-size: 20px; line-height: 26px; font-weight: 500; }
-.about-metrics dd { margin: 4px 0 0; color: var(--secondary); font-size: 13px; line-height: 18px; }
 
 .experience-project-cta { max-width: 608px; margin: 0 auto 32px; }
 .experience-project-cta .contact-button { --contact-fs: 15px; --contact-lh: 20px; }
