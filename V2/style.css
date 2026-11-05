@@ -373,12 +373,38 @@ html.visual-open { overflow: hidden; }
 .about-page { gap: 32px; }
 .about-page .contact-button { font-weight: 400; }
 .about-page .about p { color: var(--text); }
-.about-outcomes { padding: 12px 14px 8px; border-radius: 12px; background: var(--work-hover-bg); }
-.about-outcomes h2 { margin-bottom: 3px; font-size: 15px; line-height: 22px; font-weight: 400; }
-.about-outcomes ul { margin: 0; padding: 0; list-style: none; }
-.about-outcomes li { display: grid; grid-template-columns: 16px 1fr; align-items: start; gap: 8px; padding: 5px 0; line-height: 22px; }
-.about-outcomes li + li { border-top: 1px solid var(--fill-hover); }
-.about-outcome-check { display: grid; place-items: center; width: 16px; height: 16px; margin-top: 3px; border-radius: 4px; background: var(--text); color: var(--background); font-size: 11px; line-height: 1; }
+.about-outcomes {
+  --outcome-gutter: 19.6%;
+  --outcome-rule: color-mix(in srgb, var(--text) 7%, transparent);
+  margin-block: 24px;
+}
+.about-outcomes h2 { padding-bottom: 8px; font-size: 15px; line-height: 22px; font-weight: 400; color: var(--secondary); }
+.about-outcomes ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--outcome-rule); }
+.about-outcomes li {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--outcome-gutter) minmax(0, 1fr);
+  align-items: baseline;
+  padding-block: 10px;
+  line-height: 20px;
+}
+.about-outcomes li + li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto var(--outcome-gutter);
+  border-top: 1px solid var(--outcome-rule);
+}
+.about-outcome-check {
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--fill-hover);
+  border-radius: 3px;
+  color: var(--secondary);
+  font-size: 10px;
+  line-height: 1;
+}
 .about-company { display: inline-flex; align-items: center; gap: .28em; margin-inline-start: .14em; vertical-align: baseline; white-space: nowrap; }
 .about-company-name { text-decoration: underline; text-decoration-color: currentColor; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: .16em; }
 .about-company:is(:hover, :focus-visible) .about-company-name { text-decoration-color: currentColor; }
