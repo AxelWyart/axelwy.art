@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
 
 const root = new URL('../', import.meta.url);
-const home = await readFile(new URL('index.html', root), 'utf8');
+const home = await readFile(new URL('old/index.html', root), 'utf8');
 const filenames = (await readdir(new URL('case-studies/', root))).filter((name) => name.endsWith('.html'));
 const sitemap = await readFile(new URL('sitemap.xml', root), 'utf8');
 const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];

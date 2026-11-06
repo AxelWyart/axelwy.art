@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.axelwy.art/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -77,5 +77,26 @@
     <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/about</loc>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/work/blank</loc>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/work/foundever</loc>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/work/independent</loc>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/work/laiye</loc>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/work/mindsay</loc>
+  </url>
+  <url>
+    <loc>https://www.axelwy.art/work/nudge</loc>
   </url>
 </urlset>
