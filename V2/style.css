@@ -40,6 +40,7 @@ p { margin: 0; }
 .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: fit-content; position: relative; padding-right: 4px; }
 .contact-call { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .contact-email, .about-outcome-check:not(.is-pending) { background: #242424; color: #fff; }
+.about-outcome-check:not(.is-pending) { --control-edge: linear-gradient(180deg, #111, #11111180 25%, #11111180 75%, #111); }
 .contact-button:active { transform: scale(.95); }
 section { display: flex; flex-direction: column; gap: 20px; }
 .entries { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; }
