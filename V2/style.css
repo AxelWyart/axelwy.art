@@ -140,6 +140,11 @@ html.experience-open { overflow: hidden; }
 .experience-handle:focus-visible span, .experience-dialog.is-scroll-dismiss-armed .experience-handle span, .experience-dialog.is-dragging .experience-handle span { background: color-mix(in srgb, var(--text) 40%, transparent); transform: scaleX(1.15); }
 .experience-close, .experience-back { display: grid; place-items: center; flex: none; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; transition: transform 300ms var(--ease); }
 .experience-back { position: relative; }
+.experience-close {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(var(--fill-hover), var(--fill-hover)), var(--control-bg);
+}
 .experience-toolbar .experience-close { position: absolute; top: 12px; right: 16px; pointer-events: auto; }
 .experience-content { padding: 0; }
 
@@ -224,8 +229,6 @@ html.visual-open { overflow: hidden; }
     top: calc(100dvh - 76px - env(safe-area-inset-bottom));
     right: auto;
     left: calc(50% - 22px);
-    width: 44px;
-    height: 44px;
   }
   .experience-article { padding: 8px 20px max(40px, env(safe-area-inset-bottom)); }
   .experience-dialog .experience-article { padding-top: 64px; padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
