@@ -38,6 +38,8 @@ p { margin: 0; }
 :is(.contact-button, .experience-back, .experience-close, .about-outcome-check)::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
 :is(.contact-button, .experience-back, .experience-close)::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: var(--control-drop); pointer-events: none; }
 .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: fit-content; position: relative; padding-right: 4px; }
+.identity > .contact { column-gap: 16px; }
+
 .contact-call { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .contact-email, .about-outcome-check:not(.is-pending) { background: #242424; color: #fff; }
 .contact-email, .about-outcome-check:not(.is-pending) { --control-edge: linear-gradient(180deg, #111, #11111180 25%, #11111180 75%, #111); }
