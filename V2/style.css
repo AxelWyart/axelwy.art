@@ -75,22 +75,10 @@ span.client-logo { filter: grayscale(1); cursor: not-allowed; transition: opacit
 .client-mark { display: block; width: min(112px, 100%); height: auto; max-height: 36px; }
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
-footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
+footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
 .page > footer::before { content: ""; width: 96px; height: 1px; margin-bottom: 15px; background: var(--fill-hover); }
 .footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: color-mix(in srgb, var(--secondary) 75%, transparent); font: 10px/9px ui-monospace, monospace; white-space: pre; text-align: left; cursor: pointer; }
-#footer-wave-forecast {
-  position: absolute;
-  inset-inline-start: calc(100% + 8px);
-  top: 50%;
-  transform: translateY(-50%);
-  color: inherit;
-  font: var(--footer-type);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 120ms ease;
-}
-.footer-wave:is(:hover, :focus-visible) #footer-wave-forecast { opacity: 1; }
+.footer-wave-tooltip { inset-inline-start: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
 @media (prefers-reduced-motion: reduce) {
   .footer-wave { cursor: default; }
 }
@@ -117,7 +105,6 @@ footer { --footer-type: 15px/20px system-ui, sans-serif; display: flex; flex-dir
   .page { padding-inline: 12px; }
   .entry { gap: 12px; }
   .entry > .entry-copy, footer { font-size: 13px; }
-  footer { --footer-type: 13px/20px system-ui, sans-serif; }
   .about { font-size: 13px; }
   .entry-description { gap: 8px; }
 }
@@ -329,7 +316,7 @@ html.visual-open { overflow: hidden; }
 
 .avatar-link { display: block; border-radius: 50%; }
 .avatar-link .avatar { pointer-events: none; }
-:is(.avatar-tooltip, .client-funding-tooltip) {
+:is(.avatar-tooltip, .client-funding-tooltip, .footer-wave-tooltip) {
   position: absolute;
   z-index: 1;
   display: flex;
@@ -349,10 +336,10 @@ html.visual-open { overflow: hidden; }
   opacity: 0;
 }
 .avatar-tooltip { top: var(--avatar-tip-y, calc(50% - 11.5px)); left: var(--avatar-tip-x, calc(100% + 12px)); }
-:is(.avatar-link:focus-visible, .client-funding:focus-within) > :is(.avatar-tooltip, .client-funding-tooltip) { opacity: 1; }
+:is(.avatar-link:focus-visible, .client-funding:focus-within, .footer-wave:focus-visible) > :is(.avatar-tooltip, .client-funding-tooltip, .footer-wave-tooltip) { opacity: 1; }
 @media (hover: hover) and (pointer: fine) {
   .avatar-link::before { content: ""; position: absolute; inset: -12px; border-radius: 50%; }
-  :is(.avatar-link, .client-funding):hover > :is(.avatar-tooltip, .client-funding-tooltip) { opacity: 1; }
+  :is(.avatar-link, .client-funding, .footer-wave):hover > :is(.avatar-tooltip, .client-funding-tooltip, .footer-wave-tooltip) { opacity: 1; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .avatar-link .avatar {
@@ -360,14 +347,14 @@ html.visual-open { overflow: hidden; }
     transition: transform 420ms cubic-bezier(.24, 1.08, .42, 1);
   }
   .avatar-link:hover .avatar { transition: transform 160ms ease-out; }
-  :is(.avatar-tooltip, .client-funding-tooltip) {
+  :is(.avatar-tooltip, .client-funding-tooltip, .footer-wave-tooltip) {
     clip-path: inset(0 82% 0 0 round 17px);
     filter: blur(7px);
     transition: opacity 210ms var(--ease), clip-path 230ms var(--ease), filter 230ms ease-in-out;
   }
-  :is(.avatar-link:focus-visible, .client-funding:focus-within) > :is(.avatar-tooltip, .client-funding-tooltip) { clip-path: inset(0 round 17px); filter: none; }
+  :is(.avatar-link:focus-visible, .client-funding:focus-within, .footer-wave:focus-visible) > :is(.avatar-tooltip, .client-funding-tooltip, .footer-wave-tooltip) { clip-path: inset(0 round 17px); filter: none; }
   @media (hover: hover) and (pointer: fine) {
-    :is(.avatar-link, .client-funding):hover > :is(.avatar-tooltip, .client-funding-tooltip) { clip-path: inset(0 round 17px); filter: none; }
+    :is(.avatar-link, .client-funding, .footer-wave):hover > :is(.avatar-tooltip, .client-funding-tooltip, .footer-wave-tooltip) { clip-path: inset(0 round 17px); filter: none; }
   }
 }
 
