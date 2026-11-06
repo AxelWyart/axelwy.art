@@ -35,7 +35,7 @@ p { margin: 0; }
 .contact { margin-top: 20px; margin-left: -4px; --contact-fs: 15px; --contact-lh: 20px; }
 .contact-button { position: relative; display: block; height: 44px; padding: 12px 16px; border: 0; border-radius: 22px; cursor: pointer; font-size: var(--contact-fs); line-height: var(--contact-lh); font-weight: 500; transition: transform 300ms var(--ease), color 100ms ease; }
 :is(.contact-button, .experience-back, .experience-close, .about-outcome-check) { background: var(--control-bg); backdrop-filter: blur(16px) saturate(200%); box-shadow: var(--control-shadow); }
-:is(.contact-button, .experience-back, .experience-close, .about-outcome-check)::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
+:is(.contact-button, .experience-back, .experience-close, .about-outcome-check, .company-tile-adaptive)::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
 :is(.contact-button, .experience-back, .experience-close)::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: var(--control-drop); pointer-events: none; }
 .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: fit-content; position: relative; padding-right: 4px; }
 .identity > .contact { column-gap: 16px; }
@@ -53,6 +53,7 @@ section { display: flex; flex-direction: column; gap: 20px; }
 .company-icon.company-tile { position: relative; filter: none; border-radius: 25%; box-shadow: var(--company-icon-shadow); }
 .company-icon.supplied-logo { filter: none; border-radius: 25%; }
 .company-tile > .supplied-logo { width: 100%; height: 100%; }
+.company-tile-adaptive::before { display: none; }
 /* A quiet shared grey highlight moves between rows; icons and labels stay still. */
 [aria-labelledby="work-heading"] .entries { position: relative; isolation: isolate; }
 [aria-labelledby="work-heading"] .entries::before { content: ""; position: absolute; z-index: -1; pointer-events: none; top: -10px; left: -12px; width: calc(100% + 24px); height: calc(var(--hover-height, 44px) + 20px); border-radius: 14px; background: var(--work-hover-bg); opacity: 0; transform: translateY(var(--hover-y, 0px)); transition: transform 180ms cubic-bezier(.23, 1, .32, 1), opacity 120ms ease; }
@@ -115,6 +116,9 @@ footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9p
 }
 @media (prefers-color-scheme: dark) {
   :root { --work-hover-bg: #ffffff0c; --company-icon-shadow: 0 4px 8px -2px #0006; --background: #000; --text: #fff; --secondary: #ffffffb3; --hover-text: #ffffffd6; --fill-hover: #ffffff14; --control-bg: linear-gradient(180deg, #1c1c1cb3, #2b2b2bb3); --control-edge: linear-gradient(180deg, #ffffff29, #fff0 25%, #fff0 75%, #ffffff1a); --control-shadow: inset 0 .5px 4px #ffffff1a, 0 0 0 .6px #0003, .6px 0 0 #0003, -.6px 0 0 #0003; --control-drop: 0 4px 12px #0000001f; }
+  .company-tile-adaptive::before { display: block; }
+  .company-tile-background { fill: #242424; }
+  .company-tile-mark { fill: #fff; }
   .avatar { box-shadow: 0 8px 24px #0006; }
   .company-icon[src$="ellie.png"] { filter: drop-shadow(0 4px 20px #0003); }
   .company-icon[src$="laiye.png"] { background: #fff; border-radius: 10px; }
