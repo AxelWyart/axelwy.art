@@ -34,8 +34,8 @@ p { margin: 0; }
 .intro { max-width: 460px; margin-top: 20px; padding-bottom: 16px; color: var(--text); }
 .contact { margin-top: 20px; margin-left: -4px; --contact-fs: 15px; --contact-lh: 20px; }
 .contact-button { position: relative; display: block; height: 44px; padding: 12px 16px; border: 0; border-radius: 22px; cursor: pointer; font-size: var(--contact-fs); line-height: var(--contact-lh); font-weight: 500; transition: transform 300ms var(--ease), color 100ms ease; }
-:is(.contact-button, .experience-back, .experience-close) { background: var(--control-bg); backdrop-filter: blur(16px) saturate(200%); box-shadow: var(--control-shadow); }
-:is(.contact-button, .experience-back, .experience-close)::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
+:is(.contact-button, .experience-back, .experience-close, .about-outcome-check) { background: var(--control-bg); backdrop-filter: blur(16px) saturate(200%); box-shadow: var(--control-shadow); }
+:is(.contact-button, .experience-back, .experience-close, .about-outcome-check)::before { content: ""; position: absolute; inset: 0; padding: .75px; border-radius: inherit; background: var(--control-edge); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
 :is(.contact-button, .experience-back, .experience-close)::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: var(--control-drop); pointer-events: none; }
 .contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: fit-content; position: relative; padding-right: 4px; }
 .contact-call { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
@@ -394,16 +394,15 @@ html.visual-open { overflow: hidden; }
   border-top: 1px solid var(--outcome-rule);
 }
 .about-outcome-check {
+  position: relative;
   display: grid;
   place-items: center;
   width: var(--outcome-icon-size);
   height: var(--outcome-icon-size);
   border-radius: 6px;
-  background: color-mix(in srgb, var(--text) 10%, var(--background));
   color: var(--secondary);
 }
 .about-outcome-done { color: var(--secondary); }
-.about-outcome-check.is-pending { background: var(--fill-hover); }
 .about-outcome-check:not(.is-pending)::after {
   content: "";
   width: 8px;
