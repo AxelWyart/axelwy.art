@@ -147,11 +147,11 @@ html.experience-open { overflow: hidden; }
 .experience-article { max-width: 880px; margin: auto; padding: 24px 24px 48px; }
 .experience-dialog .experience-article { padding-top: 72px; }
 .experience-page-nav { max-width: 656px; margin: auto; padding: 40px 24px 0; }
-.experience-header, .experience-lede, .experience-information, .experience-pagination { max-width: 608px; margin-inline: auto; }
+.experience-header, .experience-lede, .experience-information, .experience-contact, .experience-pagination { max-width: 608px; margin-inline: auto; }
 .experience-header { margin-bottom: 24px; }
 .experience-icon, .experience-icon .company-icon { display: block; width: 48px; height: 48px; }
 .experience-icon { margin-bottom: 20px; }
-.experience-header h1 { margin: 0; font-size: 20px; line-height: 28px; letter-spacing: normal; font-weight: 500; }
+.experience-header h1, .experience-contact h1 { margin: 0; font-size: 20px; line-height: 28px; letter-spacing: normal; font-weight: 500; }
 .experience-subtitle { margin-top: 0; color: var(--secondary); font-size: 15px; line-height: 22px; }
 .experience-lede { margin-bottom: 56px; font-size: 20px; line-height: 28px; }
 .experience-lede:has(+ .experience-collaborators) { margin-bottom: 40px; }
@@ -207,6 +207,8 @@ html.visual-open { overflow: hidden; }
 .experience-information dt { color: var(--secondary); }
 .experience-information dd { margin: 0; text-align: end; }
 .experience-information a { text-decoration: none; }
+.experience-contact { gap: 16px; margin-block: 48px; }
+.experience-contact .contact { margin: 0; }
 .experience-pagination { margin-top: 24px; }
 .experience-pagination .entry { position: relative; isolation: isolate; }
 .experience-pagination .entry::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: -10px -12px; border-radius: 14px; background: var(--work-hover-bg); opacity: 0; transition: opacity 120ms ease; }
