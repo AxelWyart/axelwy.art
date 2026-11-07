@@ -24,7 +24,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; }
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--secondary); outline-offset: 5px; }
-.page { max-width: 588px; margin-inline: auto; padding: 60px 24px 92px; display: flex; flex-direction: column; gap: 60px; }
+.page { --page-gap: 60px; max-width: 588px; margin-inline: auto; padding: 60px 24px 92px; display: flex; flex-direction: column; gap: var(--page-gap); }
 .avatar-frame { width: 64px; height: 64px; position: relative; margin: 0 0 16px -4px; }
 .avatar { display: block; position: absolute; bottom: 0; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 16px #00000012; }
 h1, h2 { font-size: 20px; font-weight: 500; line-height: 26px; letter-spacing: normal; margin: 0; }
@@ -81,7 +81,7 @@ span.client-logo { filter: grayscale(1); cursor: not-allowed; transition: opacit
 .client-mark .fill-icon { fill: currentColor; }
 .client-mark .fill-white { fill: #fff; }
 footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: var(--secondary); font-size: 15px; line-height: 20px; }
-.page > footer::before { content: ""; width: 96px; height: 1px; margin-bottom: 15px; background: var(--fill-hover); }
+.page > footer::before { content: ""; width: 96px; height: 1px; margin-bottom: calc(var(--page-gap) - 9px); background: var(--fill-hover); }
 .footer-wave { position: relative; padding: 0; border: 0; background: transparent; color: color-mix(in srgb, var(--secondary) 75%, transparent); font: inherit; text-align: left; cursor: pointer; }
 .footer-wave > [aria-hidden] { display: block; font: 10px/9px ui-monospace, monospace; white-space: pre; }
 .footer-wave-tooltip { inset-inline-start: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
@@ -100,7 +100,7 @@ footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9p
   .clients-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 20px; }
 }
 @media (max-width: 767px) {
-  .page { max-width: 596px; padding: 44px 28px 68px; gap: 44px; }
+  .page { --page-gap: 44px; max-width: 596px; padding: 44px 28px 68px; }
   .contact { margin-top: 16px; --contact-fs: 17px; --contact-lh: 22px; }
   .contact-button { padding-block: 11px; }
   .company-icon { width: 48px; height: 48px; }
