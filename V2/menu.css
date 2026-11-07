@@ -23,3 +23,8 @@
   .site-menu.is-open { max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; }
   .site-menu-links a { height: 36px; padding-inline: 10px; }
 }
+
+.has-site-menu .experience-page-nav > .experience-back,
+.has-site-menu .about-page > .experience-back { position: fixed; top: max(14px, env(safe-area-inset-top)); left: calc(max(12px, env(safe-area-inset-left)) + 52px); right: auto; z-index: 109; }
+.site-menu-links .site-menu-link-label { display: inline-flex; align-items: center; gap: 10px; color: inherit; }
+.site-menu-social-icon { display: block; flex: none; }
