@@ -369,7 +369,6 @@ html.visual-open { overflow: hidden; }
 }
 
 .about-page { gap: 32px; }
-.about-page .contact-button { font-weight: 400; }
 .about-page .about p { color: var(--text); }
 .about-outcomes {
   --outcome-rule: color-mix(in srgb, var(--text) 5%, transparent);
