@@ -537,3 +537,6 @@ html.visual-open { overflow: hidden; }
 
 .has-site-menu > .page.home-page { padding-top: 112px; }
 @media (max-width: 767px) { .has-site-menu > .page.home-page { padding-top: 104px; } }
+
+.experience-page .experience-article { padding-top: 80px; }
+@media (max-width: 640px) { .experience-page .experience-article { padding-top: 72px; } }
