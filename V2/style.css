@@ -534,3 +534,6 @@ html.visual-open { overflow: hidden; }
 .entry-coming-soon:hover .entry-name { color: var(--text); }
 
 @media (hover: hover) and (pointer: fine) { .entry-coming-soon:hover .entry-soon { opacity: 1; } }
+
+.has-site-menu > .page.home-page { padding-top: 112px; }
+@media (max-width: 767px) { .has-site-menu > .page.home-page { padding-top: 104px; } }
