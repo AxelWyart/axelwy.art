@@ -527,3 +527,8 @@ html.visual-open { overflow: hidden; }
 }
 
 .about-orbit.is-orbiting .orbit-landscape { width: clamp(125px, 24%, 330px); }
+
+.entry-name-with-badge { display: inline-flex; align-items: center; gap: 8px; }
+.entry-soon { display: inline-flex; padding: 1px 6px; border-radius: 5px; background: var(--fill-hover); color: var(--secondary); font-size: 11px; line-height: 16px; font-weight: 500; }
+.entry-coming-soon { cursor: default; }
+.entry-coming-soon:hover .entry-name { color: var(--text); }
