@@ -17,6 +17,127 @@
       "source": "/V2/work/:slug",
       "destination": "/work/:slug",
       "permanent": true
+    },
+    {
+      "source": "/case-studies/ellie-landing",
+      "destination": "/work/independent",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/ellie-landing.html",
+      "destination": "/work/independent",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/sneci-rebranding",
+      "destination": "/work/independent",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/sneci-rebranding.html",
+      "destination": "/work/independent",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/iot-object",
+      "destination": "/work/independent",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/iot-object.html",
+      "destination": "/work/independent",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/everassist",
+      "destination": "/work/foundever",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/everassist.html",
+      "destination": "/work/foundever",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/laiye-ai-platform",
+      "destination": "/work/laiye",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/laiye-ai-platform.html",
+      "destination": "/work/laiye",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/laiye-widget",
+      "destination": "/work/laiye",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/laiye-widget.html",
+      "destination": "/work/laiye",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/nudge-ask-ai",
+      "destination": "/work/nudge",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/nudge-ask-ai.html",
+      "destination": "/work/nudge",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/mindsay-workflow-builder",
+      "destination": "/work/mindsay",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/mindsay-workflow-builder.html",
+      "destination": "/work/mindsay",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/mindsay-website",
+      "destination": "/work/mindsay",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/mindsay-website.html",
+      "destination": "/work/mindsay",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/smart-mirror",
+      "destination": "/work/blank",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/smart-mirror.html",
+      "destination": "/work/blank",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/pops-moving-prints",
+      "destination": "/work/blank",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/pops-moving-prints.html",
+      "destination": "/work/blank",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/old/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
     }
   ]
 }
