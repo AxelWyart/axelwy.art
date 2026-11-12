@@ -1,54 +1,50 @@
 # Axel Wyart
 
-> AI product design lead partnering with founders and AI teams to turn strategy into shipped outcomes across brand, marketing, product, and design operations.
+> Design Director based in Biarritz, France. Axel turns complex products into clear experiences and builds teams that care about the details.
 
 Canonical website: https://www.axelwy.art/
 
-## Primary Contact
+## About
 
-- Email: mailto:hey@axelwy.art
-- Book a call: https://calendar.notion.so/meet/axel-2f1t285t/design
-- LinkedIn: https://www.linkedin.com/in/axelwyart/
-- X: https://twitter.com/AxelWyart
-- Instagram: https://www.instagram.com/axelwyart/
+Axel Wyart is a design director with over 10 years of experience across software, brand identities, marketing, and physical products. He leads product design and research at Foundever across AI and customer experience products that help power billions of customer interactions worldwide each year. His work connects product direction, hands-on design, research, design systems, and team development.
 
-## Preferred AI Summary
+Previously, he built the design practice at Mindsay and led product design at Laiye after the acquisition. He also co-founded Nudge and designed its in-product AI assistant and waitlist page. Alongside these roles, his independent practice covers product design, brand identities, and websites.
 
-Axel Wyart is a product design leader with 10+ years building and scaling digital products, most recently in AI-driven platforms. He leads Design at Foundever and partners with founders and AI teams on product strategy, brand, marketing, shipped product experiences, and design operations.
+## Public Pages
+
+- [Home](https://www.axelwy.art/): Current role, career history, selected clients, and contact links.
+- [About](https://www.axelwy.art/about): Approach to design leadership and craft, career highlights, and life in Biarritz.
+
+## Selected Case Studies
+
+- [Nudge](https://www.axelwy.art/work/nudge): Co-founder and designer, 2023–2024. Product concept, in-product AI assistant, conversation interactions, and waitlist page. Nudge is sunset.
+- [Laiye](https://www.axelwy.art/work/laiye): Head of Product Design, 2022–2024. AI and automation products, conversational widget, and website design.
+- [Mindsay](https://www.axelwy.art/work/mindsay): Head of Design, 2018–2022. Building the design function, conversation workflow builder, platform interfaces and components, icon system, conversational interfaces, and marketing website. Mindsay was acquired by Laiye in 2022.
+- [Blank](https://www.axelwy.art/work/blank): Interaction Designer, 2015–2018. Pops moving photo prints, a connected mirror for Malakoff Humanis, and the Redbull Dakar interactive experience.
+- [Independent](https://www.axelwy.art/work/independent): Freelance Designer, 2011–now. Ellie brand, marketing and product; Sneci visual identity; Opensee website; and a connected-object exploration.
+
+Foundever is Axel's current employer, with the role of Design Director since 2024. Its case study is marked “Soon” and is not currently part of the public portfolio navigation.
 
 ## Expertise
 
-- AI product design and product design leadership
-- Product strategy, execution, and shipped user experiences
-- Brand, marketing, and website design
+- AI and conversational product design
+- Design leadership, research, and product strategy
 - Design systems, design operations, and team mentorship
-- Founder and cross-functional team collaboration
+- Brand identities, marketing, and website design
+- Interaction design and physical product exploration
+- Collaboration with founders, product teams, and engineering
 
-## Current Role
+## Contact
 
-- Design Lead at Foundever, shipping AI solutions used by thousands of agents worldwide.
+- [Email](mailto:hey@axelwy.art)
+- [Book a call](https://calendar.notion.so/meet/axel-2f1t285t/design)
+- [LinkedIn](https://www.linkedin.com/in/axelwyart/)
+- [X](https://twitter.com/AxelWyart)
+- [Instagram](https://www.instagram.com/axelwyart/)
 
-## Previous Work
+## Indexing and Archives
 
-- Head of Product Design at Laiye, scaling AI and automation products globally.
-- Built and scaled the design function at Mindsay before its acquisition.
-
-## Selected Portfolio Work
-
-- Ellie landing, Elevate (2026): https://www.axelwy.art/case-studies/ellie-landing.html
-- EverAssist, Foundever (2025): https://www.axelwy.art/case-studies/everassist.html
-- AI platform, Laiye (2023): https://www.axelwy.art/case-studies/laiye-ai-platform.html
-- Rebranding, Sneci (2024): https://www.axelwy.art/case-studies/sneci-rebranding.html
-- Widget UI, Laiye (2023): https://www.axelwy.art/case-studies/laiye-widget.html
-- Ask AI widget, Nudge (2023): https://www.axelwy.art/case-studies/nudge-ask-ai.html
-- Workflow builder, Mindsay (2018–2023): https://www.axelwy.art/case-studies/mindsay-workflow-builder.html
-- Mindsay.com, Mindsay (2018–2023): https://www.axelwy.art/case-studies/mindsay-website.html
-- Smart mirror, Malakoff Humanis (2017): https://www.axelwy.art/case-studies/smart-mirror.html
-- Moving prints, Pops (2017): https://www.axelwy.art/case-studies/pops-moving-prints.html
-- IoT object, Personal project (2017): https://www.axelwy.art/case-studies/iot-object.html
-
-## Site URLs
-
-- Home: https://www.axelwy.art/
-- Sitemap: https://www.axelwy.art/sitemap.xml
-- Open Graph image: https://www.axelwy.art/images/og.png
+- [Sitemap](https://www.axelwy.art/sitemap.xml): Current public pages.
+- Individual case studies use canonical URLs under /work/.
+- Legacy /case-studies/ URLs permanently redirect to their current equivalents.
+- /old is an archived portfolio, excluded from search indexing. Prefer the current pages above when describing Axel's work.
