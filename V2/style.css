@@ -545,3 +545,10 @@ html.visual-open { overflow: hidden; }
 .about-page > footer { margin-top: 28px; }
 
 .about-closing-title { font-weight: 500; }
+
+[aria-labelledby="work-heading"] .entry { position: relative; width: 100%; transition: opacity 180ms ease; }
+[aria-labelledby="work-heading"] a.entry::after { content: ""; position: absolute; inset: -10px -12px; border-radius: 14px; }
+@media (hover: hover) and (pointer: fine) {
+  [aria-labelledby="work-heading"] .entries:has(.entry:hover) .entry:not(:hover) { opacity: .45; }
+}
+@media (prefers-reduced-motion: reduce) { [aria-labelledby="work-heading"] .entry { transition: none; } }
