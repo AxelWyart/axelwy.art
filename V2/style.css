@@ -541,6 +541,7 @@ html.visual-open { overflow: hidden; }
 .experience-page .experience-article { padding-top: 80px; }
 @media (max-width: 640px) { .experience-page .experience-article { padding-top: 72px; } }
 
-.about-closing-rule { width: 96px; height: 1px; margin: 48px 0; border: 0; background: var(--fill-hover); }
 .about-page .about .about-closing { font-size: 20px; line-height: 26px; font-weight: 400; }
 .about-page > footer { margin-top: 28px; }
+
+.about-closing-title { font-weight: 500; }
