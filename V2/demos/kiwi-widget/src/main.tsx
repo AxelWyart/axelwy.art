@@ -33,9 +33,10 @@ function Widget({s,onChange}:{s:Scene;onChange:(next:Scene)=>void}){
   let frame=0,last=0;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const target=()=>{
-   const end=Math.max(0,inner.getBoundingClientRect().height-box.clientHeight);
+   const scale=box.getBoundingClientRect().width/box.offsetWidth||1;
+   const end=Math.max(0,inner.getBoundingClientRect().height/scale-box.clientHeight);
    const reply=inner.querySelector<HTMLElement>('.resolution-intro');
-   if(s.phase==='done'&&!s.details&&reply)return Math.min(end,Math.max(0,box.scrollTop+reply.getBoundingClientRect().top-box.getBoundingClientRect().top-18));
+   if(s.phase==='done'&&!s.details&&reply)return Math.min(end,Math.max(0,box.scrollTop+(reply.getBoundingClientRect().top-box.getBoundingClientRect().top)/scale-18));
    return end;
   };
   const tick=(time:number)=>{
@@ -46,7 +47,7 @@ function Widget({s,onChange}:{s:Scene;onChange:(next:Scene)=>void}){
    if(Math.abs(next-box.scrollTop)>1)frame=requestAnimationFrame(tick);else{frame=0;last=0;}
   };
   const observer=new ResizeObserver(()=>{if(reduced){box.scrollTop=target();box.toggleAttribute('data-scrolled',box.scrollTop>2);}else if(!frame)frame=requestAnimationFrame(tick);});
-  observer.observe(inner);return()=>{observer.disconnect();cancelAnimationFrame(frame);};
+  observer.observe(inner);observer.observe(box);frame=requestAnimationFrame(tick);return()=>{observer.disconnect();cancelAnimationFrame(frame);};
  },[s.phase,s.details]);
  const hasOptions=['options','booking','done'].includes(s.phase);
  const chosen=flights[s.pick??0];

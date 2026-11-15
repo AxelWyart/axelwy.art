@@ -16,7 +16,7 @@ Artifacts on the author's machine:
 - `/tmp/kiwi-poster-shipping.png`: final reduced-motion built poster.
 - `/tmp/kiwi-host-layout.json`: 390px host embed check.
 
-Fixes: hidden Collapse descendants initially inflated scrollHeight. Scrolling now follows the measured visible content height, eases its movement and settles with the assistant's reply and result in view. Added a top history fade, full loading contrast, even icon boxes, clean-URL-safe assets, inert hidden detail/support controls, and booking-timer cleanup for Replay. Container queries size the host iframe from its actual width.
+Fixes: hidden Collapse descendants initially inflated scrollHeight. Scrolling now follows the measured visible content height, eases its movement and settles with the assistant's reply and result in view. Added a top history fade, full loading contrast, even icon boxes, clean-URL-safe assets, inert hidden detail/support controls, and booking-timer cleanup for Replay. Container queries size the host iframe from its actual width. Resize handling observes both the transcript and viewport, normalizes stage scaling, and disables native scroll anchoring so card collapse does not undo the authored scroll.
 
 Review: independent fresh-eye review found one faint spinner; changed its token to white and kept the busy button opaque, then reviewer verified the fix. No remaining framing or hierarchy findings. The supplied full widget frame is intentionally retained, matching the user's reference.
 
