@@ -11,7 +11,6 @@
   const homeURL = location.href;
   const allowedURLs = new Set(links.map((link) => link.href));
   const owner = `${Date.now()}-${Math.random()}`;
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const metadataSelectors = [
     'title', 'meta[name="description"]', 'link[rel="canonical"]',
     'meta[property="og:title"]', 'meta[property="og:description"]',
@@ -55,41 +54,13 @@
   let busyLink;
   let requestID = 0;
   let presentationID = 0;
-  let openingFrame;
+  let displayedURL;
   let originTrigger;
   let savedScroll;
   let previousScrollRestoration;
   let closingRequested = false;
   let handleDrag;
   let suppressHandleClick = false;
-  let scrollDismissDistance = 0;
-  let scrollDismissEvents = 0;
-  let scrollDismissStartedAt = 0;
-  let lastOverscrollAt = 0;
-  let scrollDismissReadyAt = Infinity;
-  let scrollDismissResetTimer;
-  let previousScrollTop = 0;
-  let touchPull;
-
-  function resetScrollDismiss() {
-    clearTimeout(scrollDismissResetTimer);
-    scrollDismissDistance = 0;
-    scrollDismissEvents = 0;
-    scrollDismissStartedAt = 0;
-    lastOverscrollAt = 0;
-    dialog.classList.remove('is-scroll-dismiss-armed');
-  }
-
-  function scrollBelongsToContent(target) {
-    if (!(target instanceof Element)) return false;
-    if (target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return true;
-    // Let an embedded scroll area finish its own upward scrolling first.
-    for (let element = target; element && element !== dialog; element = element.parentElement) {
-      if (element.scrollTop > 1 && element.scrollHeight > element.clientHeight + 1 &&
-          /auto|scroll/.test(getComputedStyle(element).overflowY)) return true;
-    }
-    return false;
-  }
 
   function finishHandleDrag(dismiss = false) {
     if (!handleDrag) return;
@@ -131,38 +102,26 @@
     savedScroll = { x: scrollX, y: scrollY };
     previousScrollRestoration = history.scrollRestoration;
     history.scrollRestoration = 'manual';
-    document.body.style.setProperty('--experience-scroll-offset', `-${savedScroll.y}px`);
     document.documentElement.classList.add('experience-open');
     document.dispatchEvent(new Event('experience:toggle'));
   }
 
   function unlockPage() {
     document.documentElement.classList.remove('experience-open');
-    document.body.style.removeProperty('--experience-scroll-offset');
     if (savedScroll) window.scrollTo({ left: savedScroll.x, top: savedScroll.y, behavior: 'instant' });
     history.scrollRestoration = previousScrollRestoration || 'auto';
     document.dispatchEvent(new Event('experience:toggle'));
   }
 
   async function hideSheet() {
-    resetScrollDismiss();
-    touchPull = undefined;
     finishHandleDrag();
     const presentation = ++presentationID;
-    cancelAnimationFrame(openingFrame);
+    closingRequested = true;
     dialog.classList.remove('is-visible');
-    if (dialog.open && !reducedMotion.matches) {
-      await new Promise((resolve) => {
-        const finish = (event) => {
-          if (event && (event.target !== dialog || event.propertyName !== 'transform')) return;
-          dialog.removeEventListener('transitionend', finish);
-          clearTimeout(timeout);
-          resolve();
-        };
-        const timeout = setTimeout(finish, 560);
-        dialog.addEventListener('transitionend', finish);
-      });
-    }
+    // A close during entry can reverse a partially completed transition.
+    // Wait for the actual slide, including the zero-duration case.
+    const slide = dialog.getAnimations().find(animation => animation.transitionProperty === 'transform');
+    if (slide) await slide.finished.catch(() => {});
     // Forward can reopen the sheet while its exit transition is still running.
     if (presentation !== presentationID) return;
     if (dialog.open) {
@@ -172,12 +131,11 @@
     }
     updateMetadata();
     content.replaceChildren();
+    displayedURL = undefined;
     closingRequested = false;
   }
 
   function requestClose() {
-    resetScrollDismiss();
-    touchPull = undefined;
     cancelPending();
     if (closingRequested) return;
     closingRequested = true;
@@ -243,7 +201,6 @@
       const article = importArticle(page, response.url);
       finishHandleDrag();
       ++presentationID;
-      cancelAnimationFrame(openingFrame);
       closingRequested = false;
       hideWorkHighlight();
       if (!dialog.open) {
@@ -253,16 +210,13 @@
       content.replaceChildren(article);
       updateMetadata(page);
       if (!dialog.open) dialog.showModal();
-      resetScrollDismiss();
-      touchPull = undefined;
-      previousScrollTop = 0;
       dialog.scrollTop = 0;
-      scrollDismissReadyAt = performance.now() + 500;
       article.querySelector('#experience-title').focus({ preventScroll: true });
       // Flush the starting position so the bottom-origin transition also works
       // on browsers that do not support @starting-style for native dialogs.
       dialog.getBoundingClientRect();
-      openingFrame = requestAnimationFrame(() => dialog.classList.add('is-visible'));
+      dialog.classList.add('is-visible');
+      displayedURL = url;
       if (mode !== 'history') {
         const state = {
           ...history.state,
@@ -313,8 +267,6 @@
     if (!event.isPrimary || event.button !== 0 || handleDrag || closingRequested ||
         !dialog.open || !dialog.classList.contains('is-visible')) return;
     event.preventDefault();
-    resetScrollDismiss();
-    touchPull = undefined;
     suppressHandleClick = false;
     const transform = getComputedStyle(dialog).transform;
     const offset = transform === 'none' ? 0 : new DOMMatrixReadOnly(transform).m42;
@@ -357,85 +309,7 @@
       if (event.pointerId === handleDrag?.pointerID) finishHandleDrag();
     });
   }
-  window.addEventListener('blur', () => {
-    finishHandleDrag();
-    resetScrollDismiss();
-    touchPull = undefined;
-  });
-  dialog.addEventListener('scroll', () => {
-    const top = Math.max(0, dialog.scrollTop);
-    if (top > 1 || previousScrollTop > 1) {
-      // Reaching the top while reading is not a dismissal gesture. Give the
-      // incoming scroll momentum time to settle before counting extra effort.
-      scrollDismissReadyAt = performance.now() + 350;
-      resetScrollDismiss();
-      touchPull = undefined;
-    }
-    previousScrollTop = top;
-  }, { passive: true });
-  dialog.addEventListener('wheel', (event) => {
-    if (!dialog.open || closingRequested || handleDrag || event.defaultPrevented ||
-        !dialog.classList.contains('is-visible')) return;
-    if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.deltaY >= 0 ||
-        Math.abs(event.deltaX) >= Math.abs(event.deltaY) || dialog.scrollTop > 1 ||
-        scrollBelongsToContent(event.target)) {
-      resetScrollDismiss();
-      return;
-    }
-    // Only excess upward scrolling at the top is consumed. The article keeps
-    // its normal scrolling in both directions everywhere else.
-    event.preventDefault();
-    const now = performance.now();
-    if (now < scrollDismissReadyAt) return;
-    if (now - lastOverscrollAt > 400) resetScrollDismiss();
-    if (!scrollDismissEvents) scrollDismissStartedAt = now;
-    lastOverscrollAt = now;
-    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? dialog.clientHeight : 1;
-    scrollDismissDistance += Math.min(120, -event.deltaY * unit);
-    scrollDismissEvents++;
-    if (scrollDismissDistance >= 80) dialog.classList.add('is-scroll-dismiss-armed');
-    clearTimeout(scrollDismissResetTimer);
-    scrollDismissResetTimer = setTimeout(resetScrollDismiss, 400);
-    if (scrollDismissEvents >= 3 && scrollDismissDistance >= 240 && now - scrollDismissStartedAt >= 120) {
-      requestClose();
-    }
-  }, { passive: false });
-  dialog.addEventListener('touchstart', (event) => {
-    touchPull = undefined;
-    resetScrollDismiss();
-    if (event.touches.length !== 1 || !dialog.open || closingRequested || handleDrag ||
-        !dialog.classList.contains('is-visible') || dialog.scrollTop > 1 ||
-        performance.now() < scrollDismissReadyAt || scrollBelongsToContent(event.target) ||
-        (event.target instanceof Element && event.target.closest('.experience-handle, .experience-close'))) return;
-    const touch = event.touches[0];
-    touchPull = { id: touch.identifier, x: touch.clientX, y: touch.clientY, startedAt: performance.now() };
-  }, { passive: true });
-  dialog.addEventListener('touchmove', (event) => {
-    if (!touchPull) return;
-    const touch = event.touches[0];
-    if (event.touches.length !== 1 || touch.identifier !== touchPull.id || dialog.scrollTop > 1) {
-      touchPull = undefined;
-      resetScrollDismiss();
-      return;
-    }
-    const distance = touch.clientY - touchPull.y;
-    if (distance < 0 || Math.abs(touch.clientX - touchPull.x) > distance) {
-      touchPull = undefined;
-      resetScrollDismiss();
-      return;
-    }
-    // A new downward pull that starts at the top is the touch equivalent of
-    // insisting on scrolling beyond that boundary. Short pulls stay open.
-    if (event.cancelable) event.preventDefault();
-    if (distance >= 48) dialog.classList.add('is-scroll-dismiss-armed');
-    if (distance >= 140 && performance.now() - touchPull.startedAt >= 120) requestClose();
-  }, { passive: false });
-  for (const type of ['touchend', 'touchcancel']) {
-    dialog.addEventListener(type, () => {
-      touchPull = undefined;
-      resetScrollDismiss();
-    }, { passive: true });
-  }
+  window.addEventListener('blur', () => finishHandleDrag());
   dialog.addEventListener('cancel', (event) => {
     event.preventDefault();
     requestClose();
@@ -480,10 +354,16 @@
   });
   window.addEventListener('popstate', (event) => {
     cancelPending();
-    closingRequested = false;
     const sheet = event.state?.__experienceSheet;
     if (sheet?.owner === owner && sheet.url === location.href && allowedURLs.has(sheet.url)) {
-      openExperience(sheet.url, 'history');
+      if (dialog.open && displayedURL === sheet.url) {
+        // Forward during exit reverses the same sheet without remounting it.
+        ++presentationID;
+        closingRequested = false;
+        dialog.classList.add('is-visible');
+      } else {
+        openExperience(sheet.url, 'history');
+      }
     } else if (location.pathname === new URL(homeURL).pathname) {
       hideSheet();
     } else {
