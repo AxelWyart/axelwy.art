@@ -131,11 +131,10 @@ footer { display: flex; flex-direction: column; align-items: flex-start; gap: 9p
 
 /* Editorial case pages share the same content with the bottom sheet. */
 html { scrollbar-gutter: stable; }
-html.experience-open { overflow: hidden; }
-.experience-open body { position: fixed; top: var(--experience-scroll-offset); inset-inline: 0; }
+html.experience-open { overflow: hidden; overscroll-behavior: none; }
 :root { --detail-line: #00000014; --detail-surface: #f6f6f6; }
-.experience-dialog { position: fixed; inset: auto 0 0; width: calc(100% - 64px); max-width: 1440px; height: calc(100dvh - 32px); max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 32px 32px 0 0; background: var(--background); color: var(--text); box-shadow: 0 2dvh 0 var(--background), 0 -12px 80px #0000001f; overflow-y: auto; overscroll-behavior: contain; scroll-padding-block: 72px 32px; transform: translateY(100%); transition: transform 500ms cubic-bezier(.22, .61, .36, 1); }
-.experience-dialog.is-visible { transform: translateY(0); }
+.experience-dialog { position: fixed; inset: auto 0 0; width: calc(100% - 64px); max-width: 1440px; height: calc(100dvh - 32px); max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 32px 32px 0 0; background: var(--background); color: var(--text); box-shadow: 0 2dvh 0 var(--background), 0 -12px 80px #0000001f; overflow-y: auto; overscroll-behavior: none; scroll-padding-block: 72px 32px; transform: translateY(100%); transition: transform 500ms cubic-bezier(.22, .61, .36, 1); }
+.experience-dialog.is-visible { transform: none; }
 .experience-dialog.is-dragging { transition: none; user-select: none; }
 .experience-dialog::backdrop { background: #0006; backdrop-filter: blur(4px); opacity: 0; transition: opacity 220ms ease; }
 .experience-dialog.is-visible::backdrop { opacity: 1; }
@@ -144,7 +143,7 @@ html.experience-open { overflow: hidden; }
 .experience-handle span { width: 36px; height: 4px; border-radius: 4px; background: color-mix(in srgb, var(--text) 20%, transparent); transition: background-color 140ms ease, transform 140ms ease; }
 .experience-handle { pointer-events: auto; }
 .experience-dialog.is-dragging .experience-handle { cursor: grabbing; }
-.experience-handle:focus-visible span, .experience-dialog.is-scroll-dismiss-armed .experience-handle span, .experience-dialog.is-dragging .experience-handle span { background: color-mix(in srgb, var(--text) 40%, transparent); transform: scaleX(1.15); }
+.experience-handle:focus-visible span, .experience-dialog.is-dragging .experience-handle span { background: color-mix(in srgb, var(--text) 40%, transparent); transform: scaleX(1.15); }
 .experience-close, .experience-back { display: grid; place-items: center; flex: none; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; transition: transform 300ms var(--ease); }
 .experience-back { position: relative; }
 .experience-close {
