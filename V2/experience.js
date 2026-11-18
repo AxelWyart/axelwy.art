@@ -211,6 +211,9 @@
       updateMetadata(page);
       if (!dialog.open) dialog.showModal();
       dialog.scrollTop = 0;
+      scrollGesture = undefined;
+      lastWheelAt = -Infinity;
+      scrollReadyAt = performance.now() + 600;
       article.querySelector('#experience-title').focus({ preventScroll: true });
       // Flush the starting position so the bottom-origin transition also works
       // on browsers that do not support @starting-style for native dialogs.
@@ -310,6 +313,55 @@
     });
   }
   window.addEventListener('blur', () => finishHandleDrag());
+  let lastWheelAt = -Infinity;
+  let scrollGesture;
+  let scrollReadyAt = 0;
+
+  function scrollBelongsToContent(target) {
+    if (!(target instanceof Element)) return false;
+    if (target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return true;
+    for (let element = target; element && element !== dialog; element = element.parentElement) {
+      if (element.scrollTop > 1 && element.scrollHeight > element.clientHeight + 1 &&
+          /auto|scroll/.test(getComputedStyle(element).overflowY)) return true;
+    }
+    return false;
+  }
+
+  dialog.addEventListener('scroll', () => {
+    scrollGesture = undefined;
+  }, { passive: true });
+  dialog.addEventListener('wheel', (event) => {
+    if (!dialog.open || closingRequested || handleDrag || event.defaultPrevented ||
+        !dialog.classList.contains('is-visible')) return;
+    const now = performance.now();
+    // Eligibility is fixed for the whole wheel burst. Momentum that reaches
+    // the top cannot become a close gesture until the user pauses.
+    if (now - lastWheelAt > 180) {
+      scrollGesture = {
+        eligible: dialog.scrollTop <= 1 && now >= scrollReadyAt,
+        startedAt: now,
+        distance: 0,
+        events: 0,
+      };
+    }
+    lastWheelAt = now;
+    if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey ||
+        event.deltaY >= 0 || Math.abs(event.deltaX) >= Math.abs(event.deltaY) ||
+        dialog.scrollTop > 1 || scrollBelongsToContent(event.target)) {
+      scrollGesture = undefined;
+      return;
+    }
+    if (!scrollGesture?.eligible) return;
+    event.preventDefault();
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? dialog.clientHeight : 1;
+    scrollGesture.distance += Math.min(120, -event.deltaY * unit);
+    scrollGesture.events++;
+    if (scrollGesture.events >= 3 && scrollGesture.distance >= 240 &&
+        now - scrollGesture.startedAt >= 120) {
+      scrollGesture = undefined;
+      requestClose();
+    }
+  }, { passive: false });
   dialog.addEventListener('cancel', (event) => {
     event.preventDefault();
     requestClose();
